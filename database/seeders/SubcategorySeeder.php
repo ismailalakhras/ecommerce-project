@@ -29,19 +29,21 @@ class SubcategorySeeder extends Seeder
             ['category_id' => 2, 'name' => 'Accessories'],
             ['category_id' => 2, 'name' => 'Jewelry'],
 
-            // Home & Garden (category_id = 3)
-            ['category_id' => 3, 'name' => 'Furniture'],
-            ['category_id' => 3, 'name' => 'Kitchen'],
-            ['category_id' => 3, 'name' => 'Garden Tools'],
-            ['category_id' => 3, 'name' => 'Decor'],
-            ['category_id' => 3, 'name' => 'Lighting'],
+            //  Books  (category_id = 3)
 
-            // Books (category_id = 4)
-            ['category_id' => 4, 'name' => 'Fiction'],
-            ['category_id' => 4, 'name' => 'Non-fiction'],
-            ['category_id' => 4, 'name' => 'Children\'s Books'],
-            ['category_id' => 4, 'name' => 'Academic'],
-            ['category_id' => 4, 'name' => 'Comics'],
+
+            ['category_id' => 3, 'name' => 'Fiction'],
+            ['category_id' => 3, 'name' => 'Non-fiction'],
+            ['category_id' => 3, 'name' => 'Children\'s Books'],
+            ['category_id' => 3, 'name' => 'Academic'],
+            ['category_id' => 3, 'name' => 'Comics'],
+
+            //Home & Garden (category_id = 4)
+            ['category_id' => 4, 'name' => 'Furniture'],
+            ['category_id' => 4, 'name' => 'Kitchen'],
+            ['category_id' => 4, 'name' => 'Garden Tools'],
+            ['category_id' => 4, 'name' => 'Decor'],
+            ['category_id' => 4, 'name' => 'Lighting'],
 
             // Sports (category_id = 5)
             ['category_id' => 5, 'name' => 'Outdoor Sports'],

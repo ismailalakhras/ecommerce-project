@@ -32,7 +32,7 @@
 
     <main class="main">
 
-        {{-- @yield('home') --}}
+        @yield('home')
 
     </main>
 
