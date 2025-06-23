@@ -21,4 +21,9 @@ class Product_image extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    public function shopping_carts()
+    {
+        return $this->hasMany(Shopping_cart::class);
+    }
 }
