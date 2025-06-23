@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Shopping_cart;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -13,7 +14,8 @@ class HomeController extends Controller
     {
         $categories = Category::with('subcategories')->get();
         $featuredProducts = Product::where('is_featured', true)->take(8)->get();
+        $shoppingCart = Shopping_cart::where('user_id', 1)->get();
 
-        return view('frontend.pages.home', compact('categories', 'featuredProducts'));
+        return view('frontend.pages.home', compact('categories', 'featuredProducts', 'shoppingCart'));
     }
 }
