@@ -9,6 +9,15 @@ class Shopping_cart extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'user_id',
+        'product_id',
+        'quantity',
+        'price',
+        'total'
+
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

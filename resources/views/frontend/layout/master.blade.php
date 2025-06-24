@@ -43,6 +43,9 @@
 
         @yield('register')
 
+        @yield('cart')
+
+
     </main>
 
 

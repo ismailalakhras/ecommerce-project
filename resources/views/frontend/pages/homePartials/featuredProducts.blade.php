@@ -49,7 +49,7 @@
                                             </div>
                                             <div class="product-badges product-badges-position product-badges-mrg">
                                                 <span class="hot">Save
-                                                    {{ intval(($product->cost_price / $product->sale_price) * 100) }}
+                                                    {{ intval((($product->price - $product->sale_price) / $product->price) * 100) }}
                                                     %</span>
                                             </div>
                                         </div>
@@ -64,7 +64,7 @@
                                             </div>
                                             <div class="product-price mt-10">
                                                 <span>${{ $product->sale_price }}</span>
-                                                <span class="old-price">${{ $product->cost_price }}</span>
+                                                <span class="old-price">${{ $product->price }}</span>
                                             </div>
                                             <div class="sold mt-15 mb-15">
                                                 <div class="progress mb-5">
@@ -74,8 +74,29 @@
                                                 <span class="font-xs text-heading"> Stock:
                                                     {{ $product->stock_quantity }}</span>
                                             </div>
-                                            <a href="shop-cart.html" class="btn w-100 hover-up"><i
-                                                    class="fi-rs-shopping-cart mr-5"></i>Add To Cart</a>
+
+
+
+
+
+                                            <form action="{{ route('cart.add', $product->id) }}" method="POST">
+                                                @csrf
+
+
+                                                <button type="submit"
+                                                    class="btn w-100 hover-up d-flex align-items-center justify-content-center gap-2"
+                                                    style="background: none; border: none; padding: 0; margin: 0; font: inherit; color: inherit; cursor: pointer;">
+                                                    <a class="btn w-100 hover-up"><i
+                                                            class="fi-rs-shopping-cart mr-5"></i>Add
+                                                        To Cart</a>
+                                                </button>
+                                            </form>
+
+
+
+
+
+
                                         </div>
                                     </div>
                                 @endforeach

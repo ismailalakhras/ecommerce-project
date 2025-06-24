@@ -98,7 +98,7 @@
 
 
                                 <div class="header-action-icon-2">
-                                    <a class="mini-cart-icon" href="shop-cart.html">
+                                    <a class="mini-cart-icon" href="{{route('cart')}}">
                                         <img alt="Nest" src="build/assets/imgs/theme/icons/icon-cart.svg" />
                                         @if (auth()->check())
                                             <span class="pro-count blue">
@@ -112,7 +112,7 @@
                                             </span>
                                         @endif
                                     </a>
-                                    <a href="shop-cart.html"><span class="lable">Cart</span></a>
+                                    <a href="{{route('cart')}}"><span class="lable">Cart</span></a>
 
                                     @if (auth()->check())
 
@@ -267,7 +267,7 @@
                                 <ul>
 
                                     <li>
-                                        <a class="active" href="index.html">Home </a>
+                                        <a class="active" href="{{route('home')}}">Home </a>
 
                                     </li>
                                     <li>

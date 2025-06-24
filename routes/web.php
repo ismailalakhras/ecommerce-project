@@ -3,6 +3,7 @@
 use App\Http\Controllers\Frontend\CategoryController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ShoppingCartController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,7 +21,12 @@ use Illuminate\Support\Facades\Route;
 //     return view('frontend.layout.master');
 // });
 
-Route::get('/', [HomeController::class , 'index']) ;
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/cart', [ShoppingCartController::class, 'index'])->name('cart');
+
+Route::post('/cart/add/{product}', [ShoppingCartController::class, 'store'])->name('cart.add');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
