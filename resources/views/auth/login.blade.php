@@ -20,38 +20,24 @@
                                                     here</a></p>
                                         </div>
 
-
-
-
-
-
-
-
-
                                         <form method="POST" action="{{ route('login') }}">
 
                                             @csrf
-
 
                                             <!-- Email Address -->
                                             <div class="form-group">
                                                 <input id="email" class="block mt-1 w-full" type="email"
                                                     name="email" :value="old('email')" required autofocus
-                                                    autocomplete="username" />
+                                                    autocomplete="username" placeholder="Email" />
                                             </div>
-
 
                                             <!-- Password -->
 
-
                                             <div class="form-group">
                                                 <input id="password" class="block mt-1 w-full" type="password"
-                                                    name="password" required autocomplete="current-password" />
+                                                    name="password" required autocomplete="current-password" placeholder="Password" />
                                             </div>
 
-
-
-                                            
                                             <div class="login_footer form-group mb-50">
                                                 <div class="chek-form">
                                                     <div class="custome-checkbox">
@@ -62,11 +48,10 @@
                                                     </div>
                                                 </div>
 
-
                                                 @if (Route::has('password.request'))
-                                                    <a class="text-muted" href="{{ route('password.request') }}">Forgot password?</a>
+                                                    <a class="text-muted" href="{{ route('password.request') }}">Forgot
+                                                        password?</a>
                                                 @endif
-
 
                                             </div>
                                             <div class="form-group">
@@ -74,24 +59,6 @@
                                                     name="login">Log in</button>
                                             </div>
                                         </form>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                                     </div>
                                 </div>
                             </div>

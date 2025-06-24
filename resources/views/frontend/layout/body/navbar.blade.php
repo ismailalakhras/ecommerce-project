@@ -142,7 +142,7 @@
                                                         </li>
                                                     @endforeach
                                                 @else
-                                                    0
+                                                    No item added to cart
                                                 @endif
 
 
@@ -174,6 +174,12 @@
 
                                 </div>
 
+
+                                {{-- @dd({{ explode(' ', auth()->user()->name)[0] }}) --}}
+
+
+
+
                                 @if (auth()->check())
                                     <div class="header-action-icon-2">
                                         <a href="page-account.html">
@@ -184,8 +190,8 @@
                                         <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
                                             <ul>
                                                 <li>
-                                                    <a href="page-account.html"><i class="fi fi-rs-user mr-10"></i>My
-                                                        Account</a>
+                                                    <a href="page-account.html"><i
+                                                            class="fi fi-rs-user mr-10"></i>{{ ucfirst(explode(' ', auth()->user()->name)[0]) }}</a>
                                                 </li>
                                                 <li>
                                                     <a href="page-account.html"><i
@@ -210,7 +216,6 @@
                                                         @csrf
 
                                                         <button type="submit"
-                                                       
                                                             class="logout-button d-flex align-items-center  gap-1">
                                                             <img style="width: 30px" class="svgInject" alt="Nest"
                                                                 src="build/assets/imgs/theme/icons/logout-svgrepo-com.svg" />
