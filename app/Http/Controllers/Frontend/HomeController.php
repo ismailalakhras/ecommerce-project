@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Shopping_cart;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 
 class HomeController extends Controller
 {

@@ -63,7 +63,7 @@
                 <div class="header-wrap">
 
 
-                    
+
                     <div class="logo logo-width-1">
                         <a href="index.html"><img src="build/assets/imgs/theme/logo.svg" alt="logo" /></a>
                     </div>
@@ -100,106 +100,139 @@
                                 <div class="header-action-icon-2">
                                     <a class="mini-cart-icon" href="shop-cart.html">
                                         <img alt="Nest" src="build/assets/imgs/theme/icons/icon-cart.svg" />
-                                        <span class="pro-count blue">
-                                            @if (isset($shoppingCart) && $shoppingCart->count())
-                                                {{ $shoppingCart->count() }}
-                                            @else
-                                                0
-                                            @endif
-                                        </span>
+                                        @if (auth()->check())
+                                            <span class="pro-count blue">
+
+                                                @if (isset($shoppingCart) && $shoppingCart->count())
+                                                    {{ $shoppingCart->count() }}
+                                                @else
+                                                    0
+                                                @endif
+
+                                            </span>
+                                        @endif
                                     </a>
                                     <a href="shop-cart.html"><span class="lable">Cart</span></a>
-                                    <div class="cart-dropdown-wrap cart-dropdown-hm2">
-                                        <ul>
 
-                                            @if (isset($shoppingCart) && $shoppingCart->count())
-                                                @foreach ($shoppingCart as $product)
-                                                    <li>
-                                                        <div class="shopping-cart-img">
-                                                            <a href="shop-product-right.html"><img alt="Nest"
-                                                                    src="/images/{{ $product->product->image }}" /></a>
-                                                        </div>
-                                                        <div class="shopping-cart-title">
-                                                            <h4><a
-                                                                    href="shop-product-right.html">{{ $product->product->name }}</a>
-                                                            </h4>
-                                                            <h4><span>{{ $product->quantity }} ×
-                                                                </span>${{ $product->price }}</h4>
-                                                        </div>
+                                    @if (auth()->check())
 
+                                        <div class="cart-dropdown-wrap cart-dropdown-hm2">
+                                            <ul>
 
-
-                                                        <div class="shopping-cart-delete">
-                                                            <a href="#"><i class="fi-rs-cross-small"></i></a>
-                                                        </div>
-                                                    </li>
-                                                @endforeach
-                                            @else
-                                                0
-                                            @endif
+                                                @if (isset($shoppingCart) && $shoppingCart->count())
+                                                    @foreach ($shoppingCart as $product)
+                                                        <li>
+                                                            <div class="shopping-cart-img">
+                                                                <a href="shop-product-right.html"><img alt="Nest"
+                                                                        src="/images/{{ $product->product->image }}" /></a>
+                                                            </div>
+                                                            <div class="shopping-cart-title">
+                                                                <h4><a
+                                                                        href="shop-product-right.html">{{ $product->product->name }}</a>
+                                                                </h4>
+                                                                <h4><span>{{ $product->quantity }} ×
+                                                                    </span>${{ $product->price }}</h4>
+                                                            </div>
 
 
-                                        </ul>
-                                        <div class="shopping-cart-footer">
-                                            <div class="shopping-cart-total">
-                                                <h4>Total
-                                                    <span>
 
-                                                        @php $total = 0; @endphp
+                                                            <div class="shopping-cart-delete">
+                                                                <a href="#"><i class="fi-rs-cross-small"></i></a>
+                                                            </div>
+                                                        </li>
+                                                    @endforeach
+                                                @else
+                                                    0
+                                                @endif
 
-                                                        @if (isset($shoppingCart) && $shoppingCart->count())
-                                                            @foreach ($shoppingCart as $product)
-                                                                @php $total += $product->total; @endphp
-                                                            @endforeach
 
-                                                            {{ $total }}
-                                                        @else
-                                                            0
-                                                        @endif
-                                                    </span>
-                                                </h4>
+                                            </ul>
+                                            <div class="shopping-cart-footer">
+                                                <div class="shopping-cart-total">
+                                                    <h4>Total
+                                                        <span>
+
+                                                            @php $total = 0; @endphp
+
+                                                            @if (isset($shoppingCart) && $shoppingCart->count())
+                                                                @foreach ($shoppingCart as $product)
+                                                                    @php $total += $product->total; @endphp
+                                                                @endforeach
+
+                                                                {{ $total }}
+                                                            @else
+                                                                0
+                                                            @endif
+                                                        </span>
+                                                    </h4>
+                                                </div>
+
                                             </div>
-
                                         </div>
-                                    </div>
+
+                                    @endif
+
                                 </div>
 
+                                @if (auth()->check())
+                                    <div class="header-action-icon-2">
+                                        <a href="page-account.html">
+                                            <img class="svgInject" alt="Nest"
+                                                src="build/assets/imgs/theme/icons/icon-user.svg" />
+                                        </a>
+                                        <a href="page-account.html"><span class="lable ml-0">Account</span></a>
+                                        <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
+                                            <ul>
+                                                <li>
+                                                    <a href="page-account.html"><i class="fi fi-rs-user mr-10"></i>My
+                                                        Account</a>
+                                                </li>
+                                                <li>
+                                                    <a href="page-account.html"><i
+                                                            class="fi fi-rs-location-alt mr-10"></i>Order Tracking</a>
+                                                </li>
+                                                <li>
+                                                    <a href="page-account.html"><i class="fi fi-rs-label mr-10"></i>My
+                                                        Voucher</a>
+                                                </li>
+                                                <li>
+                                                    <a href="shop-wishlist.html"><i class="fi fi-rs-heart mr-10"></i>My
+                                                        Wishlist</a>
+                                                </li>
+                                                <li>
+                                                    <a href="page-account.html"><i
+                                                            class="fi fi-rs-settings-sliders mr-10"></i>Setting</a>
+                                                </li>
+                                                <li>
 
-                                <div class="header-action-icon-2">
-                                    <a href="page-account.html">
+
+                                                    <form method="POST" action="{{ route('logout') }}">
+                                                        @csrf
+
+                                                        <button type="submit"
+                                                       
+                                                            class="logout-button d-flex align-items-center  gap-1">
+                                                            <img style="width: 30px" class="svgInject" alt="Nest"
+                                                                src="build/assets/imgs/theme/icons/logout-svgrepo-com.svg" />
+                                                            {{ __('Log Out') }}
+
+                                                        </button>
+
+                                                    </form>
+
+
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                @else
+                                    <a href="{{ route('login') }}">
                                         <img class="svgInject" alt="Nest"
                                             src="build/assets/imgs/theme/icons/icon-user.svg" />
                                     </a>
-                                    <a href="page-account.html"><span class="lable ml-0">Account</span></a>
-                                    <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
-                                        <ul>
-                                            <li>
-                                                <a href="page-account.html"><i class="fi fi-rs-user mr-10"></i>My
-                                                    Account</a>
-                                            </li>
-                                            <li>
-                                                <a href="page-account.html"><i
-                                                        class="fi fi-rs-location-alt mr-10"></i>Order Tracking</a>
-                                            </li>
-                                            <li>
-                                                <a href="page-account.html"><i class="fi fi-rs-label mr-10"></i>My
-                                                    Voucher</a>
-                                            </li>
-                                            <li>
-                                                <a href="shop-wishlist.html"><i class="fi fi-rs-heart mr-10"></i>My
-                                                    Wishlist</a>
-                                            </li>
-                                            <li>
-                                                <a href="page-account.html"><i
-                                                        class="fi fi-rs-settings-sliders mr-10"></i>Setting</a>
-                                            </li>
-                                            <li>
-                                                <a href="page-login.html"><i class="fi fi-rs-sign-out mr-10"></i>Sign
-                                                    out</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                    <a href="{{ route('login') }}"><span class="lable ml-0">Login</span></a>
+                                @endif
+
 
 
                             </div>

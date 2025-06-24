@@ -16,13 +16,18 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="build/assets/css/plugins/animate.min.css" />
     <link rel="stylesheet" href="build/assets/css/main.css?v=5.3" />
+    <style>
+   
+
+    
+</style>
 </head>
 
 <body>
 
 
 
-
+    
 
 
     @include('frontend.layout.body.navbar')
@@ -34,10 +39,14 @@
 
         @yield('home')
 
+        @yield('login')
+
+        @yield('register')
+
     </main>
 
 
-    {{-- @include('frontend.layout.body.footer') --}}
+    @include('frontend.layout.body.footer')
 
 
 
