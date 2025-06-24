@@ -61,23 +61,28 @@
         <div class="header-middle header-middle-ptb-1 d-none d-lg-block">
             <div class="container">
                 <div class="header-wrap">
+
+
+                    
                     <div class="logo logo-width-1">
                         <a href="index.html"><img src="build/assets/imgs/theme/logo.svg" alt="logo" /></a>
                     </div>
+
+                    <div class="search-style-2">
+                        <form action="#">
+                            <select class="select-active">
+                                <option>All Categories</option>
+
+                                @foreach ($categories as $category)
+                                    <option>{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                            <input type="text" placeholder="Search for items..." />
+                        </form>
+                    </div>
+
+
                     <div class="header-right">
-
-                        <div class="search-style-2">
-                            <form action="#">
-                                <select class="select-active">
-                                    <option>All Categories</option>
-
-                                    @foreach ($categories as $category)
-                                        <option>{{ $category->name }}</option>
-                                    @endforeach
-                                </select>
-                                <input type="text" placeholder="Search for items..." />
-                            </form>
-                        </div>
                         <div class="header-action-right">
                             <div class="header-action-2">
 
@@ -113,7 +118,6 @@
                                                         <div class="shopping-cart-img">
                                                             <a href="shop-product-right.html"><img alt="Nest"
                                                                     src="/images/{{ $product->product->image }}" /></a>
-                                                            {{ $product->product->image }}
                                                         </div>
                                                         <div class="shopping-cart-title">
                                                             <h4><a
