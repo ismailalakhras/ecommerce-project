@@ -277,7 +277,7 @@
 
                                     </li>
                                     <li>
-                                        <a href="page-about.html">About</a>
+                                        <a href="#">About</a>
                                     </li>
 
 
@@ -289,11 +289,11 @@
 
                                             @foreach ($categories as $category)
                                                 <li class="sub-mega-menu sub-mega-menu-width-100">
-                                                    <a class="menu-title" href="#">{{ $category->name }}</a>
+                                                    <a class="menu-title" href="{{route('category.products', $category->id)}}">{{ $category->name }}</a>
                                                     <ul>
                                                         @foreach ($category->subcategories as $subcategory)
                                                             <li><a
-                                                                    href="shop-product-right.html">{{ $subcategory->name }}</a>
+                                                                    href="#">{{ $subcategory->name }}</a>
                                                             </li>
                                                         @endforeach
 
@@ -310,21 +310,21 @@
                                     <li>
                                         <a href="#">Pages <i class="fi-rs-angle-down"></i></a>
                                         <ul class="sub-menu">
-                                            <li><a href="page-about.html">About Us</a></li>
-                                            <li><a href="page-contact.html">Contact</a></li>
-                                            <li><a href="page-account.html">My Account</a></li>
-                                            <li><a href="page-login.html">Login</a></li>
-                                            <li><a href="page-register.html">Register</a></li>
-                                            <li><a href="page-forgot-password.html">Forgot password</a></li>
-                                            <li><a href="page-reset-password.html">Reset password</a></li>
-                                            <li><a href="page-purchase-guide.html">Purchase Guide</a></li>
-                                            <li><a href="page-privacy-policy.html">Privacy Policy</a></li>
-                                            <li><a href="page-terms.html">Terms of Service</a></li>
-                                            <li><a href="page-404.html">404 Page</a></li>
+                                            <li><a href="#">About Us</a></li>
+                                            <li><a href="#">Contact</a></li>
+                                            <li><a href="#">My Account</a></li>
+                                            <li><a href="#">Login</a></li>
+                                            <li><a href="#">Register</a></li>
+                                            <li><a href="#">Forgot password</a></li>
+                                            <li><a href="#">Reset password</a></li>
+                                            <li><a href="#">Purchase Guide</a></li>
+                                            <li><a href="#">Privacy Policy</a></li>
+                                            <li><a href="#">Terms of Service</a></li>
+                                            <li><a href="#">404 Page</a></li>
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="page-contact.html">Contact</a>
+                                        <a href="#">Contact</a>
                                     </li>
                                 </ul>
                             </nav>

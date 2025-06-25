@@ -3,7 +3,7 @@
 @section('content')
     <main class="main">
         <div class="container mb-80 mt-50">
-            <div class="row">
+            <div class="row title-page-after-header">
                 <div class="col-lg-8 mb-40">
                     <h1 class="heading-2 mb-10">Your Cart</h1>
                     <div class="d-flex justify-content-between">
