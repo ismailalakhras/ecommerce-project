@@ -220,7 +220,7 @@
                                                     <form method="POST" action="{{ route('logout') }}">
                                                         @csrf
 
-                                                        <button type="submit"
+                                                        <button type="submit" class="delete-btn"
                                                             class="logout-button d-flex align-items-center  gap-1">
                                                             <img style="width: 30px" class="svgInject" alt="Nest"
                                                                 src="{{ asset('build/assets/imgs/theme/icons/logout-svgrepo-com.svg') }}" />

@@ -12,14 +12,18 @@ class ProductController extends Controller
 {
     public function productsByCategoryId($id)
     {
-        $products = Product::where('category_id', $id)->get();
+        $products = Product::where('category_id', $id)
+            ->orderBy('price', 'asc')
+            ->paginate(10);
 
+
+        $productsCount = Product::where('category_id', $id)->count();
         $categories = Category::with(['subcategories'])->get();
 
         $shoppingCart = Shopping_cart::where('user_id', auth()->id())->get();
 
 
 
-        return view('frontend.pages.products', compact('categories', 'shoppingCart', 'products'));
+        return view('frontend.pages.products', compact('categories', 'shoppingCart', 'products', 'productsCount'));
     }
 }
