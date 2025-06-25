@@ -1,27 +1,16 @@
 <?php
 
-use App\Http\Controllers\Frontend\CategoryController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\ProductController;
 use App\Http\Controllers\Frontend\ShoppingCartController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
-// Route::get('/', function () {
-//     return view('frontend.layout.master');
-// });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/category/{id}/products',[ProductController::class, 'productsByCategoryId'])->name('category.products');
 
 
 

@@ -1,5 +1,5 @@
 @extends('frontend.layout.master')
-@section('home')
+@section('content')
 
     {{-- @include('frontend.pages.homePartials.quickView') --}}
 

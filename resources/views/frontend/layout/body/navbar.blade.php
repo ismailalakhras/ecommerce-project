@@ -36,15 +36,18 @@
                                             class="fi-rs-angle-small-down"></i></a>
                                     <ul class="language-dropdown">
                                         <li>
-                                            <a href="#"><img src="build/assets/imgs/theme/flag-fr.png"
+                                            <a href="#"><img
+                                                    src="{{ asset('build/assets/imgs/theme/flag-fr.png') }}"
                                                     alt="" />Français</a>
                                         </li>
                                         <li>
-                                            <a href="#"><img src="build/assets/imgs/theme/flag-dt.png"
+                                            <a href="#"><img
+                                                    src="{{ asset('build/assets/imgs/theme/flag-dt.png') }}"
                                                     alt="" />Deutsch</a>
                                         </li>
                                         <li>
-                                            <a href="#"><img src="build/assets/imgs/theme/flag-ru.png"
+                                            <a href="#"><img
+                                                    src="{{ asset('build/assets/imgs/theme/flag-ru.png') }}"
                                                     alt="" />Pусский</a>
                                         </li>
                                     </ul>
@@ -65,7 +68,8 @@
 
 
                     <div class="logo logo-width-1">
-                        <a href="index.html"><img src="build/assets/imgs/theme/logo.svg" alt="logo" /></a>
+                        <a href="index.html"><img src="{{ asset('build/assets/imgs/theme/logo.svg') }}"
+                                alt="logo" /></a>
                     </div>
 
                     <div class="search-style-2">
@@ -87,19 +91,20 @@
                             <div class="header-action-2">
 
 
-                                <div class="header-action-icon-2">
+                                {{-- <div class="header-action-icon-2">
                                     <a href="shop-wishlist.html">
                                         <img class="svgInject" alt="Nest"
                                             src="build/assets/imgs/theme/icons/icon-heart.svg" />
                                         <span class="pro-count blue">0</span>
                                     </a>
                                     <a href="shop-wishlist.html"><span class="lable">Wishlist</span></a>
-                                </div>
+                                </div> --}}
 
 
                                 <div class="header-action-icon-2">
-                                    <a class="mini-cart-icon" href="{{route('cart')}}">
-                                        <img alt="Nest" src="build/assets/imgs/theme/icons/icon-cart.svg" />
+                                    <a class="mini-cart-icon" href="{{ route('cart') }}">
+                                        <img alt="Nest"
+                                            src="{{ asset('build/assets/imgs/theme/icons/icon-cart.svg') }}" />
                                         @if (auth()->check())
                                             <span class="pro-count blue">
 
@@ -112,7 +117,7 @@
                                             </span>
                                         @endif
                                     </a>
-                                    <a href="{{route('cart')}}"><span class="lable">Cart</span></a>
+                                    <a href="{{ route('cart') }}"><span class="lable">Cart</span></a>
 
                                     @if (auth()->check())
 
@@ -184,7 +189,7 @@
                                     <div class="header-action-icon-2">
                                         <a href="page-account.html">
                                             <img class="svgInject" alt="Nest"
-                                                src="build/assets/imgs/theme/icons/icon-user.svg" />
+                                                src="{{ asset('build/assets/imgs/theme/icons/icon-user.svg') }}" />
                                         </a>
                                         <a href="page-account.html"><span class="lable ml-0">Account</span></a>
                                         <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
@@ -218,7 +223,7 @@
                                                         <button type="submit"
                                                             class="logout-button d-flex align-items-center  gap-1">
                                                             <img style="width: 30px" class="svgInject" alt="Nest"
-                                                                src="build/assets/imgs/theme/icons/logout-svgrepo-com.svg" />
+                                                                src="{{ asset('build/assets/imgs/theme/icons/logout-svgrepo-com.svg') }}" />
                                                             {{ __('Log Out') }}
 
                                                         </button>
@@ -233,7 +238,7 @@
                                 @else
                                     <a href="{{ route('login') }}">
                                         <img class="svgInject" alt="Nest"
-                                            src="build/assets/imgs/theme/icons/icon-user.svg" />
+                                            src="{{ asset('build/assets/imgs/theme/icons/icon-user.svg') }}" />
                                     </a>
                                     <a href="{{ route('login') }}"><span class="lable ml-0">Login</span></a>
                                 @endif
@@ -258,7 +263,8 @@
             <div class="container">
                 <div class="header-wrap header-space-between position-relative">
                     <div class="logo logo-width-1 d-block d-lg-none">
-                        <a href="index.html"><img src="build/assets/imgs/theme/logo.svg" alt="logo" /></a>
+                        <a href="index.html"><img src="{{ asset('build/assets/imgs/theme/logo.svg') }}"
+                                alt="logo" /></a>
                     </div>
                     <div class="header-nav d-none d-lg-flex">
 
@@ -267,27 +273,18 @@
                                 <ul>
 
                                     <li>
-                                        <a class="active" href="{{route('home')}}">Home </a>
+                                        <a class="active" href="{{ route('home') }}">Home </a>
 
                                     </li>
                                     <li>
                                         <a href="page-about.html">About</a>
                                     </li>
 
-                                    <li>
-                                        <a href="#">Categories <i class="fi-rs-angle-down"></i></a>
-                                        <ul class="sub-menu">
 
-                                            @foreach ($categories as $category)
-                                                <li><a href="vendors-grid.html">{{ $category->name }}</a></li>
-                                            @endforeach
-
-                                        </ul>
-                                    </li>
 
                                     {{-- Mega menu --}}
                                     <li class="position-static">
-                                        <a href="#">Subcategories <i class="fi-rs-angle-down"></i></a>
+                                        <a href="#">Categories <i class="fi-rs-angle-down"></i></a>
                                         <ul class="mega-menu">
 
                                             @foreach ($categories as $category)
@@ -343,7 +340,7 @@
                             <span class="burger-icon-bottom"></span>
                         </div>
                     </div>
-                    <div class="header-action-right d-block d-lg-none">
+                    {{-- <div class="header-action-right d-block d-lg-none">
                         <div class="header-action-2">
                             <div class="header-action-icon-2">
                                 <a href="shop-wishlist.html">
@@ -400,7 +397,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -415,7 +412,8 @@
         <div class="mobile-header-wrapper-inner">
             <div class="mobile-header-top">
                 <div class="mobile-header-logo">
-                    <a href="index.html"><img src="build/assets/imgs/theme/logo.svg" alt="logo" /></a>
+                    <a href="index.html"><img src="{{ asset('build/assets/imgs/theme/logo.svg') }}"
+                            alt="logo" /></a>
                 </div>
                 <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
                     <button class="close-style search-close">
@@ -566,15 +564,20 @@
                 </div>
                 <div class="mobile-social-icon mb-50">
                     <h6 class="mb-15">Follow Us</h6>
-                    <a href="#"><img src="build/assets/imgs/theme/icons/icon-facebook-white.svg"
+                    <a href="#"><img
+                            src="{{ asset('build/assets/imgs/theme/icons/icon-facebook-white.svg') }}"
                             alt="" /></a>
-                    <a href="#"><img src="build/assets/imgs/theme/icons/icon-twitter-white.svg"
+                    <a href="#"><img
+                            src="{{ asset('build/assets/imgs/theme/icons/icon-twitter-white.svg') }}"
                             alt="" /></a>
-                    <a href="#"><img src="build/assets/imgs/theme/icons/icon-instagram-white.svg"
+                    <a href="#"><img
+                            src="{{ asset('build/assets/imgs/theme/icons/icon-instagram-white.svg') }}"
                             alt="" /></a>
-                    <a href="#"><img src="build/assets/imgs/theme/icons/icon-pinterest-white.svg"
+                    <a href="#"><img
+                            src="{{ asset(' build/assets/imgs/theme/icons/icon-pinterest-white.svg ') }}"
                             alt="" /></a>
-                    <a href="#"><img src="build/assets/imgs/theme/icons/icon-youtube-white.svg"
+                    <a href="#"><img
+                            src="{{ asset('build/assets/imgs/theme/icons/icon-youtube-white.svg') }}"
                             alt="" /></a>
                 </div>
                 <div class="site-copyright">Copyright 2022 © Nest. All rights reserved. Powered by AliThemes.</div>

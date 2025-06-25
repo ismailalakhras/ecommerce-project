@@ -12,7 +12,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $categories = Category::with('subcategories')->get();
+        $categories = Category::with(['subcategories'])->get();
         $featuredProducts = Product::where('is_featured', true)->take(8)->get();
         $shoppingCart = Shopping_cart::where('user_id', auth()->id())->get();
         return view('frontend.pages.home', compact('categories', 'featuredProducts', 'shoppingCart'));

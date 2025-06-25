@@ -1,5 +1,5 @@
 @extends('frontend.layout.master')
-@section('login')
+@section('content')
     <main class="main pages">
 
         <div class="page-content pt-150 pb-150">

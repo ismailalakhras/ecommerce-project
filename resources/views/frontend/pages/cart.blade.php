@@ -1,6 +1,6 @@
 @extends('frontend.layout.master')
 
-@section('cart')
+@section('content')
     <main class="main">
         <div class="container mb-80 mt-50">
             <div class="row">
@@ -67,8 +67,8 @@
                                             <form action="{{ route('cart.remove', $product->product->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit"><i style="font-size:20px"
-                                                        class="fi-rs-trash"></i></button>
+                                                <button class="delete-btn" type="submit"><i style="font-size:20px"
+                                                        class="fi-rs-trash"></i>Delete</button>
                                             </form>
                                         </td>
                                     </tr>
