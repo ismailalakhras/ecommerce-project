@@ -8,9 +8,32 @@ use Illuminate\Support\Facades\Route;
 
 
 
+
+
+
+
+
+
+
+// Route::get('/cart', [ShoppingCartController::class, 'index'])->middleware(['auth', 'role:admin'])->name('cart');
+
+
+
+
+
+
+
+
+
+
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/category/{id}/products',[ProductController::class, 'productsByCategoryId'])->name('category.products');
+
+
+Route::get('/category/{id}/products', [ProductController::class, 'productsByCategoryId'])->name('category.products');
+
+// Route::get('/subcategory/{id}/products', [ProductController::class, 'productsBySubcategoryId'])->name('subcategory.products');
 
 
 

@@ -90,17 +90,11 @@
                                                     alt="" />
                                             </a>
                                         </div>
-                                        <div class="product-action-1">
-                                            <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i
-                                                    class="fi-rs-heart"></i></a>
-                                            <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i
-                                                    class="fi-rs-shuffle"></i></a>
-                                            <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal"
-                                                data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
-                                        </div>
+                                        
                                         <div class="product-badges product-badges-position product-badges-mrg">
-                                            <span
-                                                class="hot">Save {{ intval((($product->price - $product->sale_price) / $product->price)*100) }} %</span>
+                                            <span class="hot">Save
+                                                {{ intval((($product->price - $product->sale_price) / $product->price) * 100) }}
+                                                %</span>
                                         </div>
                                     </div>
                                     <div class="product-content-wrap">
@@ -114,21 +108,40 @@
                                                     style="width: {{ $product->rating_average * 20 }}%"></div>
                                             </div>
                                             <span class="font-small ml-5 text-muted">
-                                                ({{ $product->rating_average }})</span>
+                                                ({{ $product->rating_average }})
+                                            </span>
                                         </div>
-                                        {{-- <div>
-                                            <span class="font-small text-muted">By <a
-                                                    href="vendor-details-1.html">NestFood</a></span>
-                                        </div> --}}
+                                        <div>
+                                            <span class="font-small text-muted"> <a
+                                                    href="vendor-details-1.html">{{$product->subcategory->name}}</a></span>
+                                        </div>
                                         <div class="product-card-bottom">
                                             <div class="product-price">
                                                 <span>${{ $product->sale_price }}</span>
                                                 <span class="old-price">${{ $product->price }}</span>
                                             </div>
-                                            <div class="add-cart">
-                                                <a class="add" href="shop-cart.html"><i
-                                                        class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                                            </div>
+
+
+                                            {{-- <div class="add-cart">
+                                                <a class="add" href="shop-cart.html">
+                                                    <i class="fi-rs-shopping-cart mr-5">
+                                                    </i>
+                                                    Add
+                                                </a>
+                                            </div> --}}
+
+
+
+
+                                            <form action="{{ route('cart.add', $product->id) }}" method="POST">
+                                                @csrf
+
+
+                                                <button type="submit" class="products-btn-add-cart">
+                                                    <a><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                                </button>
+                                            </form>
+
                                         </div>
                                     </div>
                                 </div>
@@ -153,7 +166,8 @@
 
                             @foreach ($categories as $category)
                                 <li>
-                                    <a href="shop-grid-right.html">
+                                    <a href="{{ asset('category/' . $category->id . '/products') }}">
+
                                         <img src="{{ asset($category->image) }}" alt="" />
                                         {{ $category->name }}
                                     </a><span class="count">{{ $category->products->count() }}</span>

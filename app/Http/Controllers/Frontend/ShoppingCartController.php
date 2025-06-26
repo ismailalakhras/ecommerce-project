@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 
 
-use App\Models\Category;
 use App\Models\Product;
 use App\Models\Shopping_cart;
 
@@ -18,17 +17,16 @@ class ShoppingCartController extends Controller
     {
         $shoppingCart = Shopping_cart::where('user_id', auth()->user()->id)->get();
 
-        $categories = Category::with('subcategories')->get();
-
-
         $totalPrice = 0;
         
         foreach ($shoppingCart as $product) {
             $totalPrice += $product->total;
         }
 
-        return view('frontend.pages.cart', compact('shoppingCart', 'categories', 'totalPrice'));
+        return view('frontend.pages.cart', compact('shoppingCart', 'totalPrice'));
     }
+
+
 
     public function store(Request $request, $productId)
     {

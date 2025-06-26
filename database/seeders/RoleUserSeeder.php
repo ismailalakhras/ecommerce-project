@@ -12,6 +12,6 @@ class RoleUserSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        
     }
 }

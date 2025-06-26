@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('build/assets/css/plugins/animate.min.css') }}">
     <link rel="stylesheet" href="{{ asset('build/assets/css/plugins/slider-range.css') }}">
     <link rel="stylesheet" href="{{ asset('build/assets/css/main.css?v=5.3') }}">
+
 </head>
 
 <body>

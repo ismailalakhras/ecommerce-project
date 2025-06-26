@@ -18,9 +18,10 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-        $categories = Category::with('subcategories')->get();
 
-        return view('auth.login', compact('categories'));
+
+
+        return view('auth.login');
     }
 
     /**
@@ -30,7 +31,23 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
+        //!------------ عشان اوجه الراوت اذا كان ادمن او يوزر----------------
+        /** @var User $user */
+
+        // $user = Auth::user();
+
+        // dd($user->hasRole('admin'));
+
+        // if($user->hasRole('admin')){
+        //     return redirect()->route('');
+        // }
+
+        //!----------------------------
+
+
         $request->session()->regenerate();
+
+
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }

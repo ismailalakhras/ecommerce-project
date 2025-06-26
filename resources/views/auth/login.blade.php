@@ -29,13 +29,18 @@
                                                 <input id="email" class="block mt-1 w-full" type="email"
                                                     name="email" :value="old('email')" required autofocus
                                                     autocomplete="username" placeholder="Email" />
+
+                                                <x-input-error :messages="$errors->get('email')" class="mt-2" />
                                             </div>
 
                                             <!-- Password -->
 
                                             <div class="form-group">
                                                 <input id="password" class="block mt-1 w-full" type="password"
-                                                    name="password" required autocomplete="current-password" placeholder="Password" />
+                                                    name="password" required autocomplete="current-password"
+                                                    placeholder="Password" />
+                                                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+
                                             </div>
 
                                             <div class="login_footer form-group mb-50">

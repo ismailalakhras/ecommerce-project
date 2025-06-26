@@ -38,6 +38,7 @@
                                                     name="name" :value="old('name')" required autofocus
                                                     autocomplete="name" placeholder="Name" />
                                             </div>
+                                            <x-input-error :messages="$errors->get('name')" class="mt-2" />
 
 
 
@@ -48,6 +49,7 @@
                                                     name="email" :value="old('email')" required autofocus
                                                     autocomplete="username" placeholder="Email" />
                                             </div>
+                                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
 
 
                                             <!-- Password -->
@@ -55,16 +57,20 @@
 
                                             <div class="form-group">
                                                 <input id="password" class="block mt-1 w-full" type="password"
-                                                    name="password" required autocomplete="new-password" placeholder="Password" />
+                                                    name="password" required autocomplete="new-password"
+                                                    placeholder="Password" />
                                             </div>
+                                            <x-input-error :messages="$errors->get('password')" class="mt-2" />
 
                                             <!-- Confirm Password -->
 
                                             <div class="form-group">
                                                 <input id="password_confirmation" class="block mt-1 w-full" type="password"
-                                                    name="password_confirmation" required autocomplete="new-password" placeholder="Confirm Password" />
+                                                    name="password_confirmation" required autocomplete="new-password"
+                                                    placeholder="Confirm Password" />
                                             </div>
 
+                                            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
 
 
                                             <div class="form-group">

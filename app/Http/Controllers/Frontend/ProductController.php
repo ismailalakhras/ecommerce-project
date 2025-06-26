@@ -16,14 +16,28 @@ class ProductController extends Controller
             ->orderBy('price', 'asc')
             ->paginate(10);
 
-
         $productsCount = Product::where('category_id', $id)->count();
-        $categories = Category::with(['subcategories'])->get();
+        $categories = Category::with('subcategories')->get();
 
         $shoppingCart = Shopping_cart::where('user_id', auth()->id())->get();
 
 
-
         return view('frontend.pages.products', compact('categories', 'shoppingCart', 'products', 'productsCount'));
     }
+
+
+    // public function productsBySubcategoryId($id)
+    // {
+    //     $products = Product::where('subcategory_id', $id)
+    //         ->orderBy('price', 'asc')
+    //         ->paginate(10);
+
+    //     $productsCount = Product::where('category_id', $id)->count();
+    //     // $categories = Category::with('subcategories')->get();
+
+    //     $shoppingCart = Shopping_cart::where('user_id', auth()->id())->get();
+
+
+    //     return view('frontend.pages.products', compact( 'shoppingCart', 'products', 'productsCount'));
+    // }
 }
