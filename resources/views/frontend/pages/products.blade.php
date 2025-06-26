@@ -9,11 +9,11 @@
                     <div class="row align-items-center">
                         <div class="col-xl-3">
 
-                            
-                            <h1 class="mb-15">{{$products[0] -> category ->name}}</h1>
+
+                            <h1 class="mb-15">{{ $products[0]->category->name }}</h1>
                             <div class="breadcrumb">
                                 <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-                                <span></span> Category <span></span> {{$products[0] -> category ->name}}
+                                <span></span> Category <span></span> {{ $products[0]->category->name }}
                             </div>
                         </div>
 
@@ -27,8 +27,8 @@
                     <div class="shop-product-fillter">
                         <div class="totall-product">
 
-                           
-                            <p>We found <strong class="text-brand">{{$productsCount}}</strong> items for you!</p>
+
+                            <p>We found <strong class="text-brand">{{ $productsCount }}</strong> items for you!</p>
                         </div>
                         <div class="sort-by-product-area">
                             <div class="sort-by-cover mr-10">
@@ -84,11 +84,9 @@
                                     <div class="product-img-action-wrap">
                                         <div class="product-img product-img-zoom">
                                             <a href="shop-product-right.html">
-                                                <img class="default-img"
-                                                    src="{{ asset('images/' . $product->image) }}"
+                                                <img class="default-img" src="{{ asset('images/' . $product->image) }}"
                                                     alt="" />
-                                                <img class="hover-img"
-                                                    src="{{ asset('images/' . $product->image) }}"
+                                                <img class="hover-img" src="{{ asset('images/' . $product->image) }}"
                                                     alt="" />
                                             </a>
                                         </div>
@@ -101,28 +99,31 @@
                                                 data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
                                         </div>
                                         <div class="product-badges product-badges-position product-badges-mrg">
-                                            <span class="hot">Hot</span>
+                                            <span
+                                                class="hot">Save {{ intval((($product->price - $product->sale_price) / $product->price)*100) }} %</span>
                                         </div>
                                     </div>
                                     <div class="product-content-wrap">
                                         <div class="product-category">
-                                            <a href="shop-grid-right.html">{{$product -> subcategory ->name}}</a>
+                                            <a href="shop-grid-right.html">{{ $product->subcategory->name }}</a>
                                         </div>
-                                        <h2><a href="shop-product-right.html">{{$product->name}}</a></h2>
+                                        <h2><a href="shop-product-right.html">{{ $product->name }}</a></h2>
                                         <div class="product-rate-cover">
                                             <div class="product-rate d-inline-block">
-                                                <div class="product-rating" style="width: 90%"></div>
+                                                <div class="product-rating"
+                                                    style="width: {{ $product->rating_average * 20 }}%"></div>
                                             </div>
-                                            <span class="font-small ml-5 text-muted"> (4.0)</span>
+                                            <span class="font-small ml-5 text-muted">
+                                                ({{ $product->rating_average }})</span>
                                         </div>
-                                        <div>
+                                        {{-- <div>
                                             <span class="font-small text-muted">By <a
                                                     href="vendor-details-1.html">NestFood</a></span>
-                                        </div>
+                                        </div> --}}
                                         <div class="product-card-bottom">
                                             <div class="product-price">
-                                                <span>$28.85</span>
-                                                <span class="old-price">$32.8</span>
+                                                <span>${{ $product->sale_price }}</span>
+                                                <span class="old-price">${{ $product->price }}</span>
                                             </div>
                                             <div class="add-cart">
                                                 <a class="add" href="shop-cart.html"><i
@@ -147,31 +148,21 @@
                     <div class="sidebar-widget widget-category-2 mb-30">
                         <h5 class="section-title style-1 mb-30">Category</h5>
                         <ul>
-                            <li>
-                                <a href="shop-grid-right.html"> <img
-                                        src="{{ asset('build/assets/imgs/theme/icons/category-1.svg') }}"
-                                        alt="" />Milks & Dairies</a><span class="count">30</span>
-                            </li>
-                            <li>
-                                <a href="shop-grid-right.html"> <img
-                                        src="{{ asset('build/assets/imgs/theme/icons/category-2.svg') }}"
-                                        alt="" />Clothing</a><span class="count">35</span>
-                            </li>
-                            <li>
-                                <a href="shop-grid-right.html"> <img
-                                        src="{{ asset('build/assets/imgs/theme/icons/category-3.svg') }}"
-                                        alt="" />Pet Foods </a><span class="count">42</span>
-                            </li>
-                            <li>
-                                <a href="shop-grid-right.html"> <img
-                                        src="{{ asset('build/assets/imgs/theme/icons/category-4.svg') }}"
-                                        alt="" />Baking material</a><span class="count">68</span>
-                            </li>
-                            <li>
-                                <a href="shop-grid-right.html"> <img
-                                        src="{{ asset('build/assets/imgs/theme/icons/category-5.svg') }}"
-                                        alt="" />Fresh Fruit</a><span class="count">87</span>
-                            </li>
+
+
+
+                            @foreach ($categories as $category)
+                                <li>
+                                    <a href="shop-grid-right.html">
+                                        <img src="{{ asset($category->image) }}" alt="" />
+                                        {{ $category->name }}
+                                    </a><span class="count">{{ $category->products->count() }}</span>
+                                </li>
+                            @endforeach
+
+
+
+
                         </ul>
                     </div>
                     <!-- Fillter By Price -->

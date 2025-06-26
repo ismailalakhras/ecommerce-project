@@ -17,9 +17,13 @@ class ProductSeeder extends Seeder
     public function run(): void
     {
         $products = [];
+        $subcategories = Subcategory::all();
 
-        foreach (Subcategory::all() as $subcategory) {
-            for ($i = 1; $i <= 5; $i++) {
+        foreach ($subcategories as $subcategory) {
+            // توليد عدد عشوائي من المنتجات لكل فئة فرعية (بين 1 و10)
+            $productCount = rand(1, 10);
+
+            for ($i = 1; $i <= $productCount; $i++) {
                 $productName = "Product{$i}-from {$subcategory->name}";
 
                 $costPrice = rand(20, 300);
