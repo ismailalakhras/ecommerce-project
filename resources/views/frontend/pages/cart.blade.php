@@ -7,7 +7,8 @@
                 <div class="col-lg-8 mb-40">
                     <h1 class="heading-2 mb-10">Your Cart</h1>
                     <div class="d-flex justify-content-between">
-                        <h6 class="text-body">There are <span class="text-brand">{{$shoppingCart->count()}}</span> products in your cart</h6>
+                        <h6 class="text-body">There are <span class="text-brand">{{ $shoppingCart->count() }}</span> products
+                            in your cart</h6>
 
                     </div>
                 </div>
@@ -50,14 +51,57 @@
                                         </td>
                                         <td class="text-center detail-info" data-title="Stock">
                                             <div class="detail-extralink mr-15">
+
+                                                {{-- 
                                                 <div class="detail-qty border radius">
-                                                    <a href="#" class="qty-down"><i
-                                                            class="fi-rs-angle-small-down"></i></a>
-                                                    <input type="text" name="quantity" class="qty-val" value="1"
-                                                        min="1">
-                                                    <a href="#" class="qty-up"><i
-                                                            class="fi-rs-angle-small-up"></i></a>
-                                                </div>
+                                                    <a href="#" class="qty-down">
+                                                        <i class="fi-rs-angle-small-down"></i>
+                                                    </a>
+
+                                                    <input type="text" name="quantity" class="qty-val"
+                                                        value="{{ $product->quantity }}" min="1">
+
+
+                                                    <a href="#" class="qty-up">
+                                                        <i class="fi-rs-angle-small-up"></i>
+                                                    </a>
+                                                </div> --}}
+
+
+
+
+
+                                                <form action="{{ route('cart.update', $product->product->id) }}" 
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('PUT')
+
+                                                    <div class="detail-qty border radius">
+                                                        <a href="#" class="qty-down">
+                                                            <i class="fi-rs-angle-small-down"></i>
+                                                        </a>
+
+                                                        <input type="text" name="quantity" class="qty-val"
+                                                            value="{{ $product->quantity }}" min="1">
+
+
+                                                        <a href="#" class="qty-up ">
+                                                            <i class="fi-rs-angle-small-up"></i>
+                                                        </a>
+                                                    </div>
+
+                                                    <button type="submit"
+                                                        class="btn w-1 hover-up d-flex align-items-center justify-content-center save-change-btn "
+                                                        style="background: none; border: none; padding: 0 ; margin: 0; font: inherit; color: inherit; cursor: pointer;">
+
+
+                                                        <a class="btn w-100 ">
+                                                            Save
+                                                        </a>
+                                                    </button>
+                                                </form>
+
+
                                             </div>
                                         </td>
                                         <td class="price" data-title="Price">
@@ -103,7 +147,7 @@
                                                     <h6 class="text-muted">Subtotal</h6>
                                                 </td>
                                                 <td class="cart_total_amount">
-                                                    <h4 class="text-brand text-end">${{$totalPrice}}</h4>
+                                                    <h4 class="text-brand text-end">${{ $totalPrice }}</h4>
                                                 </td>
                                             </tr>
 
@@ -129,7 +173,7 @@
                                                     <h6 class="text-muted">Total</h6>
                                                 </td>
                                                 <td class="cart_total_amount">
-                                                    <h4 class="text-brand text-end">${{$totalPrice}}</h4>
+                                                    <h4 class="text-brand text-end">${{ $totalPrice }}</h4>
                                                 </td>
                                             </tr>
                                         </tbody>

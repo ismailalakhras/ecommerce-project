@@ -18,7 +18,7 @@ class ShoppingCartController extends Controller
         $shoppingCart = Shopping_cart::where('user_id', auth()->user()->id)->get();
 
         $totalPrice = 0;
-        
+
         foreach ($shoppingCart as $product) {
             $totalPrice += $product->total;
         }
@@ -36,13 +36,24 @@ class ShoppingCartController extends Controller
 
             $price = $product->price;
 
-            Shopping_cart::create([
-                'user_id' => auth()->id(),
-                'product_id' => $productId,
-                'price' => $price,
-                'total' => $price
+            $cartItem = Shopping_cart::where('product_id', $productId)
+                ->where('user_id', auth()->id())
+                ->first();
 
-            ]);
+
+            if ($cartItem) {
+                $cartItem->update([
+                    'quantity' => $cartItem->quantity + 1,
+                    'total' => $cartItem->total + $cartItem->price,
+                ]);
+            } else {
+                Shopping_cart::create([
+                    'user_id' => auth()->id(),
+                    'product_id' => $productId,
+                    'price' => $price,
+                    'total' => $price
+                ]);
+            }
         } catch (\Exception $e) {
             dd($e->getMessage());
         }
@@ -50,6 +61,27 @@ class ShoppingCartController extends Controller
         return redirect()->back()->with('success', 'success');
     }
 
+
+
+    public function update(Request $request, $productId)
+    {
+        try {
+
+            $cartItem = Shopping_cart::where('product_id', $productId)
+                ->where('user_id', auth()->id())
+                ->first();
+
+
+            $cartItem->update([
+                'quantity' => $request->quantity,
+                'total' =>  $cartItem->price * $request->quantity,
+            ]);
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
+
+        return redirect()->back()->with('success', 'success');
+    }
 
 
     public function destroy($productId)
