@@ -5,7 +5,7 @@
 
     @include('frontend.pages.homePartials.slider')
 
-    {{-- @include('frontend.pages.homePartials.categorySlider') --}}
+    @include('frontend.pages.homePartials.subcategorySlider')
 
     {{-- @include('frontend.pages.homePartials.banners') --}}
 

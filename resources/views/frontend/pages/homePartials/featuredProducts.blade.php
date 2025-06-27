@@ -68,7 +68,7 @@
                                             </div>
                                             <div class="sold mt-15 mb-15">
                                                 <div class="progress mb-5">
-                                                    <div class="progress-bar" role="progressbar" style="width: 50%"
+                                                    <div class="progress-bar" role="progressbar" style="width: {{ $product->stock_quantity }}%"
                                                         aria-valuemin="0" aria-valuemax="100"></div>
                                                 </div>
                                                 <span class="font-xs text-heading"> Stock:

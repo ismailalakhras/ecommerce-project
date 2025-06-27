@@ -1,3 +1,9 @@
+@php
+    $x = 0;
+
+@endphp
+
+
 @extends('frontend.layout.master')
 
 
@@ -79,7 +85,8 @@
 
 
                         @foreach ($products as $product)
-                            <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                            <div class="col-lg-1-5 col-md-4 col-12 col-sm-6 wow animate__animated animate__fadeInUp "
+                                data-wow-delay=".{{ $x++ }}s">
                                 <div class="product-cart-wrap mb-30">
                                     <div class="product-img-action-wrap">
                                         <div class="product-img product-img-zoom">
@@ -90,7 +97,7 @@
                                                     alt="" />
                                             </a>
                                         </div>
-                                        
+
                                         <div class="product-badges product-badges-position product-badges-mrg">
                                             <span class="hot">Save
                                                 {{ intval((($product->price - $product->sale_price) / $product->price) * 100) }}
@@ -113,7 +120,7 @@
                                         </div>
                                         <div>
                                             <span class="font-small text-muted"> <a
-                                                    href="vendor-details-1.html">{{$product->subcategory->name}}</a></span>
+                                                    href="vendor-details-1.html">{{ $product->subcategory->name }}</a></span>
                                         </div>
                                         <div class="product-card-bottom">
                                             <div class="product-price">
@@ -186,10 +193,10 @@
                             <div class="price-filter-inner">
                                 <div id="slider-range" class="mb-20"></div>
                                 <div class="d-flex justify-content-between">
-                                    <div class="caption">From: <strong id="slider-range-value1"
-                                            class="text-brand"></strong></div>
-                                    <div class="caption">To: <strong id="slider-range-value2"
-                                            class="text-brand"></strong></div>
+                                    <div class="caption">From: <strong id="slider-range-value1" class="text-brand"></strong>
+                                    </div>
+                                    <div class="caption">To: <strong id="slider-range-value2" class="text-brand"></strong>
+                                    </div>
                                 </div>
                             </div>
                         </div>
