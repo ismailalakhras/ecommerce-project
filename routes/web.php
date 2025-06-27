@@ -33,7 +33,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/category/{id}/products', [ProductController::class, 'productsByCategoryId'])->name('category.products');
 
-// Route::get('/subcategory/{id}/products', [ProductController::class, 'productsBySubcategoryId'])->name('subcategory.products');
+Route::get('/subcategory/{id}/products', [ProductController::class, 'productsBySubcategoryId'])->name('subcategory.products');
 
 
 

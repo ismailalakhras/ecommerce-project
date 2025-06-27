@@ -26,7 +26,7 @@
                       @foreach ($category->subcategories as $subcategory)
                           @php
                               if ($y === 6) {
-                                  $y = 9;
+                                  $y = 0;
                               }
                           @endphp
                           <div class="card-2 bg-{{ $y++ }} wow animate__animated animate__fadeInUp"
@@ -34,7 +34,7 @@
 
                               <figure class="img-hover-scale overflow-hidden">
 
-                                  <a href="shop-grid-right.html"><img
+                                  <a href="{{ asset('subcategory/' . $subcategory->id . '/products') }}"><img
                                           src="{{ asset('images/subcategories/' . $subcategory->slug . '.svg') }}"
                                           alt="" />
                                   </a>
@@ -42,7 +42,7 @@
                               </figure>
 
                               <h6>
-                                  <a href="shop-grid-right.html">{{ $subcategory->name }}</a>
+                                  <a href="{{ asset('subcategory/' . $subcategory->id . '/products') }}">{{ $subcategory->name }}</a>
                               </h6>
 
                               <span>{{ $subcategory->products->count() }} items</span>

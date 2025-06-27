@@ -146,10 +146,17 @@
 
 
 
-                                                                  <div class="shopping-cart-delete">
-                                                                      <a href="#"><i
-                                                                              class="fi-rs-cross-small"></i></a>
-                                                                  </div>
+                                                                  <form
+                                                                      action="{{ route('cart.remove', $product->product->id) }}"
+                                                                      method="POST">
+                                                                      @csrf
+                                                                      @method('DELETE')
+                                                                      <button class="delete-btn" type="submit"
+                                                                          style="border-radius : 100% !important ; width:35px;height :35px"><i style="font-size:20px"
+                                                                              class="fi-rs-trash"></i></button>
+                                                                  </form>
+
+
                                                               </li>
                                                           @endforeach
                                                       @else
@@ -158,8 +165,9 @@
 
 
                                                   </ul>
-                                                  <div class="shopping-cart-footer">
-                                                      <div class="shopping-cart-total">
+                                                  <div class="shopping-cart-footer d-flex">
+
+                                                      <div class="shopping-cart-total ">
                                                           <h4>Total
                                                               <span>
 
@@ -170,7 +178,7 @@
                                                                           @php $total += $product->total; @endphp
                                                                       @endforeach
 
-                                                                      {{ $total }}
+                                                                     $ {{ $total }}
                                                                   @else
                                                                       0
                                                                   @endif
@@ -178,6 +186,10 @@
                                                           </h4>
                                                       </div>
 
+                                                      <a href="{{asset('cart')}}" class="products-btn-add-cart"
+                                                          style="flex: 1; margin-left:15px ; display:flex !important;align-item:center;justify-content:center"><i
+                                                              class=" mr-5"></i>Go to cart
+                                                      </a>
                                                   </div>
                                               </div>
 
@@ -305,7 +317,8 @@
                                                               href="{{ route('category.products', $category->id) }}">{{ $category->name }}</a>
                                                           <ul>
                                                               @foreach ($category->subcategories as $subcategory)
-                                                                  <li><a href="#">{{ $subcategory->name }}</a>
+                                                                  <li><a
+                                                                          href="{{ asset('subcategory/' . $subcategory->id . '/products') }}">{{ $subcategory->name }}</a>
                                                                   </li>
                                                               @endforeach
 

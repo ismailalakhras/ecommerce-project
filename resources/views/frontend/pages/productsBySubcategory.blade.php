@@ -16,10 +16,10 @@
                         <div class="col-xl-3">
 
 
-                            <h1 class="mb-15">{{ $products[0]->category->name }}</h1>
+                            <h1 class="mb-15">{{ $products[0]->subcategory->name }}</h1>
                             <div class="breadcrumb">
-                                <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-                                <span></span> Category <span></span> {{ $products[0]->category->name }}
+                                <a href="#" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+                                <span></span> {{$products[0]->category->name}} <span></span> {{ $products[0]->subcategory->name }}
                             </div>
                         </div>
 
@@ -166,19 +166,21 @@
                 </div>
                 <div class="col-lg-1-5 primary-sidebar sticky-sidebar">
                     <div class="sidebar-widget widget-category-2 mb-30">
-                        <h5 class="section-title style-1 mb-30">Category</h5>
+                        <h5 class="section-title style-1 mb-30">Subcategory</h5>
                         <ul>
 
 
 
                             @foreach ($categories as $category)
-                                <li>
-                                    <a href="{{ asset('category/' . $category->id . '/products') }}">
+                                @foreach ($category->subcategories as $subcategory)
+                                    <li>
+                                        <a href="{{ asset('subcategory/' . $subcategory->id . '/products') }}">
 
-                                        <img src="{{ asset($category->image) }}" alt="" />
-                                        {{ $category->name }}
-                                    </a><span class="count">{{ $category->products->count() }}</span>
-                                </li>
+                                            <img src="{{ asset('images/subcategories/' . $subcategory->slug . '.svg') }}" alt="" />
+                                            {{ $subcategory->name }}
+                                        </a><span class="count-2">{{ $subcategory->products->count() }}</span>
+                                    </li>
+                                @endforeach
                             @endforeach
 
 
@@ -187,7 +189,8 @@
                         </ul>
                     </div>
                     <!-- Fillter By Price -->
-                    <div class="sidebar-widget price_range range mb-30">
+
+                    {{-- <div class="sidebar-widget price_range range mb-30">
                         <h5 class="section-title style-1 mb-30">Fill by price</h5>
                         <div class="price-filter">
                             <div class="price-filter-inner">
@@ -239,9 +242,13 @@
                         </div>
                         <a href="shop-grid-right.html" class="btn btn-sm btn-default"><i class="fi-rs-filter mr-5"></i>
                             Fillter</a>
-                    </div>
+                    </div> --}}
+
+
                     <!-- Product sidebar Widget -->
-                    <div class="sidebar-widget product-sidebar mb-30 p-30 bg-grey border-radius-10">
+
+
+                    {{-- <div class="sidebar-widget product-sidebar mb-30 p-30 bg-grey border-radius-10">
                         <h5 class="section-title style-1 mb-30">New products</h5>
                         <div class="single-post clearfix">
                             <div class="image">
@@ -279,8 +286,12 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="banner-img wow fadeIn mb-lg-0 animated d-lg-block d-none">
+                    </div> --}}
+
+
+
+
+                    {{-- <div class="banner-img wow fadeIn mb-lg-0 animated d-lg-block d-none">
                         <img src=" {{ asset('build/assets/imgs/banner/banner-11.png') }}" alt="" />
                         <div class="banner-text">
                             <span>Oganic</span>
@@ -290,7 +301,7 @@
                                 Juice
                             </h4>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

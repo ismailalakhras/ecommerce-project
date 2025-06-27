@@ -22,22 +22,26 @@ class ProductController extends Controller
         $shoppingCart = Shopping_cart::where('user_id', auth()->id())->get();
 
 
-        return view('frontend.pages.products', compact('categories', 'shoppingCart', 'products', 'productsCount'));
+        return view('frontend.pages.productsByCategory', compact('categories', 'shoppingCart', 'products', 'productsCount'));
     }
 
 
-    // public function productsBySubcategoryId($id)
-    // {
-    //     $products = Product::where('subcategory_id', $id)
-    //         ->orderBy('price', 'asc')
-    //         ->paginate(10);
+    public function productsBySubcategoryId($id)
+    {
+        $products = Product::where('subcategory_id', $id)
+            ->orderBy('price', 'asc')
+            ->paginate(10);
 
-    //     $productsCount = Product::where('category_id', $id)->count();
-    //     // $categories = Category::with('subcategories')->get();
+        $productsCount = Product::where('subcategory_id', $id)->count();
 
-    //     $shoppingCart = Shopping_cart::where('user_id', auth()->id())->get();
+        $categories = Category::with('subcategories')->get();
+
+        $shoppingCart = Shopping_cart::where('user_id', auth()->id())->get();
 
 
-    //     return view('frontend.pages.products', compact( 'shoppingCart', 'products', 'productsCount'));
-    // }
+        return view('frontend.pages.productsBySubcategory', compact('categories', 'shoppingCart', 'products', 'productsCount'));
+    }
+
+
+    
 }
