@@ -19,7 +19,7 @@ class ProductController extends Controller
         $productsCount = Product::where('category_id', $id)->count();
         $categories = Category::with('subcategories')->get();
 
-        $shoppingCart = Shopping_cart::where('user_id', auth()->id())->get();
+        $shoppingCart = Shopping_cart::where('user_id', auth()->id())->orderBy('created_at', 'DESC')->get();
 
 
         return view('frontend.pages.productsByCategory', compact('categories', 'shoppingCart', 'products', 'productsCount'));
@@ -36,12 +36,16 @@ class ProductController extends Controller
 
         $categories = Category::with('subcategories')->get();
 
-        $shoppingCart = Shopping_cart::where('user_id', auth()->id())->get();
+        $shoppingCart = Shopping_cart::where('user_id', auth()->id())->orderBy('created_at', 'DESC')->get();
 
 
         return view('frontend.pages.productsBySubcategory', compact('categories', 'shoppingCart', 'products', 'productsCount'));
     }
 
+    public function show($id)
+    {
+        $product = Product::findOrFail($id);
 
-    
+        return view('frontend.pages.product' , compact('product'));
+    }
 }

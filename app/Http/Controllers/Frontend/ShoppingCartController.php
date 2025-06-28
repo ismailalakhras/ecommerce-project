@@ -15,7 +15,7 @@ class ShoppingCartController extends Controller
 {
     public function index()
     {
-        $shoppingCart = Shopping_cart::where('user_id', auth()->user()->id)->get();
+        $shoppingCart = Shopping_cart::where('user_id', auth()->user()->id)->orderBy('created_at', 'DESC')->get();
 
         $totalPrice = 0;
 

@@ -14,7 +14,7 @@ class HomeController extends Controller
     {
         $categories = Category::with(['subcategories'])->get();
         $featuredProducts = Product::where('is_featured', true)->take(8)->get();
-        $shoppingCart = Shopping_cart::where('user_id', auth()->id())->get();
+        $shoppingCart = Shopping_cart::where('user_id', auth()->id())->orderBy('created_at', 'DESC')->get();
 
         $hotDealsProducts = Product::select('*')
             ->whereColumn('price', '>', 'sale_price')

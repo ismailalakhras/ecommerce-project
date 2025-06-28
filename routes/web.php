@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\ProductController;
 use App\Http\Controllers\Frontend\ShoppingCartController;
@@ -36,11 +37,24 @@ Route::get('/category/{id}/products', [ProductController::class, 'productsByCate
 Route::get('/subcategory/{id}/products', [ProductController::class, 'productsBySubcategoryId'])->name('subcategory.products');
 
 
+Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
+
+
+Route::get('/admin/dashboard', function () {
+    return view('backend.layout.master');
+})->middleware(['auth', 'role:admin'])->name('admin.dashboard');
+
+
+
+
+
+
+
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
