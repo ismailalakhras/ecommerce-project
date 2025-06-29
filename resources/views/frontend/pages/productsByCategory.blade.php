@@ -15,12 +15,13 @@
                     <div class="row align-items-center">
                         <div class="col-xl-3">
 
-
-                            <h1 class="mb-15">{{ $products[0]->category->name }}</h1>
-                            <div class="breadcrumb">
-                                <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-                                <span> {{ $products[0]->category->name }}</span>
-                            </div>
+                            @if ($products->isNotEmpty())
+                                <h1 class="mb-15">{{ $products[0]->category->name }}</h1>
+                                <div class="breadcrumb">
+                                    <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+                                    <span> {{ $products[0]->category->name }}</span>
+                                </div>
+                            @endif
                         </div>
 
                     </div>
@@ -99,14 +100,15 @@
                                         </div>
 
                                         <div class="product-badges product-badges-position product-badges-mrg">
-                                            <span class=" bg-{{($product->subcategory_id)+19}}">Save
+                                            <span class=" bg-{{ $product->subcategory_id + 19 }}">Save
                                                 {{ intval((($product->price - $product->sale_price) / $product->price) * 100) }}
                                                 %</span>
                                         </div>
                                     </div>
                                     <div class="product-content-wrap">
                                         <div class="product-category">
-                                            <a href="{{ asset('subcategory/' . $product->subcategory->id . '/products') }}">{{ $product->subcategory->name }}</a>
+                                            <a
+                                                href="{{ asset('subcategory/' . $product->subcategory->id . '/products') }}">{{ $product->subcategory->name }}</a>
                                         </div>
                                         <h2><a href="shop-product-right.html">{{ $product->name }}</a></h2>
                                         <div class="product-rate-cover">

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\ProductController;
@@ -33,11 +34,24 @@ Route::middleware('auth')->group(function () {
 
 //! backend Routes
 
-Route::middleware('auth','role:admin')->group(function () {
-    
+Route::middleware('auth', 'role:admin')->group(function () {
+
     Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
 
+
+
+
+
+
+
+    Route::get('admin/category', [CategoryController::class, 'index'])->name('admin.category.index');
+    Route::get('admin/category-create', [CategoryController::class, 'create']);
+    Route::post('admin/category-store', [CategoryController::class, 'store'])->name('admin.category.store');
+
+    Route::get('admin/category-edit/{category}', [CategoryController::class, 'edit']);
+    Route::put('admin/category-update/{category}', [CategoryController::class, 'update'])->name('admin.category.update');
+    Route::delete('admin/category-delete/{category}', [CategoryController::class, 'destroy'])->name('admin.category.delete');
 });
 
 //!----------------------------------------------------------------------------------------

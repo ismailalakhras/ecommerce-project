@@ -23,6 +23,10 @@
     <link rel="stylesheet" href="{{ asset('assets/css/dark-theme.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/semi-dark.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/header-colors.css') }}" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Rukada - Responsive Bootstrap 5 Admin Template</title>
 </head>
 
@@ -40,7 +44,7 @@
 
 
         <!--start page wrapper -->
-       @yield('content')
+        @yield('content')
         <!--end page wrapper -->
 
 
@@ -73,8 +77,7 @@
             <hr />
             <div class="d-flex align-items-center justify-content-between">
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="lightmode"
-                        checked>
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="lightmode" checked>
                     <label class="form-check-label" for="lightmode">Light</label>
                 </div>
                 <div class="form-check">
@@ -157,7 +160,7 @@
 
         </div>
     </div>
-    <!--end switcher--> 
+    <!--end switcher-->
     <!-- Bootstrap JS -->
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <!--plugins-->

@@ -15,12 +15,14 @@
                     <div class="row align-items-center">
                         <div class="col-xl-3">
 
-
-                            <h1 class="mb-15">{{ $products[0]->subcategory->name }}</h1>
-                            <div class="breadcrumb">
-                                <a href="#" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-                                <span></span> {{$products[0]->category->name}} <span></span> {{ $products[0]->subcategory->name }}
-                            </div>
+                            @if ($products->isNotEmpty())
+                                <h1 class="mb-15">{{ $products[0]->subcategory->name }}</h1>
+                                <div class="breadcrumb">
+                                    <a href="#" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+                                    <span></span> {{ $products[0]->category->name }} <span></span>
+                                    {{ $products[0]->subcategory->name }}
+                                </div>
+                            @endif
                         </div>
 
                     </div>
@@ -176,7 +178,8 @@
                                     <li>
                                         <a href="{{ asset('subcategory/' . $subcategory->id . '/products') }}">
 
-                                            <img src="{{ asset('images/subcategories/' . $subcategory->slug . '.svg') }}" alt="" />
+                                            <img src="{{ asset('images/subcategories/' . $subcategory->slug . '.svg') }}"
+                                                alt="" />
                                             {{ $subcategory->name }}
                                         </a><span class="count-2">{{ $subcategory->products->count() }}</span>
                                     </li>
