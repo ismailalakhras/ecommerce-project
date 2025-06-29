@@ -13,15 +13,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
 
-     Route::get('/admin', [AuthenticatedSessionController::class, 'create'])
-        ->name('admin');
 
-    Route::get('/admin/login', [AuthenticatedSessionController::class, 'create'])
+    Route::get('admin/login', [AuthenticatedSessionController::class, 'createAdmin'])
         ->name('admin.login');
 
-    Route::post('/admin/login', [AuthenticatedSessionController::class, 'store'])
+    Route::post('admin/login', [AuthenticatedSessionController::class, 'storeAdmin'])
         ->name('admin.login.post');
-
 
 
 
