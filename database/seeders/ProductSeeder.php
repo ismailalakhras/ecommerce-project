@@ -51,7 +51,7 @@ class ProductSeeder extends Seeder
                     'is_featured' => (bool)rand(0, 1),
                     'manage_stock' => true,
                     'stock_status' => $stockQty > 0 ? 'in_stock' : ['out_of_stock', 'on_backorder'][rand(0, 1)],
-                    'image' => 'products/sample.jpg',
+                    'image' => 'images/products/sample.jpg',
                     'gallery' => json_encode(['products/gallery1.jpg', 'products/gallery2.jpg']),
                     'meta_title' => $productName,
                     'meta_description' => "Buy $productName online.",

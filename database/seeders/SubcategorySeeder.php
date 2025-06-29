@@ -61,7 +61,7 @@ class SubcategorySeeder extends Seeder
                 'name' => $subcat['name'],
                 'slug' => Str::slug($subcat['name']),
                 'description' => 'Description for ' . $subcat['name'],
-                'image' => Str::slug($subcat['name']),
+                'image' => 'images/subcategories/' . Str::slug($subcat['name']) . '.svg',
                 'is_active' => true,
                 'sort_order' => 0,
                 'meta_title' => $subcat['name'] . ' Subcategory',

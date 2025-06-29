@@ -34,36 +34,36 @@
 
 
 
-                                @foreach ($categories as $category)
+                                @foreach ($subcategories as $subcategory)
                                     <tr>
-                                        <td>{{ $category->id }} </td>
+                                        <td>{{ $subcategory->id }} </td>
                                         <td>
                                             <div class="d-flex align-items-center">
                                                 <div class="recent-product-img">
-                                                    <img src="{{ asset($category->image) }}" alt="">
+                                                    <img src="{{ asset($subcategory->image) }}" alt="">
                                                 </div>
                                                 <div class="ms-2">
-                                                    <h6 class="mb-1 font-14">{{ $category->name }}</h6>
+                                                    <h6 class="mb-1 font-14">{{ $subcategory->name }}</h6>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>{{ $category->slug }}</td>
-                                        <td>{{ $category->description }}</td>
+                                        <td>{{ $subcategory->slug }}</td>
+                                        <td>{{ $subcategory->description }}</td>
                                         <td>
                                             <div class="badge rounded-pill bg-light-info text-info w-100">
-                                                {{ $category->is_active }}
+                                                {{ $subcategory->is_active }}
                                             </div>
                                         </td>
-                                        <td>{{ $category->sort_order }}</td>
-                                        <td>{{ $category->meta_title }}</td>
-                                        <td>{{ $category->meta_description }}</td>
-                                        <td>{{ $category->created_at }}</td>
-                                        <td>{{ $category->updated_at }}</td>
+                                        <td>{{ $subcategory->sort_order }}</td>
+                                        <td>{{ $subcategory->meta_title }}</td>
+                                        <td>{{ $subcategory->meta_description }}</td>
+                                        <td>{{ $subcategory->created_at }}</td>
+                                        <td>{{ $subcategory->updated_at }}</td>
 
 
                                         <td>
                                             <div class="d-flex order-actions">
-                                                <form action="{{route('admin.category.delete' , $category->id)}}" method="POST"
+                                                <form action="{{route('admin.subcategory.delete' , $subcategory->id)}}" method="POST"
                                                     class="d-inline">
                                                     @csrf
                                                     @method('DELETE')
@@ -78,8 +78,7 @@
                                                 </form>
 
 
-                                                {{-- <form method="GET" action="category-edit/{{ $category->id }}"> --}}
-                                                <form method="GET" action="{{route('admin.category.edit' , $category->id)}}">
+                                                <form method="GET" action="{{route('admin.subcategory.edit' , $subcategory->id)}}">
                                                     @csrf
 
                                                     <button type="submit"class="update-btn btn btn-sm  mb-0 px-2 py-1 ">

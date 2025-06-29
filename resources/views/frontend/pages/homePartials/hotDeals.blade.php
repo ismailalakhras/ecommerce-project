@@ -12,7 +12,7 @@
                      @foreach ($hotDealsProducts as $product)
                          <article class="row align-items-center hover-up">
                              <figure class="col-md-4 mb-0">
-                                 <a href="shop-product-right.html"><img src="{{ asset('images/' . $product->image) }}"
+                                 <a href="shop-product-right.html"><img src="{{ asset( $product->image) }}"
                                          alt="{{ $product->name }}" alt="" /></a>
                              </figure>
                              <div class="col-md-8 mb-0">
@@ -56,7 +56,7 @@
                      @foreach ($topRatedProducts as $product)
                          <article class="row align-items-center hover-up">
                              <figure class="col-md-4 mb-0">
-                                 <a href="shop-product-right.html"><img src="{{ asset('images/' . $product->image) }}"
+                                 <a href="shop-product-right.html"><img src="{{ asset( $product->image) }}"
                                          alt="{{ $product->name }}" alt="" /></a>
                              </figure>
                              <div class="col-md-8 mb-0">
@@ -93,7 +93,7 @@
                      @foreach ($RecentlyAddedProducts as $product)
                          <article class="row align-items-center hover-up">
                              <figure class="col-md-4 mb-0">
-                                 <a href="shop-product-right.html"><img src="{{ asset('images/' . $product->image) }}"
+                                 <a href="shop-product-right.html"><img src="{{ asset( $product->image) }}"
                                          alt="{{ $product->name }}" alt="" /></a>
                              </figure>
                              <div class="col-md-8 mb-0">
@@ -129,7 +129,7 @@
                       @foreach ($specialDealsProducts as $product)
                          <article class="row align-items-center hover-up">
                              <figure class="col-md-4 mb-0">
-                                 <a href="shop-product-right.html"><img src="{{ asset('images/' . $product->image) }}"
+                                 <a href="shop-product-right.html"><img src="{{ asset( $product->image) }}"
                                          alt="{{ $product->name }}" alt="" /></a>
                              </figure>
                              <div class="col-md-8 mb-0">

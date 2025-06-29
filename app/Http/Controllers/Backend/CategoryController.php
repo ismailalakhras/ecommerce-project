@@ -39,16 +39,17 @@ class CategoryController extends Controller
                 'slug' => 'nullable|string|max:255|unique:categories,slug',
                 'description' => 'nullable|string',
                 'image' => 'nullable|string',
-                'is_active' => 'nullable|boolean',
                 'sort_order' => 'nullable|integer',
                 'meta_title' => 'nullable|string|max:255',
                 'meta_description' => 'nullable|string',
             ], [
                 'name.required' => 'The name field is required.',
                 'name.string' => 'The name must be a string.',
-                'name.max' => 'The name may not be greater than 255 characters.',
-                'slug.unique' => 'This slug is already taken.',
+                'name.max' => 'The name must not exceed 255 characters.',
+
+                'slug.unique' => 'The slug must be unique.',
             ]);
+
 
 
             if (empty($validatedData['slug'])) {
@@ -72,15 +73,10 @@ class CategoryController extends Controller
     }
 
 
-
-
-
-
     public function edit(Category $category)
     {
         return view('backend.pages.category.edit', compact('category'));
     }
-
 
 
     public function update(Request $request, Category $category)
@@ -88,13 +84,19 @@ class CategoryController extends Controller
         toast()->position('top');
 
         try {
-            // Validate input
             $validatedData = $request->validate([
                 'name' => 'required|string|max:255',
+                'slug' => 'nullable|string|max:255|unique:categories,slug,' . $category->id,
+                'description' => 'nullable|string',
+                'image' => 'nullable|string',
+                'meta_title' => 'nullable|string|max:255',
+                'meta_description' => 'nullable|string',
             ], [
                 'name.required' => 'The name field is required.',
                 'name.string' => 'The name must be a string.',
                 'name.max' => 'The name must not exceed 255 characters.',
+
+                'slug.unique' => 'The slug must be unique.',
             ]);
 
             $category->update($validatedData);
@@ -110,6 +112,7 @@ class CategoryController extends Controller
 
         return redirect()->route('admin.category.index');
     }
+
 
 
 

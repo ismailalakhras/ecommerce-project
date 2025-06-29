@@ -132,13 +132,13 @@
                                                           @foreach ($shoppingCart as $product)
                                                               <li>
                                                                   <div class="shopping-cart-img">
-                                                                      <a href="shop-product-right.html"><img
-                                                                              alt="Nest"
-                                                                              src="/images/{{ $product->product->image }}" /></a>
+                                                                      <a href=""><img
+                                                                              alt=""
+                                                                              src="{{ asset ($product->product->image) }}" /></a>
                                                                   </div>
                                                                   <div class="shopping-cart-title">
                                                                       <h4><a
-                                                                              href="shop-product-right.html">{{ $product->product->name }}</a>
+                                                                              href="">{{ $product->product->name }}</a>
                                                                       </h4>
                                                                       <h4><span>{{ $product->quantity }} ×
                                                                           </span>${{ $product->price }}</h4>

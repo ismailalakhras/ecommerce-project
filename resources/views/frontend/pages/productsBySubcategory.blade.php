@@ -93,9 +93,9 @@
                                     <div class="product-img-action-wrap">
                                         <div class="product-img product-img-zoom">
                                             <a href="shop-product-right.html">
-                                                <img class="default-img" src="{{ asset('images/' . $product->image) }}"
+                                                <img class="default-img" src="{{ asset( $product->image) }}"
                                                     alt="" />
-                                                <img class="hover-img" src="{{ asset('images/' . $product->image) }}"
+                                                <img class="hover-img" src="{{ asset( $product->image) }}"
                                                     alt="" />
                                             </a>
                                         </div>
@@ -178,7 +178,7 @@
                                     <li>
                                         <a href="{{ asset('subcategory/' . $subcategory->id . '/products') }}">
 
-                                            <img src="{{ asset('images/subcategories/' . $subcategory->slug . '.svg') }}"
+                                            <img src="{{ asset($subcategory->image) }}"
                                                 alt="" />
                                             {{ $subcategory->name }}
                                         </a><span class="count-2">{{ $subcategory->products->count() }}</span>

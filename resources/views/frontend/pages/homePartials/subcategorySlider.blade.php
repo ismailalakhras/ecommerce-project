@@ -35,7 +35,7 @@
                               <figure class="img-hover-scale overflow-hidden">
 
                                   <a href="{{ asset('subcategory/' . $subcategory->id . '/products') }}"><img
-                                          src="{{ asset('images/subcategories/' . $subcategory->slug . '.svg') }}"
+                                          src="{{ asset( $subcategory->image ) }}"
                                           alt="" />
                                   </a>
 

@@ -677,10 +677,10 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html" tabindex="0">
                                                         <img class="default-img"
-                                                            src="{{ asset('images/' . $product->image) }}
+                                                            src="{{ asset('images/' . $product->image) }}"
                                                             alt="" />
                                                         <img class="hover-img"
-                                                            src="{{ asset('images/' . $product->image) }}
+                                                            src="{{ asset('images/' . $product->image) }}"
                                                             alt="" />
                                                     </a>
                                                 </div>

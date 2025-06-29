@@ -31,7 +31,7 @@
                                     <tr class="pt-30 ismail-cart-tr">
 
                                         <td class="image product-thumbnail pt-40"><img
-                                                src="images/{{ $product->product->image }}" alt="#"></td>
+                                                src="{{ $product->product->image }}" alt="#"></td>
                                         <td class="product-des product-name">
                                             <h6 class="mb-5"><a class="product-name mb-10 text-heading"
                                                     href="shop-product-right.html">{{ $product->product->name }}</a>
