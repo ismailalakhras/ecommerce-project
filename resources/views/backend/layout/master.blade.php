@@ -183,6 +183,9 @@
     <script src="{{ asset('assets/js/index.js') }}"></script>
     <!--app JS-->
     <script src="{{ asset('assets/js/app.js') }}"></script>
+
+    @include('sweetalert::alert')
+
 </body>
 
 </html>

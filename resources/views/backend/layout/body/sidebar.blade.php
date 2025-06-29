@@ -26,7 +26,7 @@
                 </li>
 
                 <li>
-                    <a href="{{ route('admin.category.store') }}">
+                    <a href="{{ route('admin.category.create') }}">
                         <i class="bx bx-right-arrow-alt"></i>
                         Create New Category
                     </a>

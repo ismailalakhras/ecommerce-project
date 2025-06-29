@@ -78,7 +78,7 @@
                                                 </form>
 
 
-                                                <form method="GET" action="admin/category-edit/{{ $category->id }}">
+                                                <form method="GET" action="category-edit/{{ $category->id }}">
                                                     @csrf
 
                                                     <button type="submit"class="update-btn btn btn-sm  mb-0 px-2 py-1 ">

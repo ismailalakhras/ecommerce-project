@@ -7,6 +7,8 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Str;
+
 
 class CategoryController extends Controller
 {
@@ -34,11 +36,25 @@ class CategoryController extends Controller
 
             $validatedData = $request->validate([
                 'name' => 'required|string|max:255',
+                'slug' => 'nullable|string|max:255|unique:categories,slug',
+                'description' => 'nullable|string',
+                'image' => 'nullable|string',
+                'is_active' => 'nullable|boolean',
+                'sort_order' => 'nullable|integer',
+                'meta_title' => 'nullable|string|max:255',
+                'meta_description' => 'nullable|string',
             ], [
                 'name.required' => 'The name field is required.',
                 'name.string' => 'The name must be a string.',
                 'name.max' => 'The name may not be greater than 255 characters.',
+                'slug.unique' => 'This slug is already taken.',
             ]);
+
+
+            if (empty($validatedData['slug'])) {
+                $validatedData['slug'] = Str::slug($validatedData['name']) . '-' . uniqid();
+            }
+
 
             Category::create($validatedData);
             Alert::success('Success', 'Category created successfully');
@@ -52,7 +68,7 @@ class CategoryController extends Controller
             Alert::error('Error', 'Something went wrong while creating the category')->autoClose(8000);
         }
 
-        return redirect()->route('category.index');
+        return redirect()->route('admin.category.index');
     }
 
 
