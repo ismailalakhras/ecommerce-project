@@ -91,7 +91,7 @@ class SubcategoryController extends Controller
             $validatedData = $request->validate([
                 'name' => 'required|string|max:255',
                 'category_id' => 'required|exists:categories,id',
-                'slug' => 'nullable|string|max:255|unique:subcategories,slug' . $subcategory->id,
+                'slug' => 'nullable|string|max:255|unique:subcategories,slug,' . $subcategory->id,
                 'description' => 'nullable|string',
                 'image' => 'nullable|string',
                 'is_active' => 'nullable|boolean',
@@ -120,6 +120,7 @@ class SubcategoryController extends Controller
         } catch (\Exception $e) {
 
             Alert::error('Error', 'Something went wrong while updating the subcategory')->autoClose(8000);
+            return redirect()->back()->withInput();
         }
 
         return redirect()->route('admin.subcategory.index');

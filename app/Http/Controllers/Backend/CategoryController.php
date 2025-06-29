@@ -67,6 +67,7 @@ class CategoryController extends Controller
         } catch (\Exception $e) {
             // Handle other exceptions
             Alert::error('Error', 'Something went wrong while creating the category')->autoClose(8000);
+            return redirect()->back()->withInput();
         }
 
         return redirect()->route('admin.category.index');
@@ -108,6 +109,7 @@ class CategoryController extends Controller
             return redirect()->back()->withInput();
         } catch (\Exception $e) {
             Alert::error('Error', 'Something went wrong while updating the category')->autoClose(8000);
+            return redirect()->back()->withInput();
         }
 
         return redirect()->route('admin.category.index');
