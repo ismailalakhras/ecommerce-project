@@ -53,10 +53,6 @@
 
                                     <th style="position: sticky ; top:0">created_at</th>
                                     <th style="position: sticky ; top:0">updated_at</th>
-
-
-
-
                                 </tr>
                             </thead>
                             <tbody>

@@ -184,6 +184,30 @@
     <!--app JS-->
     <script src="{{ asset('assets/js/app.js') }}"></script>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+    <script>
+        $(function() {
+            const subcategories = @json($subcategories ?? []);
+            const oldId = {{ old('subcategory_id') ?? 'null' }};
+
+            $('#categorySelect').on('change', function() {
+                const catId = this.value;
+                const options = subcategories
+                    .filter(subcategory => subcategory.category_id == catId)
+                    .map(subcategory =>
+                        `<option value="${subcategory.id}" ${subcategory.id == oldId ? 'selected' : ''}>${subcategory.name}</option>`)
+                    .join('');
+
+                $('#subcategorySelect').html('<option value="">-- Choose Subcategory --</option>' + options);
+            }).trigger('change');
+        });
+    </script>
+
+
     @include('sweetalert::alert')
 
 </body>

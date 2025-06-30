@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
@@ -22,9 +23,12 @@ class ProductAdminController extends Controller
     public function create()
 
     {
+        $categories = Category::with(['subcategories'])->get();
+
         $subcategories = Subcategory::all();
 
-        return view('pages.product.create', compact('subcategories'));
+
+        return view('backend.pages.product.create', compact('categories', 'subcategories'));
     }
 
 
@@ -32,42 +36,58 @@ class ProductAdminController extends Controller
     {
         try {
             toast()->position('top');
-            
+
 
             $validatedData = $request->validate([
-                'name' => 'required|string|max:255',
-                'description' => 'nullable|string',
-                'price' => 'required|numeric|min:0',
-                'stock' => 'required|integer|min:0',
-                'subcategory_id' => 'required|exists:subcategories,id',
+                'category_id'         => ['required', 'exists:categories,id'],
+                'subcategory_id'      => ['required', 'exists:subcategories,id'],
+                'name'                => ['required', 'string', 'max:255'],
+                'slug'                => ['required', 'string', 'max:255', 'unique:products,slug'],
+                'description'         => ['nullable', 'string'],
+                'short_description'   => ['nullable', 'string'],
+                'sku'                 => ['required', 'string', 'max:100', 'unique:products,sku'],
+                'price'               => ['required', 'numeric', 'min:0'],
+                'sale_price'          => ['nullable', 'numeric', 'min:0', 'lte:price'],
+                'cost_price'          => ['nullable', 'numeric', 'min:0', 'lte:sale_price'],
+                'stock_quantity'      => ['nullable', 'integer', 'min:0'],
+                'min_quantity'        => ['nullable', 'integer', 'min:1'],
+                'weight'              => ['nullable', 'numeric', 'min:0'],
+                'dimensions'          => ['nullable', 'string', 'max:255'],
+                'is_active'           => ['nullable', 'boolean'],
+                'is_featured'         => ['nullable', 'boolean'],
+                'manage_stock'        => ['nullable', 'boolean'],
+                'stock_status'        => ['nullable', 'in:in_stock,out_of_stock,on_backorder'],
+                'image'               => ['nullable', 'string', 'max:255'],
+                'meta_title'          => ['nullable', 'string', 'max:255'],
+                'meta_description'    => ['nullable', 'string'],
+                'rating_average'      => ['nullable', 'numeric', 'min:0', 'max:5'],
+                'rating_count'        => ['nullable', 'integer', 'min:0'],
             ], [
-                'name.required' => 'The name field is required.',
-                'name.string' => 'The name must be a string.',
-                'name.max' => 'The name may not be greater than 255 characters.',
-
-                'description.string' => 'The description must be a string.',
-
-                'price.required' => 'The price field is required.',
-                'price.numeric' => 'The price must be a number.',
-                'price.min' => 'The price must be at least 0.',
-
-                'stock.required' => 'The stock field is required.',
-                'stock.integer' => 'The stock must be an integer.',
-                'stock.min' => 'The stock must be at least 0.',
-
-                'subcategory_id.required' => 'The subcategory field is required.',
-                'subcategory_id.exists' => 'The selected subcategory does not exist.',
+                'category_id.required'      => 'The category is required.',
+                'category_id.exists'        => 'The selected category is invalid.',
+                'subcategory_id.required'   => 'The subcategory is required.',
+                'subcategory_id.exists'     => 'The selected subcategory is invalid.',
+                'name.required'             => 'The product name is required.',
+                'slug.required'             => 'The slug is required.',
+                'slug.unique'               => 'The slug must be unique.',
+                'sku.required'              => 'The SKU is required.',
+                'sku.unique'                => 'The SKU must be unique.',
+                'price.required'            => 'The price is required.',
+                'price.numeric'             => 'The price must be a number.',
             ]);
 
+
             product::create($validatedData);
-            Alert::success('Success', 'Category created successfully');
+            Alert::success('Success', 'Product created successfully');
         } catch (ValidationException $e) {
             $firstError = $e->validator->errors()->first();
             Alert::error('Error', $firstError)->autoClose(8000);
             return redirect()->back()->withInput();
         } catch (\Exception $e) {
             // Handle other exceptions
+            // dd($e);
             Alert::error('Error', 'Something went wrong while creating the product')->autoClose(8000);
+            return redirect()->back()->withInput();
         }
         return redirect()->route('admin.product.index');
     }
@@ -75,9 +95,9 @@ class ProductAdminController extends Controller
 
     public function edit(Product $product)
     {
-        $subcategories = Subcategory::all();
+        $categories = Category::with(['subcategories'])->get();
 
-        return view('pages.product.edit', compact('product', 'subcategories'));
+        return view('pages.product.edit', compact('product', 'subcategories', 'categories'));
     }
 
     public function update(Request $request, Product $product)
@@ -116,7 +136,8 @@ class ProductAdminController extends Controller
             Alert::error('Error', $firstError)->autoClose(8000);
             return redirect()->back()->withInput();
         } catch (\Exception $e) {
-            Alert::error('Error', 'Something went wrong while updating the category')->autoClose(8000);
+            Alert::error('Error', 'Something went wrong while updating the product')->autoClose(8000);
+            return redirect()->back()->withInput();
         }
 
         return redirect()->route('admin.product.index');
@@ -129,9 +150,9 @@ class ProductAdminController extends Controller
         try {
             $product->delete();
             toast()->position('top');
-            Alert::success('Deleted', 'Category deleted successfully');
+            Alert::success('Deleted', 'Product deleted successfully');
         } catch (\Exception $e) {
-            Alert::error('Error', 'Something went wrong while deleting the category')->autoClose(8000);
+            Alert::error('Error', 'Something went wrong while deleting the product')->autoClose(8000);
         }
 
         return redirect()->route('admin.product.index');
