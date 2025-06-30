@@ -11,34 +11,9 @@
     </div>
     <!--navigation-->
     <ul class="metismenu" id="menu">
-        <li>
-            <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class='bx bx-home-circle'></i>
-                </div>
-                <div class="menu-title">Category</div>
-            </a>
-            <ul>
-                <li>
-                    <a href="{{ route('admin.category.index') }}">
-                        <i class="bx bx-right-arrow-alt"></i>
-                        All Categories
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{{ route('admin.category.create') }}">
-                        <i class="bx bx-right-arrow-alt"></i>
-                        Create New Category
-                    </a>
-                </li>
-
-               
 
 
-            </ul>
-        </li>
-
-        <li>
+        {{-- <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class='bx bx-home-circle'></i>
                 </div>
@@ -55,14 +30,39 @@
                 <li>
                     <a href="{{ route('admin.subcategory.create') }}">
                         <i class="bx bx-right-arrow-alt"></i>
-                        Create New Subcategory
+                        New Subcategory
                     </a>
                 </li>
-
-               
-
-
             </ul>
+        </li> --}}
+
+
+
+        <li>
+            <a href="{{ route('admin.category.index') }}" class="has-arrow no-after ">
+                <div class="parent-icon"><i class='bx bx-home-circle'></i>
+                </div>
+                <div class="menu-title ">Category</div>
+            </a>
+
+        </li>
+
+        <li>
+            <a href="{{ route('admin.subcategory.index') }}" class="has-arrow no-after">
+                <div class="parent-icon"><i class='bx bx-home-circle'></i>
+                </div>
+                <div class="menu-title">Subcategory</div>
+            </a>
+
+        </li>
+
+        <li>
+            <a href="{{ route('admin.product.index') }}" class="has-arrow no-after">
+                <div class="parent-icon"><i class='bx bx-home-circle'></i>
+                </div>
+                <div class="menu-title">Product</div>
+            </a>
+
         </li>
 
     </ul>

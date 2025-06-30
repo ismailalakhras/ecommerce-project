@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\ProductAdminController;
 use App\Http\Controllers\Backend\SubcategoryController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\ProductController;
@@ -65,6 +66,18 @@ Route::middleware('auth', 'role:admin')->group(function () {
     Route::get('admin/subcategory-edit/{subcategory}', [SubcategoryController::class, 'edit'])->name('admin.subcategory.edit');
     Route::put('admin/subcategory-update/{subcategory}', [SubcategoryController::class, 'update'])->name('admin.subcategory.update');
     Route::delete('admin/subcategory-delete/{subcategory}', [SubcategoryController::class, 'destroy'])->name('admin.subcategory.delete');
+
+
+
+       //!product
+
+    Route::get('admin/product', [ProductAdminController::class, 'index'])->name('admin.product.index');
+    Route::get('admin/product-create', [productAdminController::class, 'create'])->name('admin.product.create');
+    Route::post('admin/product-store', [productAdminController::class, 'store'])->name('admin.product.store');
+
+    Route::get('admin/product-edit/{product}', [productAdminController::class, 'edit'])->name('admin.product.edit');
+    Route::put('admin/product-update/{product}', [productAdminController::class, 'update'])->name('admin.product.update');
+    Route::delete('admin/product-delete/{product}', [productAdminController::class, 'destroy'])->name('admin.product.delete');
 });
 
 //!----------------------------------------------------------------------------------------
