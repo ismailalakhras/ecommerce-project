@@ -96,8 +96,10 @@ class ProductAdminController extends Controller
     public function edit(Product $product)
     {
         $categories = Category::with(['subcategories'])->get();
+        $subcategories = Subcategory::all();
 
-        return view('pages.product.edit', compact('product', 'subcategories', 'categories'));
+
+        return view('backend.pages.product.edit', compact('product', 'categories', 'subcategories'));
     }
 
     public function update(Request $request, Product $product)
@@ -105,27 +107,33 @@ class ProductAdminController extends Controller
         toast()->position('top');
 
         try {
+
             $validatedData = $request->validate([
-                'name' => 'required|string|max:255',
-                'price' => 'required|numeric|min:0',
-                'stock' => 'required|numeric|min:0',
-                'subcategory_id' => 'required|exists:subcategories,id'
-            ], [
-                'name.required' => 'Product name is required.',
-                'name.string' => 'Product name must be a string.',
-                'name.max' => 'Product name must not exceed 255 characters.',
-
-                'price.required' => 'Price is required.',
-                'price.numeric' => 'Price must be a number.',
-                'price.min' => 'Price must be at least 0.',
-
-                'stock.required' => 'Stock is required.',
-                'stock.numeric' => 'Stock must be a number.',
-                'stock.min' => 'Stock must be at least 0.',
-
-                'subcategory_id.required' => 'Subcategory is required.',
-                'subcategory_id.exists' => 'Selected subcategory does not exist.',
+                'category_id'         => 'required|exists:categories,id',
+                'subcategory_id'      => 'required|exists:subcategories,id',
+                'name'                => 'required|string|max:255',
+                'slug'                => 'required|string|max:255|unique:products,slug,' . $product->id,
+                'description'         => 'nullable|string',
+                'short_description'   => 'nullable|string',
+                'sku'                 => 'required|string|max:100|unique:products,sku,' . $product->id,
+                'price'               => 'required|numeric|min:0',
+                'sale_price'          => 'nullable|numeric|min:0|lte:price',
+                'cost_price'          => 'nullable|numeric|min:0|lte:sale_price',
+                'stock_quantity'      => 'nullable|integer|min:0',
+                'min_quantity'        => 'nullable|integer|min:1',
+                'weight'              => 'nullable|numeric|min:0',
+                'dimensions'          => 'nullable|string|max:255',
+                'is_active'           => 'nullable|boolean',
+                'is_featured'         => 'nullable|boolean',
+                'manage_stock'        => 'nullable|boolean',
+                'stock_status'        => 'nullable|in:in_stock,out_of_stock,on_backorder',
+                'image'               => 'nullable|string|max:255',
+                'meta_title'          => 'nullable|string|max:255',
+                'meta_description'    => 'nullable|string',
+                'rating_average'      => 'nullable|numeric|min:0|max:5',
+                'rating_count'        => 'nullable|integer|min:0',
             ]);
+
 
 
             $product->update($validatedData);
@@ -150,7 +158,7 @@ class ProductAdminController extends Controller
         try {
             $product->delete();
             toast()->position('top');
-            Alert::success('Deleted', 'Product deleted successfully');
+            Alert::success('Deleted', $product->name . ' deleted successfully');
         } catch (\Exception $e) {
             Alert::error('Error', 'Something went wrong while deleting the product')->autoClose(8000);
         }

@@ -36,7 +36,7 @@ class CategoryController extends Controller
 
             $validatedData = $request->validate([
                 'name' => 'required|string|max:255',
-                'slug' => 'nullable|string|max:255|unique:categories,slug',
+                'slug' => 'nullable|string|max:255|unique:categories,slug' ,
                 'description' => 'nullable|string',
                 'image' => 'nullable|string',
                 'sort_order' => 'nullable|integer',
@@ -126,7 +126,7 @@ class CategoryController extends Controller
             $category->delete();
             toast()->position('top');
 
-            Alert::success('Deleted', 'Category deleted successfully')->autoClose(8000);
+            Alert::success('Deleted', $category->name . ' deleted successfully')->autoClose(8000);
         } catch (\Exception $e) {
             Alert::error('Error', 'Something went wrong while deleting the category')->autoClose(8000);
         }

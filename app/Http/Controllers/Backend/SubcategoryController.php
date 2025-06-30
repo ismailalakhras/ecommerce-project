@@ -136,7 +136,7 @@ class SubcategoryController extends Controller
             $subcategory->delete();
             toast()->position('top');
 
-            Alert::success('Deleted', 'Subcategory deleted successfully')->autoClose(8000);
+            Alert::success('Deleted', $subcategory->name . ' deleted successfully')->autoClose(8000);
         } catch (\Exception $e) {
             Alert::error('Error', 'Something went wrong while deleting the subcategory')->autoClose(8000);
         }
