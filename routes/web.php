@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\ProductAdminController;
 use App\Http\Controllers\Backend\SubcategoryController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\OrderController;
 use App\Http\Controllers\Frontend\ProductController;
 use App\Http\Controllers\Frontend\ShoppingCartController;
 use App\Http\Controllers\ProfileController;
@@ -27,11 +28,20 @@ Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.s
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/cart', [ShoppingCartController::class, 'index'])->name('cart');
-    Route::post('/cart/add/{product}', [ShoppingCartController::class, 'store'])->name('cart.add');
-    Route::put('/cart/update/{product}', [ShoppingCartController::class, 'update'])->name('cart.update');
-    Route::delete('/cart/remove/{product}', [ShoppingCartController::class, 'destroy'])->name('cart.remove');
+    //! cart
+    Route::get('/cart', [ShoppingCartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/{id}', [ShoppingCartController::class, 'store'])->name('cart.store');
+    Route::put('/cart/{id}', [ShoppingCartController::class, 'update'])->name('cart.update');
+    Route::delete('/cart/{id}', [ShoppingCartController::class, 'destroy'])->name('cart.destroy');
+
+
+     //! orders 
+    Route::get('/order', [OrderController::class, 'index'])->name('order.index');
+    Route::post('/order', [OrderController::class, 'store'])->name('order.store');
+    Route::put('/order/{id}', [OrderController::class, 'update'])->name('order.update');
+    Route::delete('/order/{id}', [OrderController::class, 'destroy'])->name('order.destroy');
 });
+
 
 
 //! backend Routes
@@ -39,12 +49,6 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth', 'role:admin')->group(function () {
 
     Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-
-
-
-
-
-
 
     //!category
 
@@ -69,7 +73,7 @@ Route::middleware('auth', 'role:admin')->group(function () {
 
 
 
-       //!product
+    //!product
 
     Route::get('admin/product', [ProductAdminController::class, 'index'])->name('admin.product.index');
     Route::get('admin/product-create', [productAdminController::class, 'create'])->name('admin.product.create');

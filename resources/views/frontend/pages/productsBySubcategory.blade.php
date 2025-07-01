@@ -142,7 +142,7 @@
 
 
 
-                                            <form action="{{ route('cart.add', $product->id) }}" method="POST">
+                                            <form action="{{ route('cart.store', $product->id) }}" method="POST">
                                                 @csrf
 
 

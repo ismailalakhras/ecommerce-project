@@ -15,19 +15,15 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::latest()->get();
 
         return view('backend.pages.category.index', compact('categories'));
     }
-
-
 
     public function create()
     {
         return view('backend.pages.category.create');
     }
-
-
 
     public function store(Request $request)
     {
@@ -114,8 +110,6 @@ class CategoryController extends Controller
 
         return redirect()->route('admin.category.index');
     }
-
-
 
 
     public function destroy(Category $category)

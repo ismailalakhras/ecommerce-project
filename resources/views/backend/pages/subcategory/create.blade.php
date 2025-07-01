@@ -44,7 +44,7 @@
                                             style="color: red ; margin-bottom:5px">*</span></label>
 
                                     <select name="category_id" class="form-control mb-3">
-                                        <option value="">-- Choose a Category --</option>
+                                        <option value="" disabled selected>-- Choose a Category --</option>
                                         @foreach ($categories as $category)
                                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                                         @endforeach

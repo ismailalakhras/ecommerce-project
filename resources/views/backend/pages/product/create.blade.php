@@ -34,12 +34,11 @@
                                 <label class="text-primary mb-1">Product Name <span class="text-danger">*</span></label>
                                 <input class="form-control mb-3" type="text" name="name" value="{{ old('name') }}">
 
-                        
 
                                 <!-- Category -->
                                 <label class="text-primary mb-1">Category Name <span class="text-danger">*</span></label>
                                 <select name="category_id" id="categorySelect" class="form-control mb-3">
-                                    <option value="">-- Choose a Category --</option>
+                                    <option value="" disabled selected>-- Choose a Category --</option>
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}"
                                             {{ old('category_id') == $category->id ? 'selected' : '' }}>
@@ -51,7 +50,7 @@
                                 <!-- SubCategory -->
                                 <label class="text-primary mb-1">SubCategory Name <span class="text-danger">*</span></label>
                                 <select name="subcategory_id" id="subcategorySelect" class="form-control mb-3">
-                                    <option value="">-- Choose a SubCategory --</option>
+                                    <option value="" disabled >-- Choose a SubCategory --</option>
                                 </select>
 
 

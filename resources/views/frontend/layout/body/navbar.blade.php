@@ -106,7 +106,7 @@
 
 
                                       <div class="header-action-icon-2">
-                                          <a class="mini-cart-icon" href="{{ route('cart') }}">
+                                          <a class="mini-cart-icon" href="{{ route('cart.index') }}">
                                               <img alt="Nest"
                                                   src="{{ asset('build/assets/imgs/theme/icons/icon-cart.svg') }}" />
                                               @if (auth()->check())
@@ -121,7 +121,7 @@
                                                   </span>
                                               @endif
                                           </a>
-                                          <a href="{{ route('cart') }}"><span class="lable">Cart</span></a>
+                                          <a href="{{ route('cart.index') }}"><span class="lable">Cart</span></a>
 
                                           @if (auth()->check())
 
@@ -147,7 +147,7 @@
 
 
                                                                   <form
-                                                                      action="{{ route('cart.remove', $product->product->id) }}"
+                                                                      action="{{ route('cart.destroy', $product->product->id) }}"
                                                                       method="POST">
                                                                       @csrf
                                                                       @method('DELETE')
@@ -186,7 +186,7 @@
                                                           </h4>
                                                       </div>
 
-                                                      <a href="{{asset('cart')}}" class="products-btn-add-cart"
+                                                      <a href="{{route('cart.index')}}" class="products-btn-add-cart"
                                                           style="flex: 1; margin-left:15px ; display:flex !important;align-item:center;justify-content:center"><i
                                                               class=" mr-5"></i>Go to cart
                                                       </a>

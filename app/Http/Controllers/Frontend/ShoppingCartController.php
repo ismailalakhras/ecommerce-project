@@ -10,6 +10,7 @@ use App\Models\Shopping_cart;
 
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ShoppingCartController extends Controller
 {
@@ -28,7 +29,7 @@ class ShoppingCartController extends Controller
 
 
 
-    public function store(Request $request, $productId)
+    public function store($productId)
     {
         try {
 

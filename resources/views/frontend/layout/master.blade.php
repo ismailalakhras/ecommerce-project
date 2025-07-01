@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <title>@yield('title', 'Nest - eCommerce')</title>
@@ -49,5 +50,18 @@
     <!-- Main JS -->
     <script src="{{ asset('build/assets/js/main.js?v=5.3') }}"></script>
     <script src="{{ asset('build/assets/js/shop.js?v=5.3') }}"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            $('#Proceed_to_checkout').click(function() {
+                $('#shipping_addresses_form').toggle(500);
+                $('#Proceed_to_checkout').hide()
+
+            });
+        });
+    </script>
+
 </body>
+
 </html>

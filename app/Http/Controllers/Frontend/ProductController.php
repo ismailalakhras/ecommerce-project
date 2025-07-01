@@ -17,7 +17,7 @@ class ProductController extends Controller
             ->paginate(10);
 
         $productsCount = Product::where('category_id', $id)->count();
-        $categories = Category::with('subcategories')->get();
+        $categories = Category::with('subcategories')->orderBy('created_at', 'DESC')->get();
 
         $shoppingCart = Shopping_cart::where('user_id', auth()->id())->orderBy('created_at', 'DESC')->get();
 

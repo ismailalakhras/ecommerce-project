@@ -14,7 +14,7 @@ class ProductAdminController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
+        $products = Product::latest()->get();
 
         return view('backend.pages.product.index', compact('products'));
     }
@@ -25,7 +25,7 @@ class ProductAdminController extends Controller
     {
         $categories = Category::with(['subcategories'])->get();
 
-        $subcategories = Subcategory::all();
+        $subcategories = Subcategory::latest()->get();
 
 
         return view('backend.pages.product.create', compact('categories', 'subcategories'));
@@ -96,7 +96,7 @@ class ProductAdminController extends Controller
     public function edit(Product $product)
     {
         $categories = Category::with(['subcategories'])->get();
-        $subcategories = Subcategory::all();
+        $subcategories = Subcategory::latest()->get();
 
 
         return view('backend.pages.product.edit', compact('product', 'categories', 'subcategories'));
@@ -134,8 +134,6 @@ class ProductAdminController extends Controller
                 'rating_count'        => 'nullable|integer|min:0',
             ]);
 
-
-
             $product->update($validatedData);
 
             Alert::success('Success', 'Product updated successfully');
@@ -150,7 +148,6 @@ class ProductAdminController extends Controller
 
         return redirect()->route('admin.product.index');
     }
-
 
 
     public function destroy(Product $product)

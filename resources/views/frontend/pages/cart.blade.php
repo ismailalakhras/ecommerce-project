@@ -30,8 +30,8 @@
                                 @foreach ($shoppingCart as $product)
                                     <tr class="pt-30 ismail-cart-tr">
 
-                                        <td class="image product-thumbnail pt-40"><img
-                                                src="{{ $product->product->image }}" alt="#"></td>
+                                        <td class="image product-thumbnail pt-40"><img src="{{ $product->product->image }}"
+                                                alt="#"></td>
                                         <td class="product-des product-name">
                                             <h6 class="mb-5"><a class="product-name mb-10 text-heading"
                                                     href="shop-product-right.html">{{ $product->product->name }}</a>
@@ -71,7 +71,7 @@
 
 
 
-                                                <form action="{{ route('cart.update', $product->product->id) }}" 
+                                                <form action="{{ route('cart.update', $product->product->id) }}"
                                                     method="POST">
                                                     @csrf
                                                     @method('PUT')
@@ -108,7 +108,8 @@
                                             <h4 class="text-brand">${{ $product->total }} </h4>
                                         </td>
                                         <td class="action text-center" data-title="Remove">
-                                            <form action="{{ route('cart.remove', $product->product->id) }}" method="POST">
+                                            <form action="{{ route('cart.destroy', $product->product->id) }}"
+                                                method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="delete-btn" type="submit"><i style="font-size:20px"
@@ -179,10 +180,65 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <a href="#" class="btn mb-20 w-100">Proceed To CheckOut<i
+
+
+                                {{-- Shipping addresses form --}}
+
+                                <div class="row" id="shipping_addresses_form" style="display: none">
+
+                                    <div class="row title-page-after-header"
+                                        style="height: 75px; --bs-gutter-x: 0; padding: 20px 10px; border-radius: 0;">
+
+                                        <h4 class="mb-30">Shipping addresses</h4>
+                                    </div>
+                                    <form method="POST" action="{{ route('order.store') }}">
+                                        @csrf
+
+                                        <label>First Name</label>
+                                        <input type="text" name="first_name" required>
+
+                                        <label>Last Name</label>
+                                        <input type="text" name="last_name" required>
+
+                                        <label>Company</label>
+                                        <input type="text" name="company">
+
+                                        <label>Address Line 1</label>
+                                        <input type="text" name="address_line_1" required>
+
+                                        <label>Address Line 2</label>
+                                        <input type="text" name="address_line_2">
+
+                                        <label>City</label>
+                                        <input type="text" name="city" required>
+
+                                        <label>State</label>
+                                        <input type="text" name="state">
+
+                                        <label>Postal Code</label>
+                                        <input type="text" name="postal_code" required>
+
+                                        <label>Country</label>
+                                        <input type="text" name="country" required>
+
+                                        <label>Phone</label>
+                                        <input type="text" name="phone">
+
+                                        <button type="submit" class="btn mb-20 w-100"> Order now
+                                            <i class="fi-rs-sign-out ml-15 "></i>
+                                        </button>
+                                    </form>
+
+
+                                </div>
+
+
+                                <a id="Proceed_to_checkout" class="btn mb-20 w-100">Proceed To CheckOut<i
                                         class="fi-rs-sign-out ml-15"></i></a>
                             </div>
                         </div>
+
+
 
 
 

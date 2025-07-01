@@ -32,13 +32,6 @@
                                     value="{{ old('name', $product->name) }}">
 
 
-
-
-
-
-
-
-
                                       <!-- Category -->
                                 <label class="text-primary mb-1">Category Name <span class="text-danger">*</span></label>
                                 <select name="category_id" id="categorySelect" class="form-control mb-3">
@@ -56,18 +49,6 @@
                                 <select name="subcategory_id" id="subcategorySelect" class="form-control mb-3">
                                     <option value="">-- Choose a SubCategory --</option>
                                 </select>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                                 <label class="text-primary mb-1">Slug <span class="text-danger">*</span></label>

@@ -14,19 +14,16 @@ class SubcategoryController extends Controller
 
     public function index()
     {
-        $subcategories = Subcategory::all();
+        $subcategories = Subcategory::latest()->get();
         return view('backend.pages.subcategory.index', compact('subcategories'));
     }
 
 
-
     public function create()
     {
-        $categories = Category::all();
+        $categories = Category::latest()->get();
         return view('backend.pages.subcategory.create', compact('categories'));
     }
-
-
 
     public function store(Request $request)
     {
@@ -71,12 +68,9 @@ class SubcategoryController extends Controller
 
 
 
-
-
-
     public function edit(Subcategory $subcategory)
     {
-        $categories = Category::all();
+        $categories = Category::latest()->get();
         return view('backend.pages.subcategory.edit', compact('subcategory', 'categories'));
     }
 
