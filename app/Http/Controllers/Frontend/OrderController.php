@@ -23,16 +23,10 @@ class OrderController extends Controller
 
         $user = auth()->user();
 
-        // جلب الطلبات مع العناصر وعنوان الشحن
         $orders = $user->orders()
-            ->with(['order_items.product', 'shipping_address']) // eager load
+            ->with(['order_items.product', 'shipping_address']) 
             ->orderBy('created_at', 'desc')
             ->get();
-
-
-
-
-
 
         return view('frontend.pages.order', compact('orders'));
     }

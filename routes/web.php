@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\OrderAdminController;
 use App\Http\Controllers\Backend\ProductAdminController;
 use App\Http\Controllers\Backend\SubcategoryController;
 use App\Http\Controllers\Frontend\HomeController;
@@ -35,10 +36,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/cart/{id}', [ShoppingCartController::class, 'destroy'])->name('cart.destroy');
 
 
-     //! orders 
+    //! orders 
     Route::get('/order', [OrderController::class, 'index'])->name('order.index');
     Route::post('/order', [OrderController::class, 'store'])->name('order.store');
-    
 });
 
 
@@ -73,7 +73,6 @@ Route::middleware('auth', 'role:admin')->group(function () {
 
 
     //!product
-
     Route::get('admin/product', [ProductAdminController::class, 'index'])->name('admin.product.index');
     Route::get('admin/product-create', [productAdminController::class, 'create'])->name('admin.product.create');
     Route::post('admin/product-store', [productAdminController::class, 'store'])->name('admin.product.store');
@@ -81,6 +80,15 @@ Route::middleware('auth', 'role:admin')->group(function () {
     Route::get('admin/product-edit/{product}', [productAdminController::class, 'edit'])->name('admin.product.edit');
     Route::put('admin/product-update/{product}', [productAdminController::class, 'update'])->name('admin.product.update');
     Route::delete('admin/product-delete/{product}', [productAdminController::class, 'destroy'])->name('admin.product.delete');
+
+    //! order
+    Route::get('admin/order', [OrderAdminController::class, 'index'])->name('admin.order.index');
+    Route::get('admin/order-create', [OrderAdminController::class, 'create'])->name('admin.order.create');
+    Route::post('admin/order-store', [OrderAdminController::class, 'store'])->name('admin.order.store');
+
+    Route::get('admin/order-edit/{order}', [OrderAdminController::class, 'edit'])->name('admin.order.edit');
+    Route::put('admin/order-update/{order}', [OrderAdminController::class, 'update'])->name('admin.order.update');
+    Route::delete('admin/order-delete/{order}', [OrderAdminController::class, 'destroy'])->name('admin.order.delete');
 });
 
 //!----------------------------------------------------------------------------------------
