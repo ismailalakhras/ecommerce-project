@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\OrderAdminController;
 use App\Http\Controllers\Backend\ProductAdminController;
 use App\Http\Controllers\Backend\SubcategoryController;
+use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\OrderController;
 use App\Http\Controllers\Frontend\ProductController;
@@ -89,6 +90,14 @@ Route::middleware('auth', 'role:admin')->group(function () {
     Route::get('admin/order-edit/{order}', [OrderAdminController::class, 'edit'])->name('admin.order.edit');
     Route::put('admin/order-update/{order}', [OrderAdminController::class, 'update'])->name('admin.order.update');
     Route::delete('admin/order-delete/{order}', [OrderAdminController::class, 'destroy'])->name('admin.order.delete');
+
+
+
+
+     //! user
+    Route::get('admin/user', [UserController::class, 'index'])->name('admin.user.index');
+    Route::get('admin/user-edit/{user}', [UserController::class, 'edit'])->name('admin.user.edit');
+    Route::delete('admin/user-delete/{user}', [UserController::class, 'destroy'])->name('admin.user.delete');
 });
 
 //!----------------------------------------------------------------------------------------

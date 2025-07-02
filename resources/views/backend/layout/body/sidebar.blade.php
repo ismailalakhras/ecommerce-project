@@ -37,10 +37,19 @@
         </li> --}}
 
 
+        <li>
+            <a href="{{ route('admin.user.index') }}" class="has-arrow no-after ">
+                <div class="parent-icon"><img  style="width:25px" src="{{asset('images/user.svg')}}" alt="">
+                </div>
+                <div class="menu-title ">User</div>
+            </a>
+
+        </li>
+
 
         <li>
             <a href="{{ route('admin.category.index') }}" class="has-arrow no-after ">
-                <div class="parent-icon"><i class='bx bx-home-circle'></i>
+                <div class="parent-icon"><img  style="width:25px" src="{{asset('images/category.svg')}}" alt="">
                 </div>
                 <div class="menu-title ">Category</div>
             </a>
@@ -49,7 +58,7 @@
 
         <li>
             <a href="{{ route('admin.subcategory.index') }}" class="has-arrow no-after">
-                <div class="parent-icon"><i class='bx bx-home-circle'></i>
+                <div class="parent-icon"><img  style="width:25px" src="{{asset('images/subcategory.svg')}}" alt="">
                 </div>
                 <div class="menu-title">Subcategory</div>
             </a>
@@ -58,9 +67,18 @@
 
         <li>
             <a href="{{ route('admin.product.index') }}" class="has-arrow no-after">
-                <div class="parent-icon"><i class='bx bx-home-circle'></i>
+                <div class="parent-icon"><img  style="width:25px" src="{{asset('images/product.svg')}}" alt="">
                 </div>
                 <div class="menu-title">Product</div>
+            </a>
+
+        </li>
+
+        <li>
+            <a href="{{ route('admin.order.index') }}" class="has-arrow no-after">
+                <div class="parent-icon"><img  style="width:25px" src="{{asset('images/order.svg')}}" alt="">
+                </div>
+                <div class="menu-title">Order</div>
             </a>
 
         </li>
