@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\Order_item;
 use App\Models\Product;
 use App\Models\Shopping_cart;
 use Illuminate\Http\Request;
@@ -18,20 +19,23 @@ class OrderController extends Controller
 
     public function index()
     {
-        $orders = Order::all();
+        /** @var User $user */
 
-        return view('frontend.pages.order.index', compact('orders'));
+        $user = auth()->user();
+
+        // جلب الطلبات مع العناصر وعنوان الشحن
+        $orders = $user->orders()
+            ->with(['order_items.product', 'shipping_address']) // eager load
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+
+
+
+
+
+        return view('frontend.pages.order', compact('orders'));
     }
-
-
-
-    public function create()
-    {
-
-       
-    }
-
-
 
 
 
@@ -59,6 +63,7 @@ class OrderController extends Controller
 
         $subtotal = $cartItems->sum(fn($item) => $item->price * $item->quantity);
 
+        /** @var User $user */
         $order = $user->orders()->create([
             'order_number' => strtoupper(Str::random(10)),
             'total_amount' => $subtotal,
@@ -81,65 +86,8 @@ class OrderController extends Controller
         }
 
 
-        return redirect()->route('order.index')->with('success', 'Order placed successfully.');
-    }
+        Shopping_cart::where('user_id', $user->id)->delete();
 
-
-
-
-
-
-
-    public function edit(Order $order)
-    {
-        return view('frontend.pages.order.edit', compact('order'));
-    }
-
-
-
-    public function update(Request $request, Order $order)
-    {
-        toast()->position('top');
-
-        try {
-            // Validate input
-            $validatedData = $request->validate([
-                'name' => 'required|string|max:255',
-            ], [
-                'name.required' => 'The name field is required.',
-                'name.string' => 'The name must be a string.',
-                'name.max' => 'The name must not exceed 255 characters.',
-            ]);
-
-            $order->update($validatedData);
-
-            Alert::success('Success', 'Order updated successfully');
-        } catch (ValidationException $e) {
-            $firstError = $e->validator->errors()->first();
-            Alert::error('Error', $firstError)->autoClose(8000);
-            return redirect()->back()->withInput();
-        } catch (\Exception $e) {
-            Alert::error('Error', 'Something went wrong while updating the order')->autoClose(8000);
-        }
-
-        return redirect()->route('order.index');
-    }
-
-
-
-    public function destroy(Order $order)
-    {
-        toast()->position('top');
-
-        try {
-            $order->delete();
-            toast()->position('top');
-
-            Alert::success('Deleted', 'Order deleted successfully')->autoClose(8000);
-        } catch (\Exception $e) {
-            Alert::error('Error', 'Something went wrong while deleting the order')->autoClose(8000);
-        }
-
-        return redirect()->route('order.index');
+        return redirect()->route('cart.index')->with('success', 'Order placed successfully.');
     }
 }

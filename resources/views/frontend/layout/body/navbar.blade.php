@@ -132,9 +132,8 @@
                                                           @foreach ($shoppingCart as $product)
                                                               <li>
                                                                   <div class="shopping-cart-img">
-                                                                      <a href=""><img
-                                                                              alt=""
-                                                                              src="{{ asset ($product->product->image) }}" /></a>
+                                                                      <a href=""><img alt=""
+                                                                              src="{{ asset($product->product->image) }}" /></a>
                                                                   </div>
                                                                   <div class="shopping-cart-title">
                                                                       <h4><a
@@ -152,7 +151,8 @@
                                                                       @csrf
                                                                       @method('DELETE')
                                                                       <button class="delete-btn" type="submit"
-                                                                          style="border-radius : 100% !important ; width:35px;height :35px"><i style="font-size:20px"
+                                                                          style="border-radius : 100% !important ; width:35px;height :35px"><i
+                                                                              style="font-size:20px"
                                                                               class="fi-rs-trash"></i></button>
                                                                   </form>
 
@@ -178,7 +178,7 @@
                                                                           @php $total += $product->total; @endphp
                                                                       @endforeach
 
-                                                                     $ {{ $total }}
+                                                                      $ {{ $total }}
                                                                   @else
                                                                       0
                                                                   @endif
@@ -186,7 +186,7 @@
                                                           </h4>
                                                       </div>
 
-                                                      <a href="{{route('cart.index')}}" class="products-btn-add-cart"
+                                                      <a href="{{ route('cart.index') }}" class="products-btn-add-cart"
                                                           style="flex: 1; margin-left:15px ; display:flex !important;align-item:center;justify-content:center"><i
                                                               class=" mr-5"></i>Go to cart
                                                       </a>
@@ -345,7 +345,7 @@
                                                   <li><a href="#">Purchase Guide</a></li>
                                                   <li><a href="#">Privacy Policy</a></li>
                                                   <li><a href="#">Terms of Service</a></li>
-                                                  <li><a href="#">404 Page</a></li>
+                                                  <li><a href="{{ route('order.index') }}">My orders</a></li>
                                               </ul>
                                           </li>
                                           <li>

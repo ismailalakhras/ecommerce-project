@@ -38,8 +38,7 @@ Route::middleware('auth')->group(function () {
      //! orders 
     Route::get('/order', [OrderController::class, 'index'])->name('order.index');
     Route::post('/order', [OrderController::class, 'store'])->name('order.store');
-    Route::put('/order/{id}', [OrderController::class, 'update'])->name('order.update');
-    Route::delete('/order/{id}', [OrderController::class, 'destroy'])->name('order.destroy');
+    
 });
 
 
