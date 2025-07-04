@@ -1,94 +1,148 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--favicon-->
+    <link rel="icon" href="{{ asset('assets/images/favicon-32x32.png') }}" type="image/png" />
+    <!--plugins-->
+    <link href="{{ asset('assets/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/plugins/metismenu/css/metisMenu.min.css') }}" rel="stylesheet" />
+    <!-- loader-->
+    <link href="{{ asset('assets/css/pace.min.css') }}" rel="stylesheet" />
+    <script src="{{ asset('assets/js/pace.min.js') }}"></script>
     <!-- Bootstrap CSS -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <title>admin login</title>
+    <title>Rukada - Responsive Bootstrap 5 Admin Template</title>
 </head>
 
-<body>
-    <section class="vh-100" style="background-color: ##efefef;">
-        <div class="container py-5 h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col col-xl-10">
-                    <div class="card" style="border-radius: 1rem;">
-                        <div class="row g-0">
-                            <div class="col-md-6 col-lg-5 d-none d-md-block">
-                                <img src="{{ asset('assets/images/login-images/login-1.png') }}" alt="login form"
-                                    class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
-                            </div>
-                            <div class="col-md-6 col-lg-7 d-flex align-items-center">
-                                <div class="card-body p-4 p-lg-5 text-black">
-
-                                    <form method="POST" action="{{ route('admin.login.post') }}">
-
-                                        @csrf
-
-                                        <div class="d-flex align-items-center mb-3 pb-1">
-                                            {{-- <i class="fas fa-cubes fa-2x me-3" style="color: #c06237;"></i> --}}
-                                            <img src="{{ asset('assets/images/logo.svg') }}" style="width:150px"
-                                                alt="">
-                                            {{-- <span class="h1 fw-bold mb-0">ADMIN</span> --}}
-                                        </div>
-
-                                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your
-                                            account</h5>
-
-                                        <div data-mdb-input-init class="form-outline mb-4">
+<body class="bg-login">
+    <!--wrapper-->
+    <div class="wrapper">
+        <div class="section-authentication-signin d-flex align-items-center justify-content-center my-5 my-lg-0">
+            <div class="container-fluid">
+                <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3">
+                    <div class="col mx-auto">
+                        <div class="mb-4 text-center">
+                            <img src="{{ asset('assets/images/logo-img.png') }}" width="180" alt="" />
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="border p-4 rounded">
+                                    <div class="text-center">
+                                        <h3 class="">Sign in</h3>
+                                        <p>Don't have an account yet? <a href="authentication-signup.html">Sign up
+                                                here</a>
+                                        </p>
+                                    </div>
+                                    <div class="d-grid">
+                                        <a class="btn my-4 shadow-sm btn-white" href="javascript:;"> <span
+                                                class="d-flex justify-content-center align-items-center">
+                                                <img class="me-2" src="{{ asset('assets/images/icons/search.svg') }}"
+                                                    width="16" alt="Image Description">
+                                                <span>Sign in with Google</span>
+                                            </span>
+                                        </a> <a href="javascript:;" class="btn btn-facebook"><i
+                                                class="bx bxl-facebook"></i>Sign in with Facebook</a>
+                                    </div>
+                                    <div class="login-separater text-center mb-4"> <span>OR SIGN IN WITH EMAIL</span>
+                                        <hr />
+                                    </div>
+                                    <div class="form-body">
+                                        <form class="row g-3" method="POST" action="{{ route('admin.login.post') }}">
+                                            @csrf
 
                                             {{-- email input  --}}
 
-                                            <input id="email" class="form-control form-control-lg" type="email"
-                                                name="email" :value="old('email')" required autofocus
-                                                autocomplete="username" placeholder="Email" />
+                                            <div class="col-12">
+                                                <label for="email" class="form-label">Email Address</label>
+                                                <input type="email" class="form-control" id="email"
+                                                    placeholder="Email Address" name="email" :value="old('email')"
+                                                    required autofocus autocomplete="username">
+                                                <x-input-error :messages="$errors->get('email')" class="mt-2" />
 
-                                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-
-                                        </div>
-
-                                        <div data-mdb-input-init class="form-outline mb-4">
+                                            </div>
 
                                             {{-- password input  --}}
-                                            <input id="password" class="form-control form-control-lg" type="password"
-                                                name="password" required autocomplete="current-password"
-                                                placeholder="Password" />
+
+                                            <div class="col-12">
+                                                <label for="inputChoosePassword" class="form-label">Enter
+                                                    Password</label>
+                                                <div class="input-group" id="show_hide_password">
+                                                    <input type="password" class="form-control border-end-0"
+                                                        id="password" name="password" required
+                                                        autocomplete="current-password" placeholder="Enter Password">
+                                                    <a href="javascript:;" class="input-group-text bg-transparent">
+                                                        <i class='bx bx-hide'></i>
+                                                    </a>
+                                                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
+
+                                                </div>
+                                            </div>
 
 
-                                            <x-input-error :messages="$errors->get('password')" class="mt-2" />
 
 
-                                        </div>
-
-                                        <div class="pt-1 mb-4">
-                                            <button data-mdb-button-init data-mdb-ripple-init
-                                                class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
-                                        </div>
-
-                                        <a class="small text-muted" href="#!">Forgot password?</a>
-
-                                        <a href="#!" class="small text-muted">Terms of use.</a>
-                                        <a href="#!" class="small text-muted">Privacy policy</a>
-                                    </form>
-
+                                            <div class="col-md-6">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox"
+                                                        id="flexSwitchCheckChecked" checked>
+                                                    <label class="form-check-label"
+                                                        for="flexSwitchCheckChecked">Remember Me</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 text-end"> <a
+                                                    href="authentication-forgot-password.html">Forgot Password ?</a>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="d-grid">
+                                                    <button type="submit" class="btn btn-primary"><i
+                                                            class="bx bxs-lock-open"></i>Sign in</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!--end row-->
             </div>
         </div>
-    </section>
+    </div>
+    <!--end wrapper-->
+    <!-- Bootstrap JS -->
+    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+    <!--plugins-->
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/simplebar/js/simplebar.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/metismenu/js/metisMenu.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
+    <!--Password show & hide js -->
+    <script>
+        $(document).ready(function() {
+            $("#show_hide_password a").on('click', function(event) {
+                event.preventDefault();
+                if ($('#show_hide_password input').attr("type") == "text") {
+                    $('#show_hide_password input').attr('type', 'password');
+                    $('#show_hide_password i').addClass("bx-hide");
+                    $('#show_hide_password i').removeClass("bx-show");
+                } else if ($('#show_hide_password input').attr("type") == "password") {
+                    $('#show_hide_password input').attr('type', 'text');
+                    $('#show_hide_password i').removeClass("bx-hide");
+                    $('#show_hide_password i').addClass("bx-show");
+                }
+            });
+        });
+    </script>
+    <!--app JS-->
+    <script src="{{ asset('assets/js/app.js') }}"></script>
 </body>
 
 </html>

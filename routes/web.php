@@ -29,7 +29,7 @@ Route::get('/subcategory/{id}/products', [ProductController::class, 'productsByS
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
 
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth:web')->group(function () {
     //! cart
     Route::get('/cart', [ShoppingCartController::class, 'index'])->name('cart.index');
     Route::post('/cart/{id}', [ShoppingCartController::class, 'store'])->name('cart.store');
@@ -46,7 +46,7 @@ Route::middleware('auth')->group(function () {
 
 //! backend Routes
 
-Route::middleware('auth', 'role:admin')->group(function () {
+Route::middleware('auth:admin', 'role:admin')->group(function () {
 
     Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
@@ -59,6 +59,8 @@ Route::middleware('auth', 'role:admin')->group(function () {
     Route::get('admin/category-edit/{category}', [CategoryController::class, 'edit'])->name('admin.category.edit');
     Route::put('admin/category-update/{category}', [CategoryController::class, 'update'])->name('admin.category.update');
     Route::delete('admin/category-delete/{category}', [CategoryController::class, 'destroy'])->name('admin.category.delete');
+
+    
 
 
     //!subcategory

@@ -10,14 +10,14 @@
                             <h5 class="mb-0">Products Overview</h5>
                         </div>
                         <div class="font-22 ms-auto">
-                            <a  class="btn btn-warning text-white">
+                            <a class="btn btn-warning text-white">
                                 <i class="bx bx-layer-plus"></i> insert
                             </a>
                         </div>
                     </div>
                     <hr>
                     <div class="table-responsive" style="max-height: calc(100vh - 14.5rem); overflow-y: auto;">
-                        <table class="table align-middle mb-0">
+                        <table id="searchTable" class="table align-middle mb-0">
                             <thead class="table-light">
                                 <tr>
                                     <th style="position: sticky ; top:0"></th>
@@ -77,7 +77,7 @@
                                                                     style="margin: 0 !important">
                                                                     <i class="fas fa-user text-warning"
                                                                         style="font-size: 1.1rem">
-                                                                        
+
                                                                     </i>
                                                                 </a>
                                                             </button>

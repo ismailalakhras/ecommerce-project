@@ -24,6 +24,10 @@
     <link rel="stylesheet" href="{{ asset('assets/css/semi-dark.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/header-colors.css') }}" />
 
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -199,13 +203,26 @@
                 const options = subcategories
                     .filter(subcategory => subcategory.category_id == catId)
                     .map(subcategory =>
-                        `<option value="${subcategory.id}" ${subcategory.id == oldId ? 'selected' : ''}>${subcategory.name}</option>`)
+                        `<option value="${subcategory.id}" ${subcategory.id == oldId ? 'selected' : ''}>${subcategory.name}</option>`
+                        )
                     .join('');
 
-                $('#subcategorySelect').html('<option value="">-- Choose Subcategory --</option>' + options);
+                $('#subcategorySelect').html('<option value="">-- Choose Subcategory --</option>' +
+                options);
             }).trigger('change');
         });
     </script>
+
+
+    <script>
+        $('#searchInput').on('keyup', function() {
+            let value = $(this).val().toLowerCase();
+            $('#searchTable tbody tr').filter(function() {
+                $(this).toggle($(this).text().toLowerCase().includes(value));
+            });
+        });
+    </script>
+
 
 
 

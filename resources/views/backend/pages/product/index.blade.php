@@ -18,7 +18,7 @@
                     </div>
                     <hr>
                     <div class="table-responsive" style="max-height: calc(100vh - 14.5rem); overflow-y: auto;">
-                        <table class="table align-middle mb-0">
+                        <table  id="searchTable" class="table align-middle mb-0">
                             <thead class="table-light">
                                 <tr>
                                     <th style="position: sticky ; top:0"></th>

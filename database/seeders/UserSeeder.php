@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
     {
         // إنشاء المستخدم الأدمن
         $admin = User::create([
-            'name' => 'ismail admin',
+            'name' => 'ismail',
             'email' => 'ismail_admin@gmail.com',
             'password' => Hash::make('000000000'),
         ]);
@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
 
         $usersData = [
             [
-                'name' => 'ismail user',
+                'name' => 'ismail',
                 'email' => 'ismail_user@gmail.com',
                 'password' => Hash::make('000000000'),
             ],
