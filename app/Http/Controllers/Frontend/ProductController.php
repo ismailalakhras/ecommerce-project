@@ -14,7 +14,7 @@ class ProductController extends Controller
     {
         $products = Product::where('category_id', $id)
             ->orderBy('price', 'asc')
-            ->paginate(10);
+            ->paginate(5);
 
         $productsCount = Product::where('category_id', $id)->count();
         $categories = Category::with('subcategories')->orderBy('created_at', 'DESC')->get();
@@ -30,7 +30,7 @@ class ProductController extends Controller
     {
         $products = Product::where('subcategory_id', $id)
             ->orderBy('price', 'asc')
-            ->paginate(10);
+            ->paginate(5);
 
         $productsCount = Product::where('subcategory_id', $id)->count();
 
@@ -46,6 +46,6 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
 
-        return view('frontend.pages.product' , compact('product'));
+        return response()->json($product);
     }
 }

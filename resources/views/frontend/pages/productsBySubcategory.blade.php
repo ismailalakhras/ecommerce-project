@@ -81,22 +81,16 @@
                     </div>
 
 
-                    <div class="row product-grid">
-
-
-
-
+                    <div class="row product-grid" id="product-list" style="min-height: 60vh">
                         @foreach ($products as $product)
-                            <div class="col-lg-1-5 col-md-4 col-12 col-sm-6 wow animate__animated animate__fadeInUp "
-                                data-wow-delay=".{{ $x++ }}s">
+                            <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                 <div class="product-cart-wrap mb-30">
                                     <div class="product-img-action-wrap">
                                         <div class="product-img product-img-zoom">
                                             <a href="shop-product-right.html">
-                                                <img class="default-img" src="{{ asset( $product->image) }}"
+                                                <img class="default-img" src="{{ asset($product->image) }}"
                                                     alt="" />
-                                                <img class="hover-img" src="{{ asset( $product->image) }}"
-                                                    alt="" />
+                                                <img class="hover-img" src="{{ asset($product->image) }}" alt="" />
                                             </a>
                                         </div>
 
@@ -157,7 +151,9 @@
                             </div>
                         @endforeach
                     </div>
-                    {{ $products->links() }}
+                    <div id="pagination-links">
+                        {{ $products->links() }}
+                    </div>
 
                     <!--end product card-->
 
@@ -178,8 +174,7 @@
                                     <li>
                                         <a href="{{ asset('subcategory/' . $subcategory->id . '/products') }}">
 
-                                            <img src="{{ asset($subcategory->image) }}"
-                                                alt="" />
+                                            <img src="{{ asset($subcategory->image) }}" alt="" />
                                             {{ $subcategory->name }}
                                         </a><span class="count-2">{{ $subcategory->products->count() }}</span>
                                     </li>

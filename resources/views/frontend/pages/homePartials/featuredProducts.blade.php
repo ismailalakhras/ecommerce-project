@@ -34,14 +34,15 @@
                                                 <a href="shop-product-right.html">
                                                     <img class="default-img" src="{{ $product->image }}"
                                                         alt="" />
-                                                    <img class="hover-img" src="{{ $product->image }}"
-                                                        alt="" />
+                                                    <img class="hover-img" src="{{ $product->image }}" alt="" />
                                                 </a>
                                             </div>
                                             <div class="product-action-1">
-                                                <a aria-label="Quick view" class="action-btn small hover-up"
-                                                    data-bs-toggle="modal" data-bs-target="#quickViewModal"> <i
-                                                        class="fi-rs-eye"></i></a>
+                                                <a aria-label="Quick view" class="action-btn small hover-up quick-view-btn"
+                                                    data-bs-toggle="modal" data-bs-target="#quickViewModal" data-id={{$product->id}}>
+                                                    <i class="fi-rs-eye"></i>
+                                                </a>
+
                                                 <a aria-label="Add To Wishlist" class="action-btn small hover-up"
                                                     href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
                                                 <a aria-label="Compare" class="action-btn small hover-up"
@@ -68,8 +69,9 @@
                                             </div>
                                             <div class="sold mt-15 mb-15">
                                                 <div class="progress mb-5">
-                                                    <div class="progress-bar" role="progressbar" style="width: {{ $product->stock_quantity }}%"
-                                                        aria-valuemin="0" aria-valuemax="100"></div>
+                                                    <div class="progress-bar" role="progressbar"
+                                                        style="width: {{ $product->stock_quantity }}%" aria-valuemin="0"
+                                                        aria-valuemax="100"></div>
                                                 </div>
                                                 <span class="font-xs text-heading"> Stock:
                                                     {{ $product->stock_quantity }}</span>
@@ -91,33 +93,14 @@
                                                         To Cart</a>
                                                 </button>
                                             </form>
-
-
-
-
-
-
                                         </div>
                                     </div>
                                 @endforeach
-
-
-
                                 <!--End product Wrap-->
-
-
-
-
-
-
-
-
                             </div>
                         </div>
                     </div>
                     <!--End tab-pane-->
-
-
                 </div>
                 <!--End tab-content-->
             </div>

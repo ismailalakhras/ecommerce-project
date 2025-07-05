@@ -15,8 +15,7 @@ class OrderAdminController extends Controller
 
         $user = auth()->user();
 
-        $orders = $user->orders()
-            ->with(['order_items.product', 'shipping_address'])
+        $orders = Order::with(['order_items.product', 'shipping_address'])
             ->orderBy('created_at', 'desc')
             ->get();
 

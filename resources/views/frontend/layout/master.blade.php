@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="{{ asset('build/assets/css/plugins/slider-range.css') }}">
     <link rel="stylesheet" href="{{ asset('build/assets/css/main.css?v=5.3') }}">
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 </head>
 
 <body>
@@ -61,6 +63,73 @@
             });
         });
     </script>
+
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
+
+    <script>
+        $(function() {
+            $('.quick-view-btn').click(function() {
+                let productId = $(this).data('id')
+
+
+                $.ajax({
+                    url: '/product/' + productId,
+                    method: 'GET',
+
+                }).then(response => {
+                    $('#modalProductName').text(response.name);
+                    $('#modalProductPrice').text(`${response.price}$`);
+                    $('#modalProductSalePrice').text(`${response.sale_price}$`);
+                    $('#modalProductDescription').text(response.description);
+                    $('#modalProductImage-1').attr('src', response.image);
+                    $('#modalProductImage-2').attr('src', response.image);
+                    $('#modalProductImage-3').attr('src', response.image);
+                    $('#modalProductImage-4').attr('src', response.image);
+                    $('#modalRatingCount').text(`(${response.rating_count} reviews)`);
+
+
+
+                }).catch(err => {
+                    console.log(err);
+
+                })
+            });
+        });
+    </script>
+
+
+    <script>
+        $(document).ready(function() {
+            // حدث عند الضغط على رابط من روابط الباجينيشن
+            $(document).on('click', '#pagination-links a', function(e) {
+                e.preventDefault();
+
+                var url = $(this).attr('href');
+
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    beforeSend: function() {
+                        $('#product-list').html('<div>جاري التحميل...</div>');
+                    },
+                    success: function(data) {
+                        $('#product-list').html($(data).find('#product-list').html());
+                        $('#pagination-links').html($(data).find('#pagination-links').html());
+                    },
+                    error: function() {
+                        alert('حدث خطأ أثناء تحميل البيانات.');
+                    }
+                });
+            });
+        });
+    </script>
+
 
 </body>
 
