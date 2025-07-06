@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\backend\CouponController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\OrderAdminController;
 use App\Http\Controllers\Backend\ProductAdminController;
 use App\Http\Controllers\Backend\SubcategoryController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\frontend\CouponController as FrontendCouponController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\OrderController;
 use App\Http\Controllers\Frontend\ProductController;
@@ -40,6 +42,9 @@ Route::middleware('auth:web')->group(function () {
     //! orders 
     Route::get('/order', [OrderController::class, 'index'])->name('order.index');
     Route::post('/order', [OrderController::class, 'store'])->name('order.store');
+
+    //! orders 
+    Route::put('/coupon', [FrontendCouponController::class, 'update'])->name('coupon');
 });
 
 
@@ -60,7 +65,7 @@ Route::middleware('auth:admin', 'role:admin')->group(function () {
     Route::put('admin/category-update/{category}', [CategoryController::class, 'update'])->name('admin.category.update');
     Route::delete('admin/category-delete/{category}', [CategoryController::class, 'destroy'])->name('admin.category.delete');
 
-    
+
 
 
     //!subcategory
@@ -96,10 +101,20 @@ Route::middleware('auth:admin', 'role:admin')->group(function () {
 
 
 
-     //! user
+    //! user
     Route::get('admin/user', [UserController::class, 'index'])->name('admin.user.index');
     Route::get('admin/user-edit/{user}', [UserController::class, 'edit'])->name('admin.user.edit');
     Route::delete('admin/user-delete/{user}', [UserController::class, 'destroy'])->name('admin.user.delete');
+
+
+    //! coupon
+    Route::get('admin/coupon', [CouponController::class, 'index'])->name('admin.coupon.index');
+    Route::get('admin/coupon-create', [CouponController::class, 'create'])->name('admin.coupon.create');
+    Route::post('admin/coupon-store', [CouponController::class, 'store'])->name('admin.coupon.store');
+
+    Route::get('admin/coupon-edit/{coupon}', [CouponController::class, 'edit'])->name('admin.coupon.edit');
+    Route::put('admin/coupon-update/{coupon}', [CouponController::class, 'update'])->name('admin.coupon.update');
+    Route::delete('admin/coupon-delete/{coupon}', [CouponController::class, 'destroy'])->name('admin.coupon.delete');
 });
 
 //!----------------------------------------------------------------------------------------

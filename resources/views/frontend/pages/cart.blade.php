@@ -1,5 +1,4 @@
 @extends('frontend.layout.master')
-
 @section('content')
     <main class="main">
         <div class="container mb-80 mt-50">
@@ -15,8 +14,8 @@
             </div>
 
             @if ($shoppingCart->isEmpty())
-
-                <div style="font-size: 48px; color: #bfbebe; width: 100%; height: 200px; text-align: center; padding-top: 100px;">
+                <div
+                    style="font-size: 48px; color: #bfbebe; width: 100%; height: 200px; text-align: center; padding-top: 100px;">
                     No Items in your cart
                 </div>
             @else
@@ -139,9 +138,11 @@
                                 <div class="p-40">
                                     <h4 class="mb-10">Apply Coupon</h4>
                                     <p class="mb-30"><span class="font-lg text-muted">Using A Promo Code?</p>
-                                    <form action="#">
+                                    <form action="{{ route('coupon') }}" method="POST">
+                                        @CSRF
+                                        @method('PUT')
                                         <div class="d-flex justify-content-between">
-                                            <input class="font-medium mr-15 coupon" name="Coupon"
+                                            <input class="font-medium mr-15 coupon" type="text" name="code"
                                                 placeholder="Enter Your Coupon">
                                             <button class="btn"><i class="fi-rs-label mr-10"></i>Apply</button>
                                         </div>
@@ -160,6 +161,8 @@
                                                         <h6 class="text-muted">Subtotal</h6>
                                                     </td>
                                                     <td class="cart_total_amount">
+
+
                                                         <h4 class="text-brand text-end">${{ $totalPrice }}</h4>
                                                     </td>
                                                 </tr>
@@ -172,6 +175,24 @@
                                                         <h5 class="text-heading text-end">Free</h4>
                                                     </td>
                                                 </tr>
+
+
+                                                <tr>
+                                                    <td class="cart_total_label">
+                                                        <h6 class="text-muted">Copon discount</h6>
+                                                    </td>
+                                                    <td class="cart_total_amount">
+                                                        @if (session('discount') > 0)
+                                                            <h4 class="text-brand text-end">
+                                                                ${{ ($totalPrice * session('discount')) / 100 }}
+                                                            </h4>
+                                                        @else
+                                                            <h4 class="text-brand text-end">0</h4>
+                                                        @endif
+                                                    </td>
+                                                </tr>
+
+
                                                 <tr>
                                                     <td class="cart_total_label">
                                                         <h6 class="text-muted">Estimate for</h6>
@@ -186,7 +207,13 @@
                                                         <h6 class="text-muted">Total</h6>
                                                     </td>
                                                     <td class="cart_total_amount">
-                                                        <h4 class="text-brand text-end">${{ $totalPrice }}</h4>
+                                                        @if (session('discount') > 0)
+                                                            <h4 class="text-brand text-end">
+                                                                ${{ $totalPrice - ($totalPrice * session('discount')) / 100 }}
+                                                            </h4>
+                                                        @else
+                                                            <h4 class="text-brand text-end">${{ $totalPrice }}</h4>
+                                                        @endif
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -238,6 +265,18 @@
 
                                             <label>Phone</label>
                                             <input type="text" name="phone">
+
+
+                                            @if (session('discount') > 0)
+                                                <input type="hidden" name="total"
+                                                    value="{{ $totalPrice - ($totalPrice * session('discount')) / 100 }}">
+                                            @else
+                                                <input type="hidden" name="total" value="{{ $totalPrice }}">
+                                            @endif
+
+
+                                            <input type="hidden" name="discount" value="{{ session('discount') }}">
+
 
                                             <button type="submit" class="btn mb-20 w-100"> Order now
                                                 <i class="fi-rs-sign-out ml-15 "></i>

@@ -15,30 +15,6 @@ class ShoppingCartSeeder extends Seeder
      */
     public function run(): void
     {
-         $users = User::all();
-        $products = Product::all();
-
-        if ($users->count() === 0 || $products->count() === 0) {
-            $this->command->warn('Users or Products table is empty. Skipping ShoppingCartSeeder.');
-            return;
-        }
-
-        foreach ($users as $user) {
-            $randomProducts = $products->random(2);
-
-            foreach ($randomProducts as $product) {
-                $quantity = rand(1, 3);
-                $price = $product->price;
-                $total = $price * $quantity;
-
-                Shopping_cart::create([
-                    'user_id' => $user->id,
-                    'product_id' => $product->id,
-                    'quantity' => $quantity,
-                    'price' => $price,
-                    'total' => $total,
-                ]);
-            }
-        }
+       
     }
 }

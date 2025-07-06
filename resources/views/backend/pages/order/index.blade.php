@@ -102,7 +102,7 @@
                                             </ul>
                                         </td>
 
-
+                                      
 
                                         <td>
                                             {{ optional($order->shipping_address)->first_name }}

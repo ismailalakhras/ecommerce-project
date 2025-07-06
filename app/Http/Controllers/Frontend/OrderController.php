@@ -24,7 +24,7 @@ class OrderController extends Controller
         $user = auth()->user();
 
         $orders = $user->orders()
-            ->with(['order_items.product', 'shipping_address']) 
+            ->with(['order_items.product', 'shipping_address'])
             ->orderBy('created_at', 'desc')
             ->get();
 
@@ -55,12 +55,10 @@ class OrderController extends Controller
             return back()->with('error', 'Your cart is empty.');
         }
 
-        $subtotal = $cartItems->sum(fn($item) => $item->price * $item->quantity);
-
         /** @var User $user */
         $order = $user->orders()->create([
             'order_number' => strtoupper(Str::random(10)),
-            'total_amount' => $subtotal,
+            'total_amount' => $request->total,
             'currency' => 'USD',
             'payment_status' => 'pending',
             'status' => 'pending',

@@ -35,7 +35,7 @@ class ShoppingCartController extends Controller
 
             $product = Product::findOrFail($productId);
 
-            $price = $product->price;
+            $price = $product->sale_price;
 
             $cartItem = Shopping_cart::where('product_id', $productId)
                 ->where('user_id', auth()->id())
