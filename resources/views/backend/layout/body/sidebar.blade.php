@@ -83,6 +83,15 @@
 
         </li>
 
+        <li>
+            <a href="{{ route('admin.coupon.index') }}" class="has-arrow no-after">
+                <div class="parent-icon"><img  style="width:25px" src="{{asset('images/order.svg')}}" alt="">
+                </div>
+                <div class="menu-title">Coupon</div>
+            </a>
+
+        </li>
+
     </ul>
     <!--end navigation-->
 </div>

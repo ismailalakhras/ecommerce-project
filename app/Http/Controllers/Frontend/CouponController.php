@@ -25,6 +25,10 @@ class CouponController extends Controller
 
             if (isset($coupon)) {
                 $couponValue = $coupon->value;
+
+                $coupon->update([
+                    'used_count' => $coupon->used_count +1,
+                ]);
             }
         } catch (\Exception $e) {
             dd($e->getMessage());
