@@ -29,17 +29,17 @@
                             <div class="card-body">
 
                                 <label style="color: rgb(0, 60, 255); margin-bottom:5px">Code <span style="color: red">*</span></label>
-                                <input class="form-control mb-3" type="text" name="code" value="{{ $coupon->code }}" required>
+                                <input class="form-control mb-3" type="text" name="code" value="{{ $coupon->code }}" >
 
                                 <label style="color: rgb(0, 60, 255); margin-bottom:5px">Type <span style="color: red">*</span></label>
-                                <select class="form-control mb-3" name="type" required>
+                                <select class="form-control mb-3" name="type" >
                                     <option value="">Select Type</option>
                                     <option value="fixed" {{ $coupon->type == 'fixed' ? 'selected' : '' }}>Fixed</option>
                                     <option value="percentage" {{ $coupon->type == 'percentage' ? 'selected' : '' }}>Percentage</option>
                                 </select>
 
                                 <label style="color: rgb(0, 60, 255); margin-bottom:5px">Value <span style="color: red">*</span></label>
-                                <input class="form-control mb-3" type="number" name="value" step="0.01" min="0" value="{{ $coupon->value }}" required>
+                                <input class="form-control mb-3" type="number" name="value" step="0.01" min="0" value="{{ $coupon->value }}" >
 
                                 <label style="color: rgb(0, 60, 255); margin-bottom:5px">Minimum Amount</label>
                                 <input class="form-control mb-3" type="number" name="minimum_amount" step="0.01" min="0" value="{{ $coupon->minimum_amount }}">
@@ -51,7 +51,7 @@
                                 <input class="form-control mb-3" type="number" name="used_count" min="0" value="{{ $coupon->used_count }}">
 
                                 <label style="color: rgb(0, 60, 255); margin-bottom:5px">Is Active <span style="color: red">*</span></label>
-                                <select class="form-control mb-3" name="is_active" required>
+                                <select class="form-control mb-3" name="is_active" >
                                     <option value="1" {{ $coupon->is_active ? 'selected' : '' }}>Active</option>
                                     <option value="0" {{ !$coupon->is_active ? 'selected' : '' }}>Inactive</option>
                                 </select>

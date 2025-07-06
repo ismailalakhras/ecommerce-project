@@ -31,10 +31,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <title>Rukada - Responsive Bootstrap 5 Admin Template</title>
 </head>
 
 <body>
+
     <!--wrapper-->
     <div class="wrapper">
         <!--sidebar wrapper -->
@@ -204,11 +209,11 @@
                     .filter(subcategory => subcategory.category_id == catId)
                     .map(subcategory =>
                         `<option value="${subcategory.id}" ${subcategory.id == oldId ? 'selected' : ''}>${subcategory.name}</option>`
-                        )
+                    )
                     .join('');
 
                 $('#subcategorySelect').html('<option value="">-- Choose Subcategory --</option>' +
-                options);
+                    options);
             }).trigger('change');
         });
     </script>
@@ -229,6 +234,28 @@
 
 
     @include('sweetalert::alert')
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: "{{ session('success') }}",
+                timer: 3000,
+                timerProgressBar: true,
+                showConfirmButton: false,
+            });
+        </script>
+    @endif
+    @if ($errors->any())
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Validation Error',
+                html: `{!! implode('<br>', $errors->all()) !!}`,
+            });
+        </script>
+    @endif
+
 
 </body>
 

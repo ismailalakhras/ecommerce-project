@@ -28,17 +28,17 @@
                             <div class="card-body">
 
                                 <label style="color: rgb(0, 60, 255); margin-bottom:5px">Code <span style="color: red">*</span></label>
-                                <input class="form-control mb-3" type="text" name="code" required>
+                                <input class="form-control mb-3" type="text" name="code" >
 
                                 <label style="color: rgb(0, 60, 255); margin-bottom:5px">Type <span style="color: red">*</span></label>
-                                <select class="form-control mb-3" name="type" required>
+                                <select class="form-control mb-3" name="type" >
                                     <option value="">Select Type</option>
                                     <option value="fixed">Fixed</option>
                                     <option value="percentage">Percentage</option>
                                 </select>
 
                                 <label style="color: rgb(0, 60, 255); margin-bottom:5px">Value <span style="color: red">*</span></label>
-                                <input class="form-control mb-3" type="number" name="value" step="0.01" min="0" required>
+                                <input class="form-control mb-3" type="number" name="value" step="0.01" min="0" >
 
                                 <label style="color: rgb(0, 60, 255); margin-bottom:5px">Minimum Amount</label>
                                 <input class="form-control mb-3" type="number" name="minimum_amount" step="0.01" min="0">
@@ -50,7 +50,7 @@
                                 <input class="form-control mb-3" type="number" name="used_count" min="0" value="0">
 
                                 <label style="color: rgb(0, 60, 255); margin-bottom:5px">Is Active <span style="color: red">*</span></label>
-                                <select class="form-control mb-3" name="is_active" required>
+                                <select class="form-control mb-3" name="is_active" >
                                     <option value="1">Active</option>
                                     <option value="0">Inactive</option>
                                 </select>

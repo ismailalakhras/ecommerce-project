@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Backend\Category\StoreCategoryRequest;
+use App\Http\Requests\Backend\Category\UpdateCategoryRequest;
 use App\Models\Category;
-use Illuminate\Http\Request;
-use Illuminate\Validation\ValidationException;
-use RealRashid\SweetAlert\Facades\Alert;
-use Illuminate\Support\Str;
 
 
 class CategoryController extends Controller
@@ -25,48 +23,15 @@ class CategoryController extends Controller
         return view('backend.pages.category.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
         try {
-            toast()->position('top');
-
-            $validatedData = $request->validate([
-                'name' => 'required|string|max:255',
-                'slug' => 'nullable|string|max:255|unique:categories,slug' ,
-                'description' => 'nullable|string',
-                'image' => 'nullable|string',
-                'sort_order' => 'nullable|integer',
-                'meta_title' => 'nullable|string|max:255',
-                'meta_description' => 'nullable|string',
-            ], [
-                'name.required' => 'The name field is required.',
-                'name.string' => 'The name must be a string.',
-                'name.max' => 'The name must not exceed 255 characters.',
-
-                'slug.unique' => 'The slug must be unique.',
-            ]);
-
-
-
-            if (empty($validatedData['slug'])) {
-                $validatedData['slug'] = Str::slug($validatedData['name']) . '-' . uniqid();
-            }
-
-
+            $validatedData = $request->validated();
             Category::create($validatedData);
-            Alert::success('Success', 'Category created successfully');
-        } catch (ValidationException $e) {
-            // Handle validation errors
-            $firstError = $e->validator->errors()->first();
-            Alert::error('Error', $firstError)->autoClose(8000);
-            return redirect()->back()->withInput();
+            return redirect()->route('admin.category.index')->with('success', 'Category created successfully');
         } catch (\Exception $e) {
-            // Handle other exceptions
-            Alert::error('Error', 'Something went wrong while creating the category')->autoClose(8000);
-            return redirect()->back()->withInput();
+            return redirect()->back()->withInput()->with('error', 'Something went wrong while creating the category');
         }
-
-        return redirect()->route('admin.category.index');
     }
 
 
@@ -76,39 +41,15 @@ class CategoryController extends Controller
     }
 
 
-    public function update(Request $request, Category $category)
+    public function update(UpdateCategoryRequest $request, Category $category)
     {
-        toast()->position('top');
-
         try {
-            $validatedData = $request->validate([
-                'name' => 'required|string|max:255',
-                'slug' => 'nullable|string|max:255|unique:categories,slug,' . $category->id,
-                'description' => 'nullable|string',
-                'image' => 'nullable|string',
-                'meta_title' => 'nullable|string|max:255',
-                'meta_description' => 'nullable|string',
-            ], [
-                'name.required' => 'The name field is required.',
-                'name.string' => 'The name must be a string.',
-                'name.max' => 'The name must not exceed 255 characters.',
-
-                'slug.unique' => 'The slug must be unique.',
-            ]);
-
+            $validatedData = $request->validated();
             $category->update($validatedData);
-
-            Alert::success('Success', 'Category updated successfully');
-        } catch (ValidationException $e) {
-            $firstError = $e->validator->errors()->first();
-            Alert::error('Error', $firstError)->autoClose(8000);
-            return redirect()->back()->withInput();
+            return redirect()->route('admin.category.index')->with('success', 'Category updated successfully');
         } catch (\Exception $e) {
-            Alert::error('Error', 'Something went wrong while updating the category')->autoClose(8000);
-            return redirect()->back()->withInput();
+            return redirect()->back()->withInput()->with('error', 'Something went wrong while updating the category');
         }
-
-        return redirect()->route('admin.category.index');
     }
 
 
@@ -118,13 +59,9 @@ class CategoryController extends Controller
 
         try {
             $category->delete();
-            toast()->position('top');
-
-            Alert::success('Deleted', $category->name . ' deleted successfully')->autoClose(8000);
         } catch (\Exception $e) {
-            Alert::error('Error', 'Something went wrong while deleting the category')->autoClose(8000);
+            return redirect()->back()->with('error', 'Something went wrong while deleting the category');
         }
-
-        return redirect()->route('admin.category.index');
+        return redirect()->route('admin.category.index')->with('success','category deleted successfully');
     }
 }
