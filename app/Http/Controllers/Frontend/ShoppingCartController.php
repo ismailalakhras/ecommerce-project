@@ -47,6 +47,7 @@ class ShoppingCartController extends Controller
                     'quantity' => $cartItem->quantity + 1,
                     'total' => $cartItem->total + $cartItem->price,
                 ]);
+                return redirect()->back()->with('success', 'This product is already in your cart. Quantity increased by 1');
             } else {
                 Shopping_cart::create([
                     'user_id' => auth()->id(),
@@ -54,12 +55,11 @@ class ShoppingCartController extends Controller
                     'price' => $price,
                     'total' => $price
                 ]);
+                return redirect()->back()->with('success', 'product added to cart successfully');
             }
         } catch (\Exception $e) {
-            dd($e->getMessage());
+            return redirect()->back()->with('error', 'something error when add product to cart');
         }
-
-        return redirect()->back()->with('success', 'success');
     }
 
 
@@ -78,10 +78,10 @@ class ShoppingCartController extends Controller
                 'total' =>  $cartItem->price * $request->quantity,
             ]);
         } catch (\Exception $e) {
-            dd($e->getMessage());
+            return redirect()->back()->with('error', 'something error when add product to cart');
         }
 
-        return redirect()->back()->with('success', 'success');
+        return redirect()->back()->with('success', 'Quantity increased by 1');
     }
 
 

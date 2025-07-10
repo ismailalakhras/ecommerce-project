@@ -21,7 +21,6 @@ class ProductController extends Controller
 
         $shoppingCart = Shopping_cart::where('user_id', auth()->id())->orderBy('created_at', 'DESC')->get();
 
-
         return view('frontend.pages.productsByCategory', compact('categories', 'shoppingCart', 'products', 'productsCount'));
     }
 
@@ -37,7 +36,6 @@ class ProductController extends Controller
         $categories = Category::with('subcategories')->get();
 
         $shoppingCart = Shopping_cart::where('user_id', auth()->id())->orderBy('created_at', 'DESC')->get();
-
 
         return view('frontend.pages.productsBySubcategory', compact('categories', 'shoppingCart', 'products', 'productsCount'));
     }

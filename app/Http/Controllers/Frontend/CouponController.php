@@ -27,11 +27,11 @@ class CouponController extends Controller
                 $couponValue = $coupon->value;
 
                 $coupon->update([
-                    'used_count' => $coupon->used_count +1,
+                    'used_count' => $coupon->used_count + 1,
                 ]);
             }
         } catch (\Exception $e) {
-            dd($e->getMessage());
+            return redirect()->back()->with('error', 'something error');
         }
 
         return redirect()->back()

@@ -601,7 +601,7 @@
                                   src="{{ asset('build/assets/imgs/theme/icons/icon-instagram-white.svg') }}"
                                   alt="" /></a>
                           <a href="#"><img
-                                  src="{{ asset(' build/assets/imgs/theme/icons/icon-pinterest-white.svg ') }}"
+                                  src="{{ asset('build/assets/imgs/theme/icons/icon-pinterest-white.svg ') }}"
                                   alt="" /></a>
                           <a href="#"><img
                                   src="{{ asset('build/assets/imgs/theme/icons/icon-youtube-white.svg') }}"

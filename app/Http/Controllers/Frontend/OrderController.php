@@ -3,14 +3,8 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Order;
-use App\Models\Order_item;
-use App\Models\Product;
 use App\Models\Shopping_cart;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\ValidationException;
-use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Str;
 
 
@@ -76,7 +70,6 @@ class OrderController extends Controller
                 'total' => $item->price * $item->quantity,
             ]);
         }
-
 
         Shopping_cart::where('user_id', $user->id)->delete();
 

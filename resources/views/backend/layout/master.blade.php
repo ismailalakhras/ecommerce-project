@@ -193,8 +193,8 @@
     <!--app JS-->
     <script src="{{ asset('assets/js/app.js') }}"></script>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+    
 
 
 
@@ -237,21 +237,54 @@
     @if (session('success'))
         <script>
             Swal.fire({
+                position: 'top-end',
                 icon: 'success',
-                title: 'Success',
-                text: "{{ session('success') }}",
-                timer: 3000,
-                timerProgressBar: true,
+                title: "{{ session('success') }}",
                 showConfirmButton: false,
+                timer: 3000,
+                background: '#ffffff',
+                width: '400px',
+                padding: '16px',
+                backdrop: false,
+                customClass: {
+                    popup: 'shadow-md rounded-lg border border-gray-200',
+                    title: 'text-gray-800 text-base font-medium',
+                    icon: '!border-none'
+                },
+                toast: true,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+
             });
         </script>
     @endif
+
     @if ($errors->any())
         <script>
             Swal.fire({
+                position: 'top-end',
                 icon: 'error',
-                title: 'Validation Error',
-                html: `{!! implode('<br>', $errors->all()) !!}`,
+                title: "{{ $errors->first() }}",
+                showConfirmButton: false,
+                timer: 5000,
+                background: '#ffffff',
+                width: '400px',
+                padding: '16px',
+                backdrop: false,
+                customClass: {
+                    popup: 'shadow-md rounded-lg border border-gray-200',
+                    title: 'text-gray-800 text-base font-medium',
+                    icon: '!border-none'
+                },
+                toast: true,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
             });
         </script>
     @endif
