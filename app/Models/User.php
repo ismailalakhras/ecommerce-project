@@ -55,7 +55,7 @@ class User extends Authenticatable implements LaratrustUser
 
     public function shopping_carts()
     {
-        return $this->hasMany(Shopping_cart::class);
+        return $this->hasMany(ShoppingCart::class);
     }
 
     public function orders()

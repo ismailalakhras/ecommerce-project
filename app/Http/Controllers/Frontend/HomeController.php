@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Category;
 use App\Models\Product;
-use App\Models\Shopping_cart;
+use App\Models\ShoppingCart;
 
 class HomeController extends Controller
 {
@@ -14,7 +14,7 @@ class HomeController extends Controller
     {
         $categories = Category::with(['subcategories'])->get();
         $featuredProducts = Product::where('is_featured', true)->take(8)->get();
-        $shoppingCart = Shopping_cart::where('user_id', auth()->id())->orderBy('created_at', 'DESC')->get();
+        $shoppingCart = ShoppingCart::where('user_id', auth()->id())->orderBy('created_at', 'DESC')->get();
 
         $hotDealsProducts = Product::select('*')
             ->whereColumn('price', '>', 'sale_price')

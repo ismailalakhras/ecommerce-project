@@ -67,7 +67,6 @@ Route::middleware('auth:admin', 'role:admin')->group(function () {
 
 
 
-
     //!subcategory
 
     Route::get('admin/subcategory', [SubcategoryController::class, 'index'])->name('admin.subcategory.index');
@@ -82,12 +81,12 @@ Route::middleware('auth:admin', 'role:admin')->group(function () {
 
     //!product
     Route::get('admin/product', [ProductAdminController::class, 'index'])->name('admin.product.index');
-    Route::get('admin/product-create', [productAdminController::class, 'create'])->name('admin.product.create');
-    Route::post('admin/product-store', [productAdminController::class, 'store'])->name('admin.product.store');
+    Route::get('admin/product-create', [ProductAdminController::class, 'create'])->name('admin.product.create');
+    Route::post('admin/product-store', [ProductAdminController::class, 'store'])->name('admin.product.store');
 
-    Route::get('admin/product-edit/{product}', [productAdminController::class, 'edit'])->name('admin.product.edit');
-    Route::put('admin/product-update/{product}', [productAdminController::class, 'update'])->name('admin.product.update');
-    Route::delete('admin/product-delete/{product}', [productAdminController::class, 'destroy'])->name('admin.product.delete');
+    Route::get('admin/product-edit/{product}', [ProductAdminController::class, 'edit'])->name('admin.product.edit');
+    Route::put('admin/product-update/{product}', [ProductAdminController::class, 'update'])->name('admin.product.update');
+    Route::delete('admin/product-delete/{product}', [ProductAdminController::class, 'destroy'])->name('admin.product.delete');
 
     //! order
     Route::get('admin/order', [OrderAdminController::class, 'index'])->name('admin.order.index');

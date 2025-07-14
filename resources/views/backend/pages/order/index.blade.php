@@ -17,7 +17,7 @@
                     </div>
                     <hr>
                     <div class="table-responsive" style="max-height: calc(100vh - 14.5rem); overflow-y: auto;">
-                        <table  id="searchTable" class="table align-middle mb-0">
+                        <table id="searchTable" class="table align-middle mb-0">
                             <thead class="table-light">
                                 <tr>
                                     <th style="position: sticky ; top:0"></th>
@@ -43,108 +43,110 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if (!!$orders->count())
+                                    @foreach ($orders as $order)
+                                        <tr>
+
+                                            <td style="background: #0000000a  !important ; padding:0">
+                                                <div class="d-flex order-actions">
+                                                    <form action="{{ route('admin.order.delete', $order->id) }}"
+                                                        method="POST" class="d-inline">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="delete-btn btn btn-sm mb-0 px-2 py-1"
+                                                            title="Delete">
+                                                            <a href="">
+                                                                <i class="far fa-trash-alt text-danger"
+                                                                    style="font-size: 1.1rem">
+                                                                </i>
+                                                            </a>
+                                                        </button>
+                                                    </form>
+
+
+                                                    <form method="GET"
+                                                        action="{{ route('admin.order.edit', $order->id) }}">
+                                                        @csrf
+
+                                                        <button
+                                                            type="submit"class="update-btn btn btn-sm  mb-0 px-2 py-1 ">
+                                                            <a href="javascript:;" class="ms-4"
+                                                                style="margin: 0 !important">
+                                                                <i class="fas fa-edit text-success"
+                                                                    style="font-size: 1.1rem">
+                                                                </i>
+                                                            </a>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </td>
+
+                                            <td>{{ $order->order_number }} </td>
+
+                                            <td>
+                                                <ul style="padding-left: 0px;">
+                                                    @foreach ($order->order_items as $item)
+                                                        <li style="margin-bottom: 5px; list-style-type: none;">
+
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="recent-product-img">
+                                                                    <img src="{{ asset($item->product->image) }}"
+                                                                        alt="">
+                                                                </div>
+                                                                <div class="ms-2">
+                                                                    <h6 class="mb-1 font-14"> {{ $item->product_name }} -
+                                                                        {{ $item->quantity }} ×
+                                                                        ${{ $item->price }}</h6>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            </td>
 
 
 
-                                @foreach ($orders as $order)
+                                            <td>
+                                                {{ optional($order->shipping_address)->first_name }}
+                                                {{ optional($order->shipping_address)->last_name }}
+                                            </td>
+
+
+                                            <td>
+
+                                                <p>
+                                                    <span style="font-weight: 600">Street:</span>
+                                                    {{ optional($order->shipping_address)->address_line_1 }}
+                                                </p>
+
+                                                <p>
+                                                    <span style="font-weight: 600">City:</span>
+                                                    {{ optional($order->shipping_address)->city }}
+                                                </p>
+
+                                                <p>
+                                                    <span style="font-weight: 600">Country:</span>
+                                                    {{ optional($order->shipping_address)->country }}
+                                                </p>
+                                            </td>
+
+                                            <td>{{ $order->status }}</td>
+                                            <td>{{ $order->shipping_amount }}</td>
+                                            <td>{{ $order->discount_amount }}</td>
+                                            <td>{{ $order->tax_amount }}</td>
+                                            <td>{{ $order->total_amount }}</td>
+                                            <td>{{ $order->created_at }}</td>
+                                            <td>{{ $order->updated_at }}</td>
+
+                                        </tr>
+                                    @endforeach
+                                @else
                                     <tr>
-
-                                        <td style="background: #0000000a  !important ; padding:0">
-                                            <div class="d-flex order-actions">
-                                                <form action="{{ route('admin.order.delete', $order->id) }}" method="POST"
-                                                    class="d-inline">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="delete-btn btn btn-sm mb-0 px-2 py-1"
-                                                        title="Delete">
-                                                        <a href="">
-                                                            <i class="far fa-trash-alt text-danger"
-                                                                style="font-size: 1.1rem">
-                                                            </i>
-                                                        </a>
-                                                    </button>
-                                                </form>
-
-
-                                                <form method="GET" action="{{ route('admin.order.edit', $order->id) }}">
-                                                    @csrf
-
-                                                    <button type="submit"class="update-btn btn btn-sm  mb-0 px-2 py-1 ">
-                                                        <a href="javascript:;" class="ms-4" style="margin: 0 !important">
-                                                            <i class="fas fa-edit text-success" style="font-size: 1.1rem">
-                                                            </i>
-                                                        </a>
-                                                    </button>
-                                                </form>
-                                            </div>
+                                        <td colspan="11">
+                                            <h3 class="text-center text-muted">No orders to show</h3>
                                         </td>
-
-                                        <td >{{ $order->order_number }} </td>
-
-                                        <td>
-                                            <ul style="padding-left: 0px;">
-                                                @foreach ($order->order_items as $item)
-                                                    <li style="margin-bottom: 5px; list-style-type: none;">
-
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="recent-product-img">
-                                                                <img src="{{ asset($item->product->image) }}"
-                                                                    alt="">
-                                                            </div>
-                                                            <div class="ms-2">
-                                                                <h6 class="mb-1 font-14"> {{ $item->product_name }} -
-                                                                    {{ $item->quantity }} ×
-                                                                    ${{ $item->price }}</h6>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                @endforeach
-                                            </ul>
-                                        </td>
-
-                                      
-
-                                        <td>
-                                            {{ optional($order->shipping_address)->first_name }}
-                                            {{ optional($order->shipping_address)->last_name }}
-                                        </td>
-
-
-                                        <td>
-
-                                            <p>
-                                                <span style="font-weight: 600">Street:</span>
-                                                {{ optional($order->shipping_address)->address_line_1 }}
-                                            </p>
-
-                                            <p>
-                                                <span style="font-weight: 600">City:</span>
-                                                {{ optional($order->shipping_address)->city }}
-                                            </p>
-
-                                            <p>
-                                                <span style="font-weight: 600">Country:</span>
-                                                {{ optional($order->shipping_address)->country }}
-                                            </p>
-                                        </td>
-
-                                        <td>{{ $order->status }}</td>
-
-                                        <td>{{ $order->shipping_amount }}</td>
-                                        <td>{{ $order->discount_amount }}</td>
-                                        <td>{{ $order->tax_amount }}</td>
-                                        <td>{{ $order->total_amount }}</td>
-
-
-
-                                        <td>{{ $order->created_at }}</td>
-                                        <td>{{ $order->updated_at }}</td>
-
-
-
                                     </tr>
-                                @endforeach
-
+                                @endif
 
                             </tbody>
                         </table>

@@ -37,11 +37,11 @@ class Order extends Model
 
     public function order_items()
     {
-        return $this->hasMany(Order_item::class);
+        return $this->hasMany(OrderItem::class);
     }
 
     public function shipping_address()
     {
-        return $this->hasOne(Shipping_address::class);
+        return $this->hasOne(ShippingAddress::class);
     }
 }

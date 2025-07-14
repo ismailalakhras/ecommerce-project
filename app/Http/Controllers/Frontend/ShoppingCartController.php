@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 
 
 use App\Models\Product;
-use App\Models\Shopping_cart;
+use App\Models\ShoppingCart;
 
 
 use Illuminate\Http\Request;
@@ -16,7 +16,7 @@ class ShoppingCartController extends Controller
 {
     public function index()
     {
-        $shoppingCart = Shopping_cart::where('user_id', auth()->user()->id)->orderBy('created_at', 'DESC')->get();
+        $shoppingCart = ShoppingCart::where('user_id', auth()->user()->id)->orderBy('created_at', 'DESC')->get();
 
         $totalPrice = 0;
 
@@ -37,7 +37,7 @@ class ShoppingCartController extends Controller
 
             $price = $product->sale_price;
 
-            $cartItem = Shopping_cart::where('product_id', $productId)
+            $cartItem = ShoppingCart::where('product_id', $productId)
                 ->where('user_id', auth()->id())
                 ->first();
 
@@ -49,7 +49,7 @@ class ShoppingCartController extends Controller
                 ]);
                 return redirect()->back()->with('success', 'This product is already in your cart. Quantity increased by 1');
             } else {
-                Shopping_cart::create([
+                ShoppingCart::create([
                     'user_id' => auth()->id(),
                     'product_id' => $productId,
                     'price' => $price,
@@ -68,7 +68,7 @@ class ShoppingCartController extends Controller
     {
         try {
 
-            $cartItem = Shopping_cart::where('product_id', $productId)
+            $cartItem = ShoppingCart::where('product_id', $productId)
                 ->where('user_id', auth()->id())
                 ->first();
 
@@ -87,7 +87,7 @@ class ShoppingCartController extends Controller
 
     public function destroy($productId)
     {
-        $cartItem = Shopping_cart::where('user_id', auth()->id())
+        $cartItem = ShoppingCart::where('user_id', auth()->id())
             ->where('product_id', $productId)
             ->first();
 

@@ -53,6 +53,8 @@ class CategoryController extends Controller
     }
 
 
+
+
     public function destroy(Category $category)
     {
         toast()->position('top');

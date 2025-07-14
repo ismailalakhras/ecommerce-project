@@ -5,26 +5,27 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Shipping_address extends Model
+class OrderItem extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'order_id',
-        'first_name',
-        'last_name',
-        'company',
-        'address_line_1',
-        'address_line_2',
-        'city',
-        'state',
-        'postal_code',
-        'country',
-        'phone',
+        'product_id',
+        'product_name',
+        'product_sku',
+        'quantity',
+        'price',
+        'total',
     ];
 
     public function order()
     {
         return $this->belongsTo(Order::class);
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
     }
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Shopping_cart;
+use App\Models\ShoppingCart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -43,7 +43,7 @@ class OrderController extends Controller
         ]);
 
         $user = auth()->user();
-        $cartItems = Shopping_cart::where('user_id', $user->id)->get();
+        $cartItems = ShoppingCart::where('user_id', $user->id)->get();
 
         if ($cartItems->isEmpty()) {
             return back()->with('error', 'Your cart is empty.');
@@ -71,7 +71,7 @@ class OrderController extends Controller
             ]);
         }
 
-        Shopping_cart::where('user_id', $user->id)->delete();
+        ShoppingCart::where('user_id', $user->id)->delete();
 
         return redirect()->route('cart.index')->with('success', 'Order placed successfully.');
     }

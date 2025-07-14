@@ -8,23 +8,32 @@ use App\Http\Requests\Backend\Product\UpdateProductRequest;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Subcategory;
+use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class ProductAdminController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::latest()->get();
+        if ($request->ajax()) {
+            $products = Product::with(['category', 'subcategory'])->latest();
 
-        return view('backend.pages.product.index', compact('products'));
-    }
+            return DataTables::of($products)
+                ->addColumn('actions', 'backend.pages.product.partials.actions')
+                ->addColumn('category_name', function ($product) {
+                    return $product->category ? $product->category->name : '';
+                })
+                ->addColumn('subcategory_name', function ($product) {
+                    return $product->subcategory ? $product->subcategory->name : '';
+                })
+                ->editColumn('image', 'backend.pages.product.partials.image')
+                ->rawColumns(['actions', 'image'])
+                ->make(true);
+        }
+        $categories = Category::all();
+        $subcategories = subcategory::all();
 
-
-    public function create()
-    {
-        $categories = Category::with(['subcategories'])->get();
-        $subcategories = Subcategory::latest()->get();
-
-        return view('backend.pages.product.create', compact('categories', 'subcategories'));
+        return view('backend.pages.product.index', compact('categories', 'subcategories'));
     }
 
 
@@ -32,20 +41,19 @@ class ProductAdminController extends Controller
     {
         try {
             $validatedData = $request->validated();
-            product::create($validatedData);
+            Product::create($validatedData);
+
+            return response()->json([
+                'success' => 'Created!',
+                'message' => 'product created successfully',
+            ]);
         } catch (\Exception $e) {
-            return redirect()->back()->withInput()->with('error', 'Something went wrong while creating the product');
+            return response()->json([
+                'success' => false,
+                'message' => 'Something went wrong while creating the product: ' . $e->getMessage(),
+
+            ], 500);
         }
-        return redirect()->route('admin.product.index')->with('success', 'Product created successfully');
-    }
-
-
-    public function edit(Product $product)
-    {
-        $categories = Category::with(['subcategories'])->get();
-        $subcategories = Subcategory::latest()->get();
-
-        return view('backend.pages.product.edit', compact('product', 'categories', 'subcategories'));
     }
 
     public function update(UpdateProductRequest $request, Product $product)
@@ -53,11 +61,17 @@ class ProductAdminController extends Controller
         try {
             $validatedData = $request->validated();
             $product->update($validatedData);
-        } catch (\Exception $e) {
-            return redirect()->back()->withInput()->with('error', 'Something went wrong while updating the product');
-        }
 
-        return redirect()->route('admin.product.index')->with('success', 'Product updated successfully');
+            return response()->json([
+                'success' => 'Updated!',
+                'message' => 'product updated successfully',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Something went wrong while updating the product',
+            ], 500);
+        }
     }
 
 
@@ -65,9 +79,15 @@ class ProductAdminController extends Controller
     {
         try {
             $product->delete();
+            return response()->json([
+                'success' => 'Deleted!',
+                'message' => 'Product has been deleted successfully',
+            ]);
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Something went wrong while deleting the product');
+            return response()->json([
+                'success' => false,
+                'message' => 'Something went wrong while updating the product',
+            ], 500);
         }
-        return redirect()->route('admin.product.index')->with('success', 'product deleted successfully');
     }
 }
