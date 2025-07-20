@@ -17,7 +17,8 @@ class SubcategoryController extends Controller
     public function index(SubcategoryDataTable $datatable)
     {
         $subcategories = Subcategory::latest()->get();
-        return $datatable->render('backend.pages.subcategory.index', compact('subcategories'));
+        $categories = Category::latest()->get();
+        return $datatable->render('backend.pages.subcategory.index', compact('subcategories','categories'));
     }
 
 
