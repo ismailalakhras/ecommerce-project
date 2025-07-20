@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\DataTables\Backend\ProductDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Product\StoreProductRequest;
 use App\Http\Requests\Backend\Product\UpdateProductRequest;
@@ -13,26 +14,13 @@ use Yajra\DataTables\DataTables;
 
 class ProductAdminController extends Controller
 {
-    public function index(Request $request)
+   
+     public function index(ProductDataTable $datatable)
     {
-        if ($request->ajax()) {
-            $products = Product::with(['category', 'subcategory'])->latest();
-
-            return DataTables::of($products)
-                ->addColumn('actions', 'backend.pages.product.partials.actions')
-                ->addColumn('category_name', function ($product) {
-                    return $product->category ? $product->category->name : '';
-                })
-                ->addColumn('subcategory_name', function ($product) {
-                    return $product->subcategory ? $product->subcategory->name : '';
-                })
-                ->editColumn('image', 'backend.pages.product.partials.image')
-                ->rawColumns(['actions', 'image'])
-                ->make(true);
-        }
         $categories = Category::all();
 
-        return view('backend.pages.product.index', compact('categories'));
+        return $datatable->render('backend.pages.product.index', compact('categories'));
+
     }
 
 

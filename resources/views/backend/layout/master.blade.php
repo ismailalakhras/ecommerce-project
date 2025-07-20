@@ -87,7 +87,9 @@
     <script src="{{ asset('assets/plugins/jquery-knob/jquery.knob.js') }}"></script> --}}
 
     <!-- DataTables -->
-    <script src="https://cdn.datatables.net/2.3.2/js/dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css" />
+
 
     <!-- App Scripts -->
     <script src="{{ asset('assets/js/app.js') }}"></script>

@@ -24,7 +24,7 @@
                     <hr>
                     <div class="table-responsive"
                         style="max-height: calc(100vh - 14.5rem);max-width: calc(100vw - 20.5rem); overflow-y: auto; overflow-x: auto;">
-                        <table id="searchTable" class="table align-middle mb-0 product-table" style="white-space: nowrap;">
+                        {{-- <table id="searchTable" class="table align-middle mb-0 product-table" style="white-space: nowrap;">
                             <thead class="table-light">
                                 <tr>
                                     <th style="position: sticky ; top:0"></th>
@@ -64,7 +64,9 @@
                             </thead>
                             <tbody>
                             </tbody>
-                        </table>
+                        </table> --}}
+
+                        {{ $dataTable->table() }}
                     </div>
                 </div>
             </div>
@@ -79,5 +81,6 @@
 @endsection
 
 @push('scripts')
+    {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
     <script src="{{ asset('assets/js/backend/product.js') }}"></script>
 @endpush

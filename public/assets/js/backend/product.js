@@ -1,51 +1,3 @@
-$(function () {
-
-    $('.product-table').DataTable({
-        ajax: '/admin/product',
-        columns: [
-            { data: 'actions' },
-            { data: 'id' },
-            { data: 'name' },
-            { data: 'image' },
-
-            { data: 'category_name' },
-            { data: 'subcategory_name' },
-            { data: 'slug' },
-            { data: 'description' },
-
-            { data: 'short_description' },
-            { data: 'sku' },
-            { data: 'price' },
-            { data: 'sale_price' },
-
-            { data: 'cost_price' },
-            { data: 'stock_quantity' },
-            { data: 'min_quantity' },
-            { data: 'weight' },
-
-            { data: 'dimensions' },
-            { data: 'is_active' },
-            { data: 'is_featured' },
-            { data: 'manage_stock' },
-
-            { data: 'stock_status' },
-            { data: 'meta_title' },
-            { data: 'meta_description' },
-            { data: 'rating_average' },
-
-            { data: 'rating_count' },
-            { data: 'created_at' },
-            { data: 'updated_at' },
-        ],
-        columnDefs: [
-            {
-                targets: 1,
-                className: 'text-center'
-            }
-        ],
-
-    });
-});
 
 
 //! ------------------------- << create product >>----------------------------
@@ -84,7 +36,7 @@ $(function () {
 
                 showSuccessAlert(res)
                 $('#createModal').modal('hide');
-                $('.product-table').DataTable().ajax.reload();
+                $('#product-table').DataTable().ajax.reload();
             },
             error: function (err) {
                 showErrorAlert(err)
@@ -136,7 +88,7 @@ $(function () {
                 showSuccessAlert(res)
 
                 $('#editModal').modal('hide');
-                $('.product-table').DataTable().ajax.reload();
+                $('#product-table').DataTable().ajax.reload();
 
             },
             error: function (err) {
