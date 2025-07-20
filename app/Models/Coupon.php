@@ -26,4 +26,23 @@ class Coupon extends Model
         'expires_at' => 'datetime',
         'is_active' => 'boolean',
     ];
+    public function getCreatedAtAttribute($value)
+    {
+        return \Carbon\Carbon::parse($value)->format('D, d M Y H:i');
+    }
+
+    public function getUpdatedAtAttribute($value)
+    {
+        return \Carbon\Carbon::parse($value)->format('D, d M Y H:i');
+    }
+
+    public function getStartsAtAttribute($value)
+    {
+        return \Carbon\Carbon::parse($value)->format('D, d M Y H:i');
+    }
+
+    public function getExpiresAtAttribute($value)
+    {
+        return \Carbon\Carbon::parse($value)->format('D, d M Y H:i');
+    }
 }

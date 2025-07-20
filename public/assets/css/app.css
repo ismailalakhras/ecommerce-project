@@ -2424,3 +2424,9 @@ input.search-control-2::placeholder {
     top: 0px;
     margin: 5px;
 }
+
+.custom-btn {
+    width: 50px;
+    font-size: 12px;
+    padding: 5px;
+}

@@ -2,7 +2,7 @@
 
 namespace App\DataTables\Backend;
 
-use App\Models\Category;
+use App\Models\Coupon;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -10,7 +10,7 @@ use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 
-class CategoryDataTable extends DataTable
+class CouponDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -20,21 +20,19 @@ class CategoryDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-             ->addColumn('action', 'backend.pages.category.partials.actions')
-            ->editColumn('name', function ($row) {
-                return view('backend.pages.category.partials.name', compact('row'));
+            ->addColumn('action', 'backend.pages.coupon.partials.actions')
+           
+            ->editColumn('is_active', function ($coupon) {
+                return $coupon->is_active ? 'Yes' : 'No';
             })
-            ->editColumn('is_active', function ($product) {
-                return $product->is_active ? 'Yes' : 'No';
-            })
-          
+
             ->setRowId('id');
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(Category $model): QueryBuilder
+    public function query(Coupon $model): QueryBuilder
     {
         return $model->newQuery();
     }
@@ -45,7 +43,7 @@ class CategoryDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('category-table')
+            ->setTableId('coupon-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             // ->dom('Bfrtip')
@@ -88,14 +86,19 @@ class CategoryDataTable extends DataTable
                 ->printable(false)
                 ->width(60)
                 ->addClass('text-center bg-action-column'),
+
             Column::make('id')->addClass('text-center align-middle'),
-            Column::make('name')->addClass('align-middle'),
-            Column::make('slug')->addClass(' align-middle')->orderable(false),
-            Column::make('description')->title('Subcategory')->addClass('align-middle')->orderable(false),
-            Column::make('is_active')->addClass('text-center align-middle'),
-            Column::make('sort_order')->addClass('text-center align-middle'),
-            Column::make('meta_title')->addClass(' align-middle')->orderable(false),
-            Column::make('meta_description')->addClass(' align-middle')->orderable(false),
+            Column::make('code')->addClass('align-middle')->orderable(false),
+            Column::make('type')->addClass(' align-middle')->orderable(false),
+
+            Column::make('value')->addClass('align-middle')->orderable(false),
+            Column::make('minimum_amount')->addClass('text-center align-middle')->orderable(false),
+            Column::make('usage_limit')->addClass('text-center align-middle')->orderable(false),
+            Column::make('used_count')->addClass('text-center align-middle')->orderable(false),
+
+            Column::make('is_active')->addClass(' align-middle')->orderable(false),
+            Column::make('starts_at')->addClass(' align-middle')->orderable(false),
+            Column::make('expires_at')->addClass(' align-middle')->orderable(false),
 
 
             Column::make('created_at')->addClass(' align-middle'),
@@ -108,6 +111,6 @@ class CategoryDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Category_' . date('YmdHis');
+        return 'Coupon_' . date('YmdHis');
     }
 }

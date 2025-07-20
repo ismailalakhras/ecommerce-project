@@ -76,10 +76,10 @@ class ProductDataTable extends DataTable
             ->orderBy(1)
             ->selectStyleSingle()
             ->buttons([
-                Button::make('excel')->className('btn btn-success me-1'),
-                Button::make('csv')->className('btn btn-info me-1'),
-                Button::make('pdf')->className('btn btn-danger me-1'),
-                Button::make('print')->className('btn btn-warning me-1'),
+                Button::make('excel')->className('btn btn-success custom-btn me-1 '),
+                Button::make('csv')->className('btn btn-info me-1 custom-btn'),
+                Button::make('pdf')->className('btn btn-danger me-1 custom-btn'),
+                Button::make('print')->className('btn btn-warning me-1 custom-btn'),
 
             ]);
     }
