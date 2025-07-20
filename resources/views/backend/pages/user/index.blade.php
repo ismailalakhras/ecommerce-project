@@ -41,11 +41,11 @@
                                             <td style="background: #0000000a  !important ; padding:0">
                                                 <div class="d-flex order-actions">
 
-                                                    <form action="{{ route('admin.user.delete', $user->id) }}"
-                                                        method="POST" class="d-inline" style="">
+                                                    <form method="POST" class="d-inline" style="">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="delete-btn btn btn-sm mb-0 px-2 py-1"
+                                                        <button type="button" data-id="{{ $user->id }}"
+                                                            class="delete-user-btn btn btn-sm mb-0 px-2 py-1"
                                                             title="Delete">
                                                             <a href="">
                                                                 <i class="far fa-trash-alt text-danger"
@@ -57,12 +57,11 @@
 
 
 
-                                                    <form method="GET" action="{{ route('admin.user.edit', $user->id) }}"
-                                                        style="">
+                                                    <form method="GET" style="">
                                                         @csrf
                                                         @if ($user->hasRole('admin'))
-                                                            <button
-                                                                type="submit"class="update-btn btn btn-sm  mb-0 px-2 py-1 ">
+                                                            <button data-id="{{ $user->id }}"
+                                                                type="button"class="update-user-btn btn btn-sm  mb-0 px-2 py-1 ">
                                                                 <a href="javascript:;" class="ms-4"
                                                                     style="margin: 0 !important">
                                                                     <i class="fas fa-user-shield text-success"
@@ -71,8 +70,8 @@
                                                                 </a>
                                                             </button>
                                                         @else
-                                                            <button
-                                                                type="submit"class="update-btn btn btn-sm  mb-0 px-2 py-1 ">
+                                                            <button data-id="{{ $user->id }}"
+                                                                type="button"class="update-user-btn btn btn-sm  mb-0 px-2 py-1 ">
                                                                 <a href="javascript:;" class="ms-4"
                                                                     style="margin: 0 !important">
                                                                     <i class="fas fa-user text-warning"
@@ -108,3 +107,8 @@
         </div>
     </div>
 @endsection
+
+
+@push('scripts')
+    <script src="{{ asset('assets/js/backend/user.js') }}"></script>
+@endpush
