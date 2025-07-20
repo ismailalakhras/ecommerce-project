@@ -1,9 +1,6 @@
-
-
 //! ------------------------- << create product >>----------------------------
 $(function () {
     $(document).on('click', '.create-product-btn', function () {
-        console.log('ssss');
 
         $.ajax({
             url: `/admin/product-create`,
@@ -33,7 +30,6 @@ $(function () {
             processData: false,
             contentType: false,
             success: function (res) {
-
                 showSuccessAlert(res)
                 $('#createModal').modal('hide');
                 $('#product-table').DataTable().ajax.reload();
@@ -238,3 +234,8 @@ function formFilling(res) {
     $('#editModal input[name="rating_count"]').val(res.product.rating_count);
 
 }
+
+//todo add class 
+$(function () {
+    $('#product-table thead tr').addClass('bg-header-row');
+});

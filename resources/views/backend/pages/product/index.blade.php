@@ -24,48 +24,6 @@
                     <hr>
                     <div class="table-responsive"
                         style="max-height: calc(100vh - 14.5rem);max-width: calc(100vw - 20.5rem); overflow-y: auto; overflow-x: auto;">
-                        {{-- <table id="searchTable" class="table align-middle mb-0 product-table" style="white-space: nowrap;">
-                            <thead class="table-light">
-                                <tr>
-                                    <th style="position: sticky ; top:0"></th>
-                                    <th style="position: sticky ; top:0">Product id</th>
-                                    <th style="position: sticky ; top:0">Name</th>
-                                    <th style="position: sticky ; top:0">image</th>
-
-                                    <th style="position: sticky ; top:0">Category id</th>
-                                    <th style="position: sticky ; top:0">Subcategory id</th>
-                                    <th style="position: sticky ; top:0">Slug</th>
-                                    <th style="position: sticky ; top:0">Description</th>
-
-                                    <th style="position: sticky ; top:0">Short Description</th>
-                                    <th style="position: sticky ; top:0">sku </th>
-                                    <th style="position: sticky ; top:0">price</th>
-                                    <th style="position: sticky ; top:0">sale_price </th>
-
-                                    <th style="position: sticky ; top:0">cost_price</th>
-                                    <th style="position: sticky ; top:0">stock_quantity</th>
-                                    <th style="position: sticky ; top:0">min_quantity</th>
-                                    <th style="position: sticky ; top:0">weight</th>
-
-                                    <th style="position: sticky ; top:0">dimensions</th>
-                                    <th style="position: sticky ; top:0">is_active</th>
-                                    <th style="position: sticky ; top:0">is_featured</th>
-                                    <th style="position: sticky ; top:0">manage_stock</th>
-
-                                    <th style="position: sticky ; top:0">stock_status</th>
-                                    <th style="position: sticky ; top:0">meta_title</th>
-                                    <th style="position: sticky ; top:0">meta_description</th>
-                                    <th style="position: sticky ; top:0">rating_average</th>
-
-                                    <th style="position: sticky ; top:0">rating_count</th>
-                                    <th style="position: sticky ; top:0">created_at</th>
-                                    <th style="position: sticky ; top:0">updated_at</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table> --}}
-
                         {{ $dataTable->table() }}
                     </div>
                 </div>
