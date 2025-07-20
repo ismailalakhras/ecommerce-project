@@ -31,11 +31,27 @@ class ProductAdminController extends Controller
                 ->make(true);
         }
         $categories = Category::all();
-        $subcategories = subcategory::all();
 
-        return view('backend.pages.product.index', compact('categories', 'subcategories'));
+        return view('backend.pages.product.index', compact('categories'));
     }
 
+
+
+  public function create()
+    {
+        try {
+            $subcategories = Subcategory::all();
+            return response()->json([
+                'subcategories' => $subcategories,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'title'=>'Fetch Product Failed!',
+                'message' => 'An error occurred while fetching the product data.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
 
     public function store(StoreProductRequest $request)
     {
@@ -44,17 +60,42 @@ class ProductAdminController extends Controller
             Product::create($validatedData);
 
             return response()->json([
-                'success' => 'Created!',
+                'success' => true,
+                'title'=>'Created!',
                 'message' => 'product created successfully',
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Something went wrong while creating the product: ' . $e->getMessage(),
+                'title'=>'Created Failed!',
+                'message' => 'Something went wrong while creating the product: ',
+                'error' => $e->getMessage()
 
             ], 500);
         }
     }
+
+    public function edit(Product $product)
+    {
+        try {
+            $subcategories = Subcategory::all();
+            return response()->json([
+                'product' => $product,
+                'category_id' => $product->category_id,
+                'subcategory_id' => $product->subcategory_id,
+                'subcategories' => $subcategories,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'title'=>'Fetch Product Failed!',
+                'message' => 'An error occurred while fetching the product data.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+
+
 
     public function update(UpdateProductRequest $request, Product $product)
     {
@@ -63,13 +104,17 @@ class ProductAdminController extends Controller
             $product->update($validatedData);
 
             return response()->json([
-                'success' => 'Updated!',
+                'success' => true,
+                'title'=>'Updated!',
                 'message' => 'product updated successfully',
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
+                'title'=>'Update Failed',
                 'message' => 'Something went wrong while updating the product',
+                'error' => $e->getMessage()
+
             ], 500);
         }
     }
@@ -80,13 +125,17 @@ class ProductAdminController extends Controller
         try {
             $product->delete();
             return response()->json([
-                'success' => 'Deleted!',
+                'success' => true,
+                'title'=>'Deleted!',
                 'message' => 'Product has been deleted successfully',
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Something went wrong while updating the product',
+                'title'=>'Delete Failed',
+                'message' => 'Something went wrong while deleting the product',
+                'error' => $e->getMessage()
+
             ], 500);
         }
     }

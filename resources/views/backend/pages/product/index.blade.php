@@ -14,7 +14,7 @@
                         </div>
                         <div class="font-22 ms-auto">
 
-                            <button type="button" class="btn btn-warning text-white create-product-btn" 
+                            <button type="button" class="btn btn-warning text-white create-product-btn"
                                 data-bs-toggle="modal" data-bs-target="#createModal">
                                 <i class="bx bx-layer-plus"></i> insert
                             </button>
@@ -72,16 +72,10 @@
     </div>
 
     {{-- Edit Modal --}}
-    @include('backend.pages.product.partials.edit-modal', [
-        'categories' => $categories,
-        'subcategories' => $subcategories,
-    ])
+    @include('backend.pages.product.partials.edit-modal')
 
     {{-- Create Modal --}}
-    @include('backend.pages.product.partials.create-modal', [
-        'categories' => $categories,
-        'subcategories' => $subcategories,
-    ])
+    @include('backend.pages.product.partials.create-modal')
 @endsection
 
 @push('scripts')
