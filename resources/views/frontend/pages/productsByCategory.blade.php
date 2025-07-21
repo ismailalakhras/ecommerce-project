@@ -125,26 +125,10 @@
                                             </div>
 
 
-                                            {{-- <div class="add-cart">
-                                                <a class="add" href="shop-cart.html">
-                                                    <i class="fi-rs-shopping-cart mr-5">
-                                                    </i>
-                                                    Add
-                                                </a>
-                                            </div> --}}
-
-
-
-
-                                            <form id="addToCartForm-productsByCategory" method="POST">
-                                                @csrf
-
-
-                                                <button data-id="{{ $product->id }}" type="button"
-                                                    class="products-btn-add-cart addToCartBtn-productsByCategory">
-                                                    <a><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                                                </button>
-                                            </form>
+                                            <button data-id="{{ $product->id }}" type="button"
+                                                class="products-btn-add-cart addToCartBtn">
+                                                <a><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                            </button>
 
                                         </div>
                                     </div>
@@ -168,8 +152,6 @@
                     <div class="sidebar-widget widget-category-2 mb-30">
                         <h5 class="section-title style-1 mb-30">Category</h5>
                         <ul>
-
-
 
                             @foreach ($categories as $category)
                                 <li>

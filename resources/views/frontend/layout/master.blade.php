@@ -6,6 +6,7 @@
     <title>@yield('title', 'Nest - eCommerce')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('build/assets/imgs/theme/favicon.svg') }}">
 
@@ -128,7 +129,7 @@
     </script>
 
 
-    @include('sweetalert::alert')
+    {{-- @include('sweetalert::alert')
     @if (session('success'))
         <script>
             Swal.fire({
@@ -137,10 +138,8 @@
                 title: "{{ session('success') }}",
                 showConfirmButton: false,
                 timer: 5000,
-                background: '#ffffff',
                 width: '400px',
                 padding: '16px',
-                backdrop: false,
                 customClass: {
                     popup: 'shadow-lg rounded-lg border border-green-100',
                     title: 'text-green-600 text-base font-medium',
@@ -154,9 +153,9 @@
                 }
             });
         </script>
-    @endif
+    @endif --}}
 
-    @if ($errors->any())
+    {{-- @if ($errors->any())
         <script>
             Swal.fire({
                 position: 'top-end',
@@ -164,10 +163,8 @@
                 title: "{{ $errors->first() }}",
                 showConfirmButton: false,
                 timer: 5000,
-                background: '#ffffff',
                 width: '400px',
                 padding: '16px',
-                backdrop: false,
                 customClass: {
                     popup: 'shadow-lg rounded-lg border border-red-100',
                     title: 'text-red-600 text-base font-medium',
@@ -181,7 +178,7 @@
                 }
             });
         </script>
-    @endif
+    @endif --}}
 
 </body>
 

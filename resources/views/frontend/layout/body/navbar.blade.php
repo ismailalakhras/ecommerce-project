@@ -132,29 +132,32 @@
                                                           @foreach ($shoppingCart as $product)
                                                               <li>
                                                                   <div class="shopping-cart-img">
-                                                                      <a href=""><img alt=""
-                                                                              src="{{ asset($product->product->image) }}" /></a>
+                                                                      <a href="">
+                                                                          <img
+                                                                              src="{{ asset($product->product->image) }}" />
+                                                                      </a>
                                                                   </div>
                                                                   <div class="shopping-cart-title">
-                                                                      <h4><a
+                                                                      <h4>
+                                                                          <a
                                                                               href="">{{ $product->product->name }}</a>
                                                                       </h4>
-                                                                      <h4><span>{{ $product->quantity }} ×
-                                                                          </span>${{ $product->price }}</h4>
+                                                                      <h4>
+                                                                          <span
+                                                                              data-id="{{ $product->product->id }}">{{ $product->quantity }}
+                                                                              ×
+                                                                          </span>${{ $product->price }}
+                                                                      </h4>
                                                                   </div>
 
 
 
-                                                                  <form
-                                                                      action="{{ route('cart.destroy', $product->product->id) }}"
-                                                                      method="POST">
-                                                                      @csrf
-                                                                      @method('DELETE')
-                                                                      <button class="delete-btn" type="submit"
-                                                                          style="border-radius : 100% !important ; width:35px;height :35px"><i
-                                                                              style="font-size:20px"
-                                                                              class="fi-rs-trash"></i></button>
-                                                                  </form>
+
+                                                                  <button class="delete-btn" type="button"
+                                                                      data-id="{{ $product->product->id }}"
+                                                                      style="border-radius : 100% !important ; width:35px;height :35px"><i
+                                                                          style="font-size:20px"
+                                                                          class="fi-rs-trash"></i></button>
 
 
                                                               </li>
@@ -169,7 +172,7 @@
 
                                                       <div class="shopping-cart-total ">
                                                           <h4>Total
-                                                              <span>
+                                                              <span id="totalPriceCart">
 
                                                                   @php $total = 0; @endphp
 

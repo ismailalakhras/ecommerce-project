@@ -134,16 +134,10 @@
                                             </div> --}}
 
 
-
-
-                                            <form action="{{ route('cart.store', $product->id) }}" method="POST">
-                                                @csrf
-
-
-                                                <button type="submit" class="products-btn-add-cart">
+                                                <button type="submit" class="products-btn-add-cart addToCartBtn" data-id="{{ $product->id }}">
                                                     <a><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                                 </button>
-                                            </form>
+                                           
 
                                         </div>
                                     </div>

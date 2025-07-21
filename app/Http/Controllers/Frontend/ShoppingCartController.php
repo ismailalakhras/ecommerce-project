@@ -18,11 +18,7 @@ class ShoppingCartController extends Controller
     {
         $shoppingCart = ShoppingCart::where('user_id', auth()->user()->id)->orderBy('created_at', 'DESC')->get();
 
-        $totalPrice = 0;
-
-        foreach ($shoppingCart as $product) {
-            $totalPrice += $product->total;
-        }
+        $totalPrice = $shoppingCart->sum('total');
 
         return view('frontend.pages.cart', compact('shoppingCart', 'totalPrice'));
     }
@@ -31,12 +27,8 @@ class ShoppingCartController extends Controller
 
     public function store($productId)
     {
-
-
         try {
-
             $product = Product::findOrFail($productId);
-
             $price = $product->sale_price;
 
             $cartItem = ShoppingCart::where('product_id', $productId)
@@ -45,15 +37,13 @@ class ShoppingCartController extends Controller
 
             $shoppingCartCount = ShoppingCart::where('user_id', auth()->id())->count();
 
-
             if ($cartItem) {
-
                 $cartItem->update([
                     'quantity' => $cartItem->quantity + 1,
                     'total' => $cartItem->total + $cartItem->price,
                 ]);
 
-                $quantity = $cartItem->quantity;
+                $total = ShoppingCart::where('user_id', auth()->id())->sum('total');
 
                 return response()->json([
                     'success' => true,
@@ -62,34 +52,44 @@ class ShoppingCartController extends Controller
                     'message' => 'Quantity updated successfully',
                     'product' => $product,
                     'cart_count' => $shoppingCartCount,
-                    'quantity' => $quantity
+                    'quantity' => $cartItem->quantity,
+                    'price' => $cartItem->price,
+                    'total' => $total // ✅ مجموع السلة كامل
                 ]);
             } else {
                 $shoppingCartCount += 1;
+
                 ShoppingCart::create([
                     'user_id' => auth()->id(),
                     'product_id' => $productId,
                     'price' => $price,
                     'total' => $price,
                 ]);
+
+                $total = ShoppingCart::where('user_id', auth()->id())->sum('total');
+
                 return response()->json([
                     'success' => true,
                     'isExists' => false,
                     'title' => 'Success!',
-                    'message' => 'product added to cart successfully',
+                    'message' => 'Product added to cart successfully',
                     'product' => $product,
-                    'cart_count' => $shoppingCartCount
+                    'cart_count' => $shoppingCartCount,
+                    'price' => $price,
+                    'total' => $total,
+                    'quantity' => 1
                 ]);
             }
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
                 'title' => 'Failed!',
-                'message' => 'something error when add product to cart ',
+                'message' => 'Something went wrong when adding product to cart',
                 'error' => $e->getMessage()
             ], 500);
         }
     }
+
 
 
 
@@ -114,17 +114,45 @@ class ShoppingCartController extends Controller
     }
 
 
-    public function destroy($productId)
+    public function destroy($product)
     {
-        $cartItem = ShoppingCart::where('user_id', auth()->id())
-            ->where('product_id', $productId)
-            ->first();
+        try {
+            $cartItem = ShoppingCart::where('product_id', $product)
+                ->where('user_id', auth()->id())
+                ->first();
 
-        if ($cartItem) {
+            if (!$cartItem) {
+                return response()->json([
+                    'success' => false,
+                    'title' => 'Not Found!',
+                    'message' => 'Product not found in cart.',
+
+                ], 404);
+            }
+
             $cartItem->delete();
-            return redirect()->back()->with('success', 'Product has been deleted successfully ');
-        }
 
-        return redirect()->back()->with('error', 'Product not found');
+            $shoppingCartCount = ShoppingCart::where('user_id', auth()->id())->count();
+
+            $total = ShoppingCart::where('user_id', auth()->id())->sum('total');
+
+
+            return response()->json([
+                'success' => true,
+                'title' => 'Deleted!',
+                'message' => 'Product removed from cart successfully.',
+                'cart_count' => $shoppingCartCount,
+                'product' => $product,
+                'total' => $total
+
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'title' => 'Failed!',
+                'message' => 'Something went wrong when deleting product from cart',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 }
