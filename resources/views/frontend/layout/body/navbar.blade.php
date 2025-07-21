@@ -110,7 +110,7 @@
                                               <img alt="Nest"
                                                   src="{{ asset('build/assets/imgs/theme/icons/icon-cart.svg') }}" />
                                               @if (auth()->check())
-                                                  <span class="pro-count blue">
+                                                  <span id="cartCount" class="pro-count blue">
 
                                                       @if (isset($shoppingCart) && $shoppingCart->count())
                                                           {{ $shoppingCart->count() }}
@@ -126,7 +126,7 @@
                                           @if (auth()->check())
 
                                               <div class="cart-dropdown-wrap cart-dropdown-hm2">
-                                                  <ul>
+                                                  <ul id="dropdown-cart">
 
                                                       @if (isset($shoppingCart) && $shoppingCart->count())
                                                           @foreach ($shoppingCart as $product)

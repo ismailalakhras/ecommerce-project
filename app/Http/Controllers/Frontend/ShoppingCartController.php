@@ -31,6 +31,8 @@ class ShoppingCartController extends Controller
 
     public function store($productId)
     {
+
+
         try {
 
             $product = Product::findOrFail($productId);
@@ -41,24 +43,51 @@ class ShoppingCartController extends Controller
                 ->where('user_id', auth()->id())
                 ->first();
 
+            $shoppingCartCount = ShoppingCart::where('user_id', auth()->id())->count();
+
 
             if ($cartItem) {
+
                 $cartItem->update([
                     'quantity' => $cartItem->quantity + 1,
                     'total' => $cartItem->total + $cartItem->price,
                 ]);
-                return redirect()->back()->with('success', 'This product is already in your cart. Quantity increased by 1');
+
+                $quantity = $cartItem->quantity;
+
+                return response()->json([
+                    'success' => true,
+                    'isExists' => true,
+                    'title' => 'Success!',
+                    'message' => 'Quantity updated successfully',
+                    'product' => $product,
+                    'cart_count' => $shoppingCartCount,
+                    'quantity' => $quantity
+                ]);
             } else {
+                $shoppingCartCount += 1;
                 ShoppingCart::create([
                     'user_id' => auth()->id(),
                     'product_id' => $productId,
                     'price' => $price,
-                    'total' => $price
+                    'total' => $price,
                 ]);
-                return redirect()->back()->with('success', 'product added to cart successfully');
+                return response()->json([
+                    'success' => true,
+                    'isExists' => false,
+                    'title' => 'Success!',
+                    'message' => 'product added to cart successfully',
+                    'product' => $product,
+                    'cart_count' => $shoppingCartCount
+                ]);
             }
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'something error when add product to cart');
+            return response()->json([
+                'success' => false,
+                'title' => 'Failed!',
+                'message' => 'something error when add product to cart ',
+                'error' => $e->getMessage()
+            ], 500);
         }
     }
 

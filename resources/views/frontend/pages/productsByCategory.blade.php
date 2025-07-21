@@ -136,11 +136,12 @@
 
 
 
-                                            <form action="{{ route('cart.store', $product->id) }}" method="POST">
+                                            <form id="addToCartForm-productsByCategory" method="POST">
                                                 @csrf
 
 
-                                                <button type="submit" class="products-btn-add-cart">
+                                                <button data-id="{{ $product->id }}" type="button"
+                                                    class="products-btn-add-cart addToCartBtn-productsByCategory">
                                                     <a><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                                 </button>
                                             </form>

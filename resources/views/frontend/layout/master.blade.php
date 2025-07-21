@@ -55,6 +55,7 @@
     <!-- Main JS -->
     <script src="{{ asset('build/assets/js/main.js?v=5.3') }}"></script>
     <script src="{{ asset('build/assets/js/shop.js?v=5.3') }}"></script>
+    <script src="{{ asset('assets/js/frontend/frontend.js') }}"></script>
 
 
     <script>
