@@ -25,9 +25,10 @@
 <body>
     @include('frontend.layout.body.navbar')
 
-    <main class="main">
+    <main id="content" class="main">
         @yield('content')
     </main>
+
 
     @include('frontend.layout.body.footer')
     @include('frontend.layout.body.preloader')
@@ -102,83 +103,6 @@
             });
         });
     </script>
-
-
-    <script>
-        $(document).ready(function() {
-            $(document).on('click', '#pagination-links a', function(e) {
-                e.preventDefault();
-
-                var url = $(this).attr('href');
-                $.ajax({
-                    url: url,
-                    type: 'GET',
-                    beforeSend: function() {
-                        $('#product-list').html('<div>جاري التحميل...</div>');
-                    },
-                    success: function(data) {
-                        $('#product-list').html($(data).find('#product-list').html());
-                        $('#pagination-links').html($(data).find('#pagination-links').html());
-                    },
-                    error: function() {
-                        alert('حدث خطأ أثناء تحميل البيانات.');
-                    }
-                });
-            });
-        });
-    </script>
-
-
-    {{-- @include('sweetalert::alert')
-    @if (session('success'))
-        <script>
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: "{{ session('success') }}",
-                showConfirmButton: false,
-                timer: 5000,
-                width: '400px',
-                padding: '16px',
-                customClass: {
-                    popup: 'shadow-lg rounded-lg border border-green-100',
-                    title: 'text-green-600 text-base font-medium',
-                    icon: '!border-none'
-                },
-                toast: true,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-            });
-        </script>
-    @endif --}}
-
-    {{-- @if ($errors->any())
-        <script>
-            Swal.fire({
-                position: 'top-end',
-                icon: 'error',
-                title: "{{ $errors->first() }}",
-                showConfirmButton: false,
-                timer: 5000,
-                width: '400px',
-                padding: '16px',
-                customClass: {
-                    popup: 'shadow-lg rounded-lg border border-red-100',
-                    title: 'text-red-600 text-base font-medium',
-                    icon: '!border-none'
-                },
-                toast: true,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-            });
-        </script>
-    @endif --}}
 
 </body>
 

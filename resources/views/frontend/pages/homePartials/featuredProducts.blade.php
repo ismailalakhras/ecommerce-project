@@ -38,8 +38,10 @@
                                                 </a>
                                             </div>
                                             <div class="product-action-1">
-                                                <a aria-label="Quick view" class="action-btn small hover-up quick-view-btn"
-                                                    data-bs-toggle="modal" data-bs-target="#quickViewModal" data-id={{$product->id}}>
+                                                <a aria-label="Quick view"
+                                                    class="action-btn small hover-up quick-view-btn"
+                                                    data-bs-toggle="modal" data-bs-target="#quickViewModal"
+                                                    data-id={{ $product->id }}>
                                                     <i class="fi-rs-eye"></i>
                                                 </a>
 
@@ -85,12 +87,13 @@
                                                 @csrf
 
 
-                                                <button type="submit"
-                                                    class="btn w-100 hover-up d-flex align-items-center justify-content-center gap-2"
-                                                    style="background: none; border: none; padding: 0; margin: 0; font: inherit; color: inherit; cursor: pointer;">
-                                                    <a class="btn w-100 hover-up"><i
+                                                <button type="button"
+                                                    class="btn w-100 hover-up d-flex align-items-center justify-content-center gap-2 addToCartBtn"
+                                                    style="background: none; border: none; padding: 0; margin: 0; font: inherit; color: inherit; cursor: pointer;"
+                                                    data-id="{{ $product->id }}">
+                                                    <span class="btn w-100 hover-up"><i
                                                             class="fi-rs-shopping-cart mr-5"></i>Add
-                                                        To Cart</a>
+                                                        To Cart</span>
                                                 </button>
                                             </form>
                                         </div>

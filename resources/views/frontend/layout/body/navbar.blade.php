@@ -316,8 +316,28 @@
 
                                                   @foreach ($categories as $category)
                                                       <li class="sub-mega-menu sub-mega-menu-width-100">
-                                                          <a class="menu-title"
-                                                              href="{{ route('category.products', $category->id) }}">{{ $category->name }}</a>
+                                                          <button class="fetchProductByCategory-btn"
+                                                              style=" display: flex;
+                                                                align-items: center;  
+                                                                padding: 0;
+                                                                margin:0 ;  
+                                                                line-height: 1.5;  
+                                                                color: #253d4e; 
+                                                                font-size: 14px;
+                                                                background: none;  
+                                                                border: none;  
+                                                                gap: 5px;
+                                                                width:100%"
+                                                              data-id="{{ $category->id }}">
+
+                                                              <img style="width:30px"
+                                                                  src="{{ asset($category->image) }}"
+                                                                  alt="" />
+                                                              {{ $category->name }}
+                                                              <span class="count-2"
+                                                                  style="">{{ $category->products->count() }}</span>
+
+                                                          </button>
                                                           <ul>
                                                               @foreach ($category->subcategories as $subcategory)
                                                                   <li><a

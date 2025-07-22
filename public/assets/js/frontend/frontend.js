@@ -51,16 +51,12 @@ $(function () {
                     $('#totalPriceCart').text(`${(res.total)}$`)
                 }
                 showSuccessAlert(res)
-
             },
 
             error: function (err) {
                 showErrorAlert(err)
-
             }
         });
-
-
     })
 })
 
@@ -87,13 +83,11 @@ $(function () {
 
                 $('#totalPriceCart').text(`${(res.total)}$`)
 
-
-
-                showSuccessAlert(res)
-
                 button.closest('li').fadeOut(1000, function () {
                     $(this).remove();
                 });
+
+                showSuccessAlert(res)
             },
             error: function (err) {
                 showErrorAlert(err)
@@ -102,7 +96,93 @@ $(function () {
     })
 })
 
+//! -----------------{{ fetch product by category id }}-----------------------
 
+$(function () {
+    $(document).on('click', '.fetchProductByCategory-btn', function () {
+
+        const btn = $(this)
+
+        const currentPath = window.location.pathname.split('/').filter(Boolean)[0];
+
+
+        if (currentPath === 'category') {
+
+            $.ajax({
+                url: `/category/${btn.data('id')}/products`,
+                method: 'GET',
+                success: function (res) {
+
+                    const newPage = $(res.page);
+
+                    $('.category-header').fadeOut(200, function () {
+                        $(this).html(newPage.find('.category-header').html()).fadeIn(200);
+                    });
+
+                    $('.content-product').fadeOut(200, function () {
+                        $(this).html(newPage.find('.content-product').html()).fadeIn(200);
+                    });
+
+                    window.history.pushState(null, '', `/category/${btn.data('id')}/products`);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+
+        } else {
+            window.location.href = `/category/${btn.data('id')}/products`;
+        }
+
+    })
+})
+
+
+
+//todo mega menu Function
+$(function () {
+    $('.main-menu > nav > ul > li > a').on('click', function (e) {
+        e.preventDefault();
+        const megaMenu = $(this).siblings('ul.mega-menu');
+
+        megaMenu.css({
+            'opacity': megaMenu.css('opacity') == 1 ? 0 : 1,
+            'visibility': megaMenu.css('opacity') == 1 ? 'hidden' : 'visible',
+            'margin-top': megaMenu.css('opacity') == 1 ? '20px' : '0'
+        });
+
+        $('ul.mega-menu li button').on('click', function (e) {
+            e.preventDefault();
+
+            megaMenu.css({
+                'opacity': 0,
+                'visibility': 'hidden',
+                'margin-top': '20px'
+            });
+
+        })
+    });
+
+
+    $(document).on('click', function (e) {
+        if (!$(e.target).closest('.mega-menu, .main-menu > nav > ul > li > a').length) {
+            $('ul.mega-menu').css({
+                'opacity': 0,
+                'visibility': 'hidden',
+                'margin-top': '20px'
+            });
+        }
+    });
+
+    $(window).on('scroll', function () {
+        $('ul.mega-menu').css({
+            'opacity': 0,
+            'visibility': 'hidden',
+            'margin-top': '20px'
+        });
+    });
+
+});
 
 //todo show Success Alert Function
 function showSuccessAlert(res) {
@@ -153,3 +233,32 @@ function showErrorAlert(err) {
         }
     })
 }
+
+//todo bootstrap pagination
+$(document).on('click', '#pagination-links a', function (e) {
+    e.preventDefault();
+
+    var url = $(this).attr('href');
+
+    $.ajax({
+        url: url,
+        type: 'GET',
+        success: function (res) {
+            const newPage = $(res.page);
+
+            $('#pagination-links').html($(res.page).find('#pagination-links').html());
+
+            $('#product-list').fadeOut(200, function () {
+                $(this).html(newPage.find('#product-list').html()).fadeIn(200);
+            });
+
+            window.history.pushState(null, '', url);
+        },
+        error: function () {
+            alert('حدث خطأ أثناء تحميل البيانات.');
+        }
+    });
+});
+
+
+
