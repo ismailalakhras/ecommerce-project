@@ -51,6 +51,8 @@ $(function () {
                     $('#totalPriceCart').text(`${(res.total)}$`)
                 }
                 showSuccessAlert(res)
+                button.prop('disabled', false);
+
             },
 
             error: function (err) {
@@ -67,6 +69,7 @@ $(function () {
 
 
     $(document).on('click', '.delete-btn', function () {
+
         const button = $(this);
         const productId = button.data('id')
 
@@ -95,6 +98,8 @@ $(function () {
         })
     })
 })
+
+
 
 //! -----------------{{ fetch product by category id }}-----------------------
 
@@ -139,6 +144,53 @@ $(function () {
 
 
 
+
+
+//! -----------------{{ fetch product by category id }}-----------------------
+
+$(function () {
+    $(document).on('click', '.fetchProductBySubcategory-btn', function () {
+        const btn = $(this)
+
+        const currentPath = window.location.pathname.split('/').filter(Boolean)[0];
+
+
+        if (currentPath === 'subcategory') {
+
+            $.ajax({
+                url: `/subcategory/${btn.data('id')}/products`,
+                method: 'GET',
+                success: function (res) {
+
+                    const newPage = $(res.page);
+                    console.log(newPage);
+
+
+                    $('.subcategory-header').fadeOut(200, function () {
+                        $(this).html(newPage.find('.subcategory-header').html()).fadeIn(200);
+                    });
+
+                    $('.content-productBySubcategory').fadeOut(200, function () {
+                        $(this).html(newPage.find('.content-productBySubcategory').html()).fadeIn(200);
+                    });
+
+                    window.history.pushState(null, '', `/subcategory/${btn.data('id')}/products`);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+
+        } else {
+            window.location.href = `/subcategory/${btn.data('id')}/products`;
+        }
+
+    })
+})
+
+
+
+
 //todo mega menu Function
 $(function () {
     $('.main-menu > nav > ul > li > a').on('click', function (e) {
@@ -174,13 +226,13 @@ $(function () {
         }
     });
 
-    $(window).on('scroll', function () {
-        $('ul.mega-menu').css({
-            'opacity': 0,
-            'visibility': 'hidden',
-            'margin-top': '20px'
-        });
-    });
+    // $(window).on('scroll', function () {
+    //     $('ul.mega-menu').css({
+    //         'opacity': 0,
+    //         'visibility': 'hidden',
+    //         'margin-top': '20px'
+    //     });
+    // });
 
 });
 

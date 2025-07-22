@@ -10,24 +10,6 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    // public function productsByCategoryId($id)
-    // {
-    //     $products = Product::where('category_id', $id)
-    //         ->orderBy('price', 'asc')
-    //         ->paginate(5);
-
-    //     $productsCount = Product::where('category_id', $id)->count();
-    //     $categories = Category::with('subcategories')->orderBy('created_at', 'DESC')->get();
-
-    //     $shoppingCart = ShoppingCart::where('user_id', auth()->id())->orderBy('created_at', 'DESC')->get();
-
-    //     return view('frontend.pages.productsByCategory', compact('categories', 'shoppingCart', 'products', 'productsCount'));
-    // }
-
-
-
-
-
     public function productsByCategoryId($id)
     {
         try {
@@ -67,34 +49,42 @@ class ProductController extends Controller
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public function productsBySubcategoryId($id)
     {
-        $products = Product::where('subcategory_id', $id)
-            ->orderBy('price', 'asc')
-            ->paginate(5);
+        try {
+            $products = Product::where('subcategory_id', $id)
+                ->orderBy('price', 'asc')
+                ->paginate(5);
+            $productsCount = Product::where('subcategory_id', $id)->count();
+            $categories = Category::with('subcategories')->get();
+            $shoppingCart = ShoppingCart::where('user_id', auth()->id())->orderBy('created_at', 'DESC')->get();
 
-        $productsCount = Product::where('subcategory_id', $id)->count();
+            if (request()->ajax()) {
 
-        $categories = Category::with('subcategories')->get();
+                /** @var \Illuminate\View\View $view */
+                $view = view('frontend.pages.productsBySubcategory', compact('categories', 'shoppingCart', 'products', 'productsCount'));
 
-        $shoppingCart = ShoppingCart::where('user_id', auth()->id())->orderBy('created_at', 'DESC')->get();
+                /** @var array<string, string> $sections */
+                $sections = $view->renderSections();
 
-        return view('frontend.pages.productsBySubcategory', compact('categories', 'shoppingCart', 'products', 'productsCount'));
+                return response()->json([
+                    'success' => true,
+                    'page' => $sections['content'],
+                ]);
+            }
+
+            return view('frontend.pages.productsBySubcategory', compact('categories', 'shoppingCart', 'products', 'productsCount'));
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'title' => 'Failed!',
+                'message' => 'Something went wrong when fetching data',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
+
+
 
     public function show($id)
     {

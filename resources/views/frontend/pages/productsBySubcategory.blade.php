@@ -13,7 +13,7 @@
             <div class="container">
                 <div class="archive-header">
                     <div class="row align-items-center">
-                        <div class="col-xl-3">
+                        <div class="col-xl-3 subcategory-header">
 
                             @if ($products->isNotEmpty())
                                 <h1 class="mb-15">{{ $products[0]->subcategory->name }}</h1>
@@ -31,7 +31,7 @@
         </div>
         <div class="container mb-30">
             <div class="row flex-row-reverse">
-                <div class="col-lg-4-5">
+                <div class="col-lg-4-5 content-productBySubcategory">
                     <div class="shop-product-fillter">
                         <div class="totall-product">
 
@@ -124,20 +124,11 @@
                                                 <span class="old-price">${{ $product->price }}</span>
                                             </div>
 
+                                            <button type="submit" class="products-btn-add-cart addToCartBtn"
+                                                data-id="{{ $product->id }}">
+                                                <a><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                            </button>
 
-                                            {{-- <div class="add-cart">
-                                                <a class="add" href="shop-cart.html">
-                                                    <i class="fi-rs-shopping-cart mr-5">
-                                                    </i>
-                                                    Add
-                                                </a>
-                                            </div> --}}
-
-
-                                                <button type="submit" class="products-btn-add-cart addToCartBtn" data-id="{{ $product->id }}">
-                                                    <a><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                                                </button>
-                                           
 
                                         </div>
                                     </div>
@@ -166,11 +157,27 @@
                             @foreach ($categories as $category)
                                 @foreach ($category->subcategories as $subcategory)
                                     <li>
-                                        <a href="{{ asset('subcategory/' . $subcategory->id . '/products') }}">
 
-                                            <img src="{{ asset($subcategory->image) }}" alt="" />
+                                        <button class="fetchProductBySubcategory-btn"
+                                            style=" display: flex;
+                                                align-items: center;  
+                                                padding: 0;
+                                                margin:0 ;  
+                                                line-height: 1.5;  
+                                                color: #253d4e; 
+                                                font-size: 14px;
+                                                background: none;  
+                                                border: none;  
+                                                gap: 5px;
+                                                width:100%"
+                                            data-id="{{ $subcategory->id }}">
+
+                                            <img style="width:30px" src="{{ asset($subcategory->image) }}" alt="" />
                                             {{ $subcategory->name }}
-                                        </a><span class="count-2">{{ $subcategory->products->count() }}</span>
+                                            <span class="count-2"
+                                                style="margin-left: auto;">{{ $subcategory->products->count() }}</span>
+
+                                        </button>
                                     </li>
                                 @endforeach
                             @endforeach

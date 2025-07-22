@@ -315,19 +315,25 @@
                                               <ul class="mega-menu">
 
                                                   @foreach ($categories as $category)
-                                                      <li class="sub-mega-menu sub-mega-menu-width-100">
+                                                      <li class="sub-mega-menu sub-mega-menu-width-100" >
                                                           <button class="fetchProductByCategory-btn"
                                                               style=" display: flex;
                                                                 align-items: center;  
                                                                 padding: 0;
                                                                 margin:0 ;  
-                                                                line-height: 1.5;  
+                                                                line-height: 1.5;
+                                                                height: 50px;  
                                                                 color: #253d4e; 
                                                                 font-size: 14px;
                                                                 background: none;  
                                                                 border: none;  
                                                                 gap: 5px;
-                                                                width:100%"
+                                                                width:100%;
+                                                                background-color: #eeeeee;
+                                                                padding: 5px 10px;
+                                                                border-radius: 5px;
+                                                                font-weight: 600;
+                                                                "
                                                               data-id="{{ $category->id }}">
 
                                                               <img style="width:30px"
@@ -340,8 +346,27 @@
                                                           </button>
                                                           <ul>
                                                               @foreach ($category->subcategories as $subcategory)
-                                                                  <li><a
-                                                                          href="{{ asset('subcategory/' . $subcategory->id . '/products') }}">{{ $subcategory->name }}</a>
+                                                                  <li><button class="fetchProductBySubcategory-btn"
+                                                                          style=" display: flex;
+                                                                            align-items: center;  
+                                                                            padding: 0 0 0 10px;
+                                                                            margin:0 ;
+                                                                            line-height: 1.5;  
+                                                                            color: #253d4e; 
+                                                                            font-size: 14px;
+                                                                            background: none;  
+                                                                            border: none;  
+                                                                            gap: 5px;
+                                                                            width:100%"
+                                                                          data-id="{{ $subcategory->id }}">
+
+                                                                          <img style="width:30px"
+                                                                              src="{{ asset($subcategory->image) }}"
+                                                                              alt="" />
+                                                                          {{ $subcategory->name }}
+                                                                         
+
+                                                                      </button>
                                                                   </li>
                                                               @endforeach
 
