@@ -121,7 +121,7 @@
                                                   </span>
                                               @endif
                                           </a>
-                                          <a href="{{ route('cart.index') }}"><span class="lable">Cart</span></a>
+                                          <a  class="update-hidden-total-price" href="{{ route('cart.index') }}"><span class="lable">Cart</span></a>
 
                                           @if (auth()->check())
 
@@ -130,7 +130,7 @@
 
                                                       @if (isset($shoppingCart) && $shoppingCart->count())
                                                           @foreach ($shoppingCart as $product)
-                                                              <li>
+                                                              <li class="product-to-delete-{{$product->product->id}}">
                                                                   <div class="shopping-cart-img">
                                                                       <a href="">
                                                                           <img
@@ -172,7 +172,7 @@
 
                                                       <div class="shopping-cart-total ">
                                                           <h4>Total
-                                                              <span id="totalPriceCart">
+                                                              <span id="totalPriceCart" class="total-price-cart">
 
                                                                   @php $total = 0; @endphp
 
@@ -189,7 +189,7 @@
                                                           </h4>
                                                       </div>
 
-                                                      <a href="{{ route('cart.index') }}" class="products-btn-add-cart"
+                                                      <a href="{{ route('cart.index') }}" class="products-btn-add-cart update-hidden-total-price"
                                                           style="flex: 1; margin-left:15px ; display:flex !important;align-item:center;justify-content:center"><i
                                                               class=" mr-5"></i>Go to cart
                                                       </a>

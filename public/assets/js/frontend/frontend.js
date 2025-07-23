@@ -78,17 +78,30 @@ $(function () {
             method: 'DELETE',
             success: function (res) {
 
-                console.log(res.product);
+
 
                 $('#cartCount').text(res.cart_count)
 
                 $(`#dropdown-cart li .shopping-cart-title h4 span[data-id=${res.product.id}] `).text(`${res.quantity} X `)
 
-                $('#totalPriceCart').text(`${(res.total)}$`)
+                // $('#totalPriceCart').text(`${(res.total)}$`)
 
-                button.closest('li').fadeOut(1000, function () {
-                    $(this).remove();
+
+                $('.total-price-cart').text(`${(res.total)}$`)
+
+
+                // button.closest('li').fadeOut(1000, function () {
+                //     $(this).remove();
+                // });
+
+                $(`.product-to-delete-${productId}`).fadeOut(1000, function () {
+                    $(`.product-to-delete-${productId}`).remove();
                 });
+
+                $('.hidden-total-price').val(res.total)
+
+                console.log($('.hidden-total-price').val());
+
 
                 showSuccessAlert(res)
             },
@@ -98,6 +111,11 @@ $(function () {
         })
     })
 })
+
+
+
+
+
 
 
 
@@ -224,6 +242,8 @@ $(function () {
                 'margin-top': '20px'
             });
         }
+        console.log($('.hidden-total-price').val());
+
     });
 
     // $(window).on('scroll', function () {
@@ -312,5 +332,97 @@ $(document).on('click', '#pagination-links a', function (e) {
     });
 });
 
+//todo update product quantity in cart
+
+$(function () {
+    $(document).on('click', '.qty-down', function (e) {
+        e.preventDefault();
+
+        const button = $(this);
+        const id = button.data('id');
+        const url = button.data('url');
+        const totalPriceItem = $(`#totalPriceItem-${id}`)
+
+        const input = $(`#qty-val-${id}`);
+        let currentQty = parseInt(input.val());
+
+        if (currentQty > 1) {
+            const newQty = currentQty - 1;
+            input.val(newQty);
+
+            $.ajax({
+                url: url,
+                method: 'PUT',
+                data: {
+                    quantity: newQty,
+                },
+                success: function (res) {
+                    totalPriceItem.html(`<h4 class="text-brand">$ ${res.totalPriceItem} </h4>`);
+                    $('.cart-total-price').text(`$ ${res.total}`)
+                    $('.cart-subtotal-price').text(`$ ${res.total}`)
+                    $('.hidden-total-price').val(res.total)
+
+                    showSuccessAlert(res);
+                },
+                error: function (err) {
+                    showErrorAlert(err);
+                    input.val(currentQty);
+                }
+            });
+        }
+    });
 
 
+    $(document).on('click', '.qty-up', function (e) {
+        e.preventDefault();
+
+        const button = $(this);
+        const id = button.data('id');
+        const url = button.data('url');
+        const totalPriceItem = $(`#totalPriceItem-${id}`)
+
+        const input = $(`#qty-val-${id}`);
+        let currentQty = parseInt(input.val());
+
+        const newQty = currentQty + 1;
+        input.val(newQty);
+
+        $.ajax({
+            url: url,
+            method: 'PUT',
+            data: {
+                quantity: newQty,
+            },
+            success: function (res) {
+
+                totalPriceItem.html(`<h4 class="text-brand">$ ${res.totalPriceItem} </h4>`);
+
+                $('.cart-total-price').text(`$ ${res.total}`)
+                $('.cart-subtotal-price').text(`$ ${res.total}`)
+                $('.hidden-total-price').val(res.total)
+
+                console.log($('.hidden-total-price').val());
+
+
+
+                showSuccessAlert(res);
+            },
+            error: function (err) {
+                showErrorAlert(err);
+                input.val(currentQty);
+            }
+        });
+    });
+
+
+})
+
+
+
+$(function () {
+    $(document).on('click', '.update-hidden-total-price', function(){
+        $('.hidden-total-price').val(res.total)
+
+        console.log($('.hidden-total-price').val());
+    })
+})

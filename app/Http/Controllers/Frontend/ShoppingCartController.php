@@ -106,11 +106,27 @@ class ShoppingCartController extends Controller
                 'quantity' => $request->quantity,
                 'total' =>  $cartItem->price * $request->quantity,
             ]);
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'something error when add product to cart');
-        }
 
-        return redirect()->back()->with('success', 'Quantity increased by 1');
+            $total = ShoppingCart::where('user_id', auth()->id())->sum('total');
+
+
+            return response()->json([
+                'success' => true,
+                'title' => 'Updated!',
+                'message' => 'Quantity updated successfully',
+                'quantity' => $cartItem->quantity,
+                'totalPriceItem' => $cartItem->total,
+                'total'=>$total
+
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'title' => 'Failed!',
+                'message' => 'Something went wrong when deleting product from cart',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
 

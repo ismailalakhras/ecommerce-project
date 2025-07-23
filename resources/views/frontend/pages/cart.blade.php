@@ -39,7 +39,7 @@
 
 
                                     @foreach ($shoppingCart as $product)
-                                        <tr class="pt-30 ismail-cart-tr">
+                                        <tr class="pt-30 ismail-cart-tr product-to-delete-{{$product->product->id}}" >
 
                                             <td class="image product-thumbnail pt-40"><img
                                                     src="{{ $product->product->image }}" alt="#"></td>
@@ -63,69 +63,36 @@
                                             <td class="text-center detail-info" data-title="Stock">
                                                 <div class="detail-extralink mr-15">
 
-                                                    {{--                                                 
-                                                <div class="detail-qty border radius">
-                                                    <a href="#" class="qty-down">
-                                                        <i class="fi-rs-angle-small-down"></i>
-                                                    </a>
+                                                    <div class="detail-qty border radius">
+                                                        <a href="" class="qty-down"
+                                                            data-id="{{ $product->product->id }}"
+                                                            data-url="{{ route('cart.update', $product->product->id) }}">
+                                                            <i class="fi-rs-angle-small-down"></i>
+                                                        </a>
 
-                                                    <input type="text" name="quantity" class="qty-val"
-                                                        value="{{ $product->quantity }}" min="1">
+                                                        <input id="qty-val-{{ $product->product->id }}" type="text"
+                                                            name="quantity" class="qty-val "
+                                                            value="{{ $product->quantity }}" min="1">
 
-
-                                                    <a href="#" class="qty-up">
-                                                        <i class="fi-rs-angle-small-up"></i>
-                                                    </a>
-                                                </div> --}}
-
-
-
-
-
-                                                    <form action="{{ route('cart.update', $product->product->id) }}"
-                                                        method="POST">
-                                                        @csrf
-                                                        @method('PUT')
-
-                                                        <div class="detail-qty border radius">
-                                                            <a href="#" class="qty-down">
-                                                                <i class="fi-rs-angle-small-down"></i>
-                                                            </a>
-
-                                                            <input type="text" name="quantity" class="qty-val"
-                                                                value="{{ $product->quantity }}" min="1">
-
-
-                                                            <a href="#" class="qty-up ">
-                                                                <i class="fi-rs-angle-small-up"></i>
-                                                            </a>
-                                                        </div>
-
-                                                        <button type="submit"
-                                                            class="btn w-1 hover-up d-flex align-items-center justify-content-center save-change-btn "
-                                                            style="background: none; border: none; padding: 0 ; margin: 0; font: inherit; color: inherit; cursor: pointer;">
-
-
-                                                            <a class="btn w-100 ">
-                                                                Save
-                                                            </a>
-                                                        </button>
-                                                    </form>
-
+                                                        <a href="" class="qty-up"
+                                                            data-id="{{ $product->product->id }}"
+                                                            data-url="{{ route('cart.update', $product->product->id) }}">
+                                                            <i class="fi-rs-angle-small-up"></i>
+                                                        </a>
+                                                    </div>
 
                                                 </div>
                                             </td>
-                                            <td class="price" data-title="Price">
+                                            <td class="price " id="totalPriceItem-{{ $product->product->id }}"
+                                                data-title="Price">
                                                 <h4 class="text-brand">${{ $product->total }} </h4>
                                             </td>
                                             <td class="action text-center" data-title="Remove">
-                                                <form action="{{ route('cart.destroy', $product->product->id) }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button class="delete-btn" type="submit"><i style="font-size:20px"
-                                                            class="fi-rs-trash"></i>Delete</button>
-                                                </form>
+
+                                                <button class="delete-btn" data-id="{{ $product->product->id }}"
+                                                    type="button"><i style="font-size:20px"
+                                                        class="fi-rs-trash"></i>Delete</button>
+
                                             </td>
                                         </tr>
                                     @endforeach
@@ -160,10 +127,9 @@
                                                     <td class="cart_total_label">
                                                         <h6 class="text-muted">Subtotal</h6>
                                                     </td>
-                                                    <td class="cart_total_amount">
-
-
-                                                        <h4 class="text-brand text-end">${{ $totalPrice }}</h4>
+                                                    <td class="cart_total_amount ">
+                                                        <h4 class="text-brand text-end cart-subtotal-price total-price-cart">
+                                                            ${{ $totalPrice }}</h4>
                                                     </td>
                                                 </tr>
 
@@ -206,13 +172,14 @@
                                                     <td class="cart_total_label">
                                                         <h6 class="text-muted">Total</h6>
                                                     </td>
-                                                    <td class="cart_total_amount">
+                                                    <td class="cart_total_amount ">
                                                         @if (session('discount') > 0)
                                                             <h4 class="text-brand text-end">
                                                                 ${{ $totalPrice - ($totalPrice * session('discount')) / 100 }}
                                                             </h4>
                                                         @else
-                                                            <h4 class="text-brand text-end">${{ $totalPrice }}</h4>
+                                                            <h4 class="text-brand text-end cart-total-price total-price-cart">
+                                                                ${{ $totalPrice }}</h4>
                                                         @endif
                                                     </td>
                                                 </tr>
@@ -271,7 +238,7 @@
                                                 <input type="hidden" name="total"
                                                     value="{{ $totalPrice - ($totalPrice * session('discount')) / 100 }}">
                                             @else
-                                                <input type="hidden" name="total" value="{{ $totalPrice }}">
+                                                <input class="hidden-total-price" type="hidden" name="total" value="{{ $totalPrice }}">
                                             @endif
 
 
