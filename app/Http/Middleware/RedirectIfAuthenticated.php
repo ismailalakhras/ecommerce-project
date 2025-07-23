@@ -24,12 +24,12 @@ class RedirectIfAuthenticated
                 return redirect(RouteServiceProvider::HOME);
             }
 
-             if (Auth::guard($guard)->check() && request()->routeIs('admin.login')) {
+            if (Auth::guard($guard)->check() && request()->routeIs('admin.login')) {
                 return redirect(RouteServiceProvider::DASHBOARD);
             }
 
 
-         
+
         }
 
         return $next($request);

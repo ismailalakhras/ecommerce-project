@@ -121,7 +121,8 @@
                                                   </span>
                                               @endif
                                           </a>
-                                          <a  class="update-hidden-total-price" href="{{ route('cart.index') }}"><span class="lable">Cart</span></a>
+                                          <a class="update-hidden-total-price" href="{{ route('cart.index') }}"><span
+                                                  class="lable">Cart</span></a>
 
                                           @if (auth()->check())
 
@@ -130,7 +131,7 @@
 
                                                       @if (isset($shoppingCart) && $shoppingCart->count())
                                                           @foreach ($shoppingCart as $product)
-                                                              <li class="product-to-delete-{{$product->product->id}}">
+                                                              <li class="product-to-delete-{{ $product->product->id }}">
                                                                   <div class="shopping-cart-img">
                                                                       <a href="">
                                                                           <img
@@ -189,7 +190,8 @@
                                                           </h4>
                                                       </div>
 
-                                                      <a href="{{ route('cart.index') }}" class="products-btn-add-cart update-hidden-total-price"
+                                                      <a href="{{ route('cart.index') }}"
+                                                          class="products-btn-add-cart update-hidden-total-price"
                                                           style="flex: 1; margin-left:15px ; display:flex !important;align-item:center;justify-content:center"><i
                                                               class=" mr-5"></i>Go to cart
                                                       </a>
@@ -300,7 +302,7 @@
                                       <ul>
 
                                           <li>
-                                              <a class="active" href="{{ route('home') }}">Home </a>
+                                              <a class="active home-btn">Home </a>
 
                                           </li>
                                           <li>
@@ -315,7 +317,7 @@
                                               <ul class="mega-menu">
 
                                                   @foreach ($categories as $category)
-                                                      <li class="sub-mega-menu sub-mega-menu-width-100" >
+                                                      <li class="sub-mega-menu sub-mega-menu-width-100">
                                                           <button class="fetchProductByCategory-btn"
                                                               style=" display: flex;
                                                                 align-items: center;  
@@ -364,7 +366,7 @@
                                                                               src="{{ asset($subcategory->image) }}"
                                                                               alt="" />
                                                                           {{ $subcategory->name }}
-                                                                         
+
 
                                                                       </button>
                                                                   </li>
@@ -383,14 +385,7 @@
                                           <li>
                                               <a href="#">Pages <i class="fi-rs-angle-down"></i></a>
                                               <ul class="sub-menu">
-                                                  <li><a href="#">About Us</a></li>
                                                   <li><a href="#">Contact</a></li>
-                                                  <li><a href="#">My Account</a></li>
-                                                  <li><a href="#">Login</a></li>
-                                                  <li><a href="#">Register</a></li>
-                                                  <li><a href="#">Forgot password</a></li>
-                                                  <li><a href="#">Reset password</a></li>
-                                                  <li><a href="#">Purchase Guide</a></li>
                                                   <li><a href="#">Privacy Policy</a></li>
                                                   <li><a href="#">Terms of Service</a></li>
                                                   <li><a href="{{ route('order.index') }}">My orders</a></li>

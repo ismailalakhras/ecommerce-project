@@ -6,7 +6,7 @@ $(function () {
     });
 })
 
-//! -----------------{{ add product to cart }}-----------------------
+//! ------------------------{{ add product to cart }}--------------------------------
 $(function () {
 
     $(document).on('click', '.addToCartBtn', function () {
@@ -63,11 +63,8 @@ $(function () {
 })
 
 
-//! -----------------{{ delete product from cart - dropdown }}-----------------------
-
+//! -------------------{{ delete product from cart - dropdown }}-----------------------
 $(function () {
-
-
     $(document).on('click', '.delete-btn', function () {
 
         const button = $(this);
@@ -78,8 +75,6 @@ $(function () {
             method: 'DELETE',
             success: function (res) {
 
-
-
                 $('#cartCount').text(res.cart_count)
 
                 $(`#dropdown-cart li .shopping-cart-title h4 span[data-id=${res.product.id}] `).text(`${res.quantity} X `)
@@ -89,10 +84,9 @@ $(function () {
 
                 $('.total-price-cart').text(`${(res.total)}$`)
 
-
-                // button.closest('li').fadeOut(1000, function () {
-                //     $(this).remove();
-                // });
+                button.closest('li').fadeOut(1000, function () {
+                    $(this).remove();
+                });
 
                 $(`.product-to-delete-${productId}`).fadeOut(1000, function () {
                     $(`.product-to-delete-${productId}`).remove();
@@ -101,7 +95,6 @@ $(function () {
                 $('.hidden-total-price').val(res.total)
 
                 console.log($('.hidden-total-price').val());
-
 
                 showSuccessAlert(res)
             },
@@ -113,21 +106,13 @@ $(function () {
 })
 
 
-
-
-
-
-
-
-//! -----------------{{ fetch product by category id }}-----------------------
-
+//! ----------------------{{ fetch product by category id }}----------------------------
 $(function () {
     $(document).on('click', '.fetchProductByCategory-btn', function () {
 
         const btn = $(this)
 
         const currentPath = window.location.pathname.split('/').filter(Boolean)[0];
-
 
         if (currentPath === 'category') {
 
@@ -161,11 +146,7 @@ $(function () {
 })
 
 
-
-
-
-//! -----------------{{ fetch product by category id }}-----------------------
-
+//! ---------------------{{ fetch product by category id }}------------------------------
 $(function () {
     $(document).on('click', '.fetchProductBySubcategory-btn', function () {
         const btn = $(this)
@@ -207,8 +188,6 @@ $(function () {
 })
 
 
-
-
 //todo mega menu Function
 $(function () {
     $('.main-menu > nav > ul > li > a').on('click', function (e) {
@@ -229,7 +208,6 @@ $(function () {
                 'visibility': 'hidden',
                 'margin-top': '20px'
             });
-
         })
     });
 
@@ -333,7 +311,6 @@ $(document).on('click', '#pagination-links a', function (e) {
 });
 
 //todo update product quantity in cart
-
 $(function () {
     $(document).on('click', '.qty-down', function (e) {
         e.preventDefault();
@@ -418,11 +395,23 @@ $(function () {
 })
 
 
-
+//todo update hidden input total price
 $(function () {
-    $(document).on('click', '.update-hidden-total-price', function(){
+    $(document).on('click', '.update-hidden-total-price', function () {
         $('.hidden-total-price').val(res.total)
 
         console.log($('.hidden-total-price').val());
+    })
+})
+
+
+//todo home function 
+$(function () {
+    $(document).on('click', '.home-btn', function () {
+        window.location.href = '/'
+    })
+
+    $(document).on('click', '.reset-password-href', function () {
+        window.location.href = '/reset-password'
     })
 })
