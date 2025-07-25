@@ -29,6 +29,7 @@
         @yield('content')
     </main>
 
+    @include('frontend.pages.homePartials.quickView')
 
     @include('frontend.layout.body.footer')
     @include('frontend.layout.body.preloader')
@@ -66,40 +67,6 @@
                 $('#shipping_addresses_form').toggle(500);
                 $('#Proceed_to_checkout').hide()
 
-            });
-        });
-    </script>
-
-    <script>
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-    </script>
-
-    <script>
-        $(function() {
-            $('.quick-view-btn').click(function() {
-                let productId = $(this).data('id')
-                $.ajax({
-                    url: '/product/' + productId,
-                    method: 'GET',
-
-                }).then(response => {
-                    $('#modalProductName').text(response.name);
-                    $('#modalProductPrice').text(`${response.price}$`);
-                    $('#modalProductSalePrice').text(`${response.sale_price}$`);
-                    $('#modalProductDescription').text(response.description);
-                    $('#modalProductImage-1').attr('src', response.image);
-                    $('#modalProductImage-2').attr('src', response.image);
-                    $('#modalProductImage-3').attr('src', response.image);
-                    $('#modalProductImage-4').attr('src', response.image);
-                    $('#modalRatingCount').text(`(${response.rating_count} reviews)`);
-                }).catch(err => {
-                    console.log(err);
-
-                })
             });
         });
     </script>

@@ -1,5 +1,4 @@
-<div class="modal fade custom-modal" id="quickViewModal" tabindex="-1" aria-labelledby="quickViewModalLabel"
-    aria-hidden="true">
+<div class="modal fade custom-modal" id="quickViewModal" tabindex="-1" aria-labelledby="quickViewModalLabel">
     <div class="modal-dialog">
         <div class="modal-content">
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -11,18 +10,18 @@
                             <!-- MAIN SLIDES -->
                             <div class="product-image-slider">
                                 <figure class="border-radius-10">
-                                    <img src="build/assets/imgs/shop/product-16-2.jpg" alt="product image" id="modalProductImage-1" />
+                                    <img src="" alt="product image" id="modalProductImage-1" />
                                 </figure>
                                 <figure class="border-radius-10">
-                                    <img src="build/assets/imgs/shop/product-16-2.jpg" alt="product image" id="modalProductImage-2" />
+                                    <img src="" alt="product image" id="modalProductImage-2" />
                                 </figure>
-                               
+
                             </div>
                             <!-- THUMBNAILS -->
                             <div class="slider-nav-thumbnails">
-                                <div><img src="build/assets/imgs/shop/thumbnail-3.jpg" alt="product image" id="modalProductImage-3"/></div>
-                                <div><img src="build/assets/imgs/shop/thumbnail-3.jpg" alt="product image" id="modalProductImage-4"/></div>
-                                
+                                <div><img src="" alt="product image" id="modalProductImage-3" /></div>
+                                <div><img src="" alt="product image" id="modalProductImage-4" /></div>
+
                             </div>
                         </div>
                         <!-- End Gallery -->
@@ -30,7 +29,8 @@
                     <div class="col-md-6 col-sm-12 col-xs-12">
                         <div class="detail-info pr-30 pl-30">
                             <span class="stock-status out-stock"> Sale Off </span>
-                            <h3 class="title-detail"><a href="shop-product-right.html" class="text-heading"  id="modalProductName">Seeds of
+                            <h3 class="title-detail"><a href="shop-product-right.html" class="text-heading"
+                                    id="modalProductName">Seeds of
                                     Change Organic Quinoa, Brown</a></h3>
                             <div class="product-detail-rating">
                                 <div class="product-rate-cover text-end">
@@ -50,14 +50,16 @@
                                 </div>
                             </div>
                             <div class="detail-extralink mb-30">
-                                <div class="detail-qty border radius">
-                                    <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                    <input type="text" name="quantity" class="qty-val" value="1" min="1">
-                                    <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                </div>
+
                                 <div class="product-extra-link2">
-                                    <button type="submit" class="button button-add-to-cart"><i
-                                            class="fi-rs-shopping-cart"></i>Add to cart</button>
+                                    <button type="button" class="modalAddToCartBtn btn btn-primary" data-id="">Add
+                                        to
+                                        Cart</button>
+                                    <button type="button" class="modalDeleteFromCartBtn btn btn-danger " data-id=""
+                                        style="display:none;">Remove from Cart</button>
+
+
+
                                 </div>
                             </div>
                             <div class="font-xs">

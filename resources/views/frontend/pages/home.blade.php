@@ -1,7 +1,6 @@
 @extends('frontend.layout.master')
 @section('content')
 
-    @include('frontend.pages.homePartials.quickView')
 
     @include('frontend.pages.homePartials.slider')
 

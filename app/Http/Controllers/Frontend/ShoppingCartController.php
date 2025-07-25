@@ -123,7 +123,7 @@ class ShoppingCartController extends Controller
             return response()->json([
                 'success' => false,
                 'title' => 'Failed!',
-                'message' => 'Something went wrong when deleting product from cart',
+                'message' => 'Something went wrong when update quantity',
                 'error' => $e->getMessage()
             ], 500);
         }

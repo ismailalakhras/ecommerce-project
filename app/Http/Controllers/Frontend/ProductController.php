@@ -89,7 +89,11 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::findOrFail($id);
+        $shoppingCart = ShoppingCart::where('user_id', auth()->id())->orderBy('created_at', 'DESC')->get();
 
-        return response()->json($product);
+        return response()->json([
+            'product' => $product,
+            'shoppingCart'=>$shoppingCart
+        ]);
     }
 }

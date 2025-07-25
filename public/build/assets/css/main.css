@@ -13422,6 +13422,10 @@ footer .hotline img {
     border: none !important;
 }
 
+
+
+
+
 .delete-btn i {
     font-size: 15px !important;
     font-weight: 400 !important;
@@ -13442,6 +13446,31 @@ footer .hotline img {
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05) !important;
     background: red !important;
 }
+
+.modalDeleteFromCartBtn {
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 12px 20px 12px 20px !important;
+    border-radius: 4px !important;
+    background-color: #f9dede !important;
+    color: red !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    border: none !important;
+}
+
+
+.modalDeleteFromCartBtn:hover {
+    background-color: red !important;
+    color: #fff !important;
+    -webkit-transform: translateY(-3px) !important;
+    transform: translateY(-3px) !important;
+    -webkit-box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05) !important;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05) !important;
+    background: red !important;
+}
+
+
 
 .save-change-btn {
     width: 100px;

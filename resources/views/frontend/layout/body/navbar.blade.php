@@ -131,7 +131,7 @@
 
                                                       @if (isset($shoppingCart) && $shoppingCart->count())
                                                           @foreach ($shoppingCart as $product)
-                                                              <li class="product-to-delete-{{ $product->product->id }}">
+                                                              <li class="product-to-delete-{{ $product->product->id }}" data-id="{{$product->product->id}}">
                                                                   <div class="shopping-cart-img">
                                                                       <a href="">
                                                                           <img

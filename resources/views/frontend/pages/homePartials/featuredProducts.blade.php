@@ -22,45 +22,34 @@
                                 id="carausel-4-columns-arrows"></div>
                             <div class="carausel-4-columns carausel-arrow-center" id="carausel-4-columns">
 
-
-
-
-
-
                                 @foreach ($featuredProducts as $product)
-                                    <div class="product-cart-wrap">
+                                    <div class="product-cart-wrap ">
                                         <div class="product-img-action-wrap">
                                             <div class="product-img product-img-zoom">
-                                                <a href="shop-product-right.html">
+                                                <a class=" quick-view-btn" data-bs-toggle="modal"
+                                                    data-bs-target="#quickViewModal" data-id={{ $product->id }}>
+
                                                     <img class="default-img" src="{{ $product->image }}"
                                                         alt="" />
                                                     <img class="hover-img" src="{{ $product->image }}" alt="" />
                                                 </a>
                                             </div>
-                                            <div class="product-action-1">
-                                                <a aria-label="Quick view"
-                                                    class="action-btn small hover-up quick-view-btn"
-                                                    data-bs-toggle="modal" data-bs-target="#quickViewModal"
-                                                    data-id={{ $product->id }}>
-                                                    <i class="fi-rs-eye"></i>
-                                                </a>
 
-                                                <a aria-label="Add To Wishlist" class="action-btn small hover-up"
-                                                    href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
-                                                <a aria-label="Compare" class="action-btn small hover-up"
-                                                    href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
-                                            </div>
                                             <div class="product-badges product-badges-position product-badges-mrg">
                                                 <span class="hot">Save
                                                     {{ intval((($product->price - $product->sale_price) / $product->price) * 100) }}
                                                     %</span>
                                             </div>
                                         </div>
-                                        <div class="product-content-wrap">
+                                        <div class="product-content-wrap ">
                                             <div class="product-category">
-                                                <a href="shop-grid-right.html">{{ $product->name }}</a>
+                                                <a class="quick-view-btn" data-bs-toggle="modal"
+                                                    data-bs-target="#quickViewModal"
+                                                    data-id={{ $product->id }}>{{ $product->name }}</a>
                                             </div>
-                                            <h2><a href="shop-product-right.html">{{ $product->short_description }}</a>
+                                            <h2><a class="quick-view-btn" data-bs-toggle="modal"
+                                                    data-bs-target="#quickViewModal"
+                                                    data-id={{ $product->id }}>{{ $product->short_description }}</a>
                                             </h2>
                                             <div class="product-rate d-inline-block">
                                                 <div class="product-rating" style="width: 80%"></div>

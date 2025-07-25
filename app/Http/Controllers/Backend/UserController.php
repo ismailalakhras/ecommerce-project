@@ -14,6 +14,7 @@ class UserController extends Controller
         return view('backend.pages.user.index', compact('users'));
     }
 
+    //! edit role of user
     public function edit(User $user)
     {
 
