@@ -39,5 +39,7 @@ class DatabaseSeeder extends Seeder
         $this->call(OrderItemSeedr::class);
 
         $this->call(ShoppingCartSeeder::class);
+        $this->call(MessageSeeder::class);
+
     }
 }

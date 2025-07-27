@@ -17,6 +17,7 @@ class UserSeeder extends Seeder
         $admin = User::create([
             'name' => 'ismail',
             'email' => 'ismail_admin@gmail.com',
+            'avatar' => 'images/avatar1.png',
             'password' => Hash::make('000000000'),
         ]);
 
@@ -24,29 +25,27 @@ class UserSeeder extends Seeder
 
         $usersData = [
             [
-                'name' => 'ismail',
-                'email' => 'ismail_user@gmail.com',
+                'name' => 'tareq',
+                'email' => 'tareq@gmail.com',
+                'avatar' => 'images/avatar2.svg',
                 'password' => Hash::make('000000000'),
             ],
             [
-                'name' => 'user-1',
-                'email' => 'user-1@gmail.com',
+                'name' => 'osama',
+                'email' => 'osama@gmail.com',
+                'avatar' => 'images/avatar3.svg',
                 'password' => Hash::make('0'),
             ],
             [
-                'name' => 'user-2',
-                'email' => 'user-2@gmail.com',
+                'name' => 'baha',
+                'email' => 'baha@gmail.com',
+                'avatar' => 'images/avatar4.svg',
                 'password' => Hash::make('0'),
             ],
             [
-                'name' => 'user-3',
-                'email' => 'user-3@gmail.com',
-                'password' => Hash::make('0'),
-            ],
-
-             [
                 'name' => 'ismail real gmail',
                 'email' => 'ismail.malakhras@gmail.com',
+                'avatar' => 'images/avatar5.svg',
                 'password' => Hash::make('0'),
             ],
         ];

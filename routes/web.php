@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\OrderAdminController;
 use App\Http\Controllers\Backend\ProductAdminController;
 use App\Http\Controllers\Backend\SubcategoryController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\Chat\MessageController;
 use App\Http\Controllers\frontend\CouponController as FrontendCouponController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\OrderController;
@@ -114,6 +115,13 @@ Route::middleware('auth:admin', 'role:admin')->group(function () {
     Route::get('admin/coupon-edit/{coupon}', [CouponController::class, 'edit'])->name('admin.coupon.edit');
     Route::put('admin/coupon-update/{coupon}', [CouponController::class, 'update'])->name('admin.coupon.update');
     Route::delete('admin/coupon-delete/{coupon}', [CouponController::class, 'destroy'])->name('admin.coupon.delete');
+});
+
+//! message
+Route::middleware('auth:admin')->group(function () {
+    Route::post('/send-message', [MessageController::class, 'sendMessage']);
+    Route::get('/messages/{receiverId}', [MessageController::class, 'getMessages']);
+    Route::get('chat', [MessageController::class, 'index'])->name('admin.chat.index');
 });
 
 //!----------------------------------------------------------------------------------------
