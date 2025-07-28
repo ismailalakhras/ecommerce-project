@@ -15,6 +15,9 @@ use App\Http\Controllers\Frontend\OrderController;
 use App\Http\Controllers\Frontend\ProductController;
 use App\Http\Controllers\Frontend\ShoppingCartController;
 use App\Http\Controllers\ProfileController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Route;
 
 
@@ -39,7 +42,6 @@ Route::middleware('auth:web')->group(function () {
     Route::put('/cart/{id}', [ShoppingCartController::class, 'update'])->name('cart.update');
     Route::delete('/cart/{id}', [ShoppingCartController::class, 'destroy'])->name('cart.destroy');
 
-
     //! orders 
     Route::get('/order', [OrderController::class, 'index'])->name('order.index');
     Route::post('/order', [OrderController::class, 'store'])->name('order.store');
@@ -57,7 +59,6 @@ Route::middleware('auth:admin', 'role:admin')->group(function () {
     Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
     //!category
-
     Route::get('admin/category', [CategoryController::class, 'index'])->name('admin.category.index');
     Route::get('admin/category-create', [CategoryController::class, 'create'])->name('admin.category.create');
     Route::post('admin/category-store', [CategoryController::class, 'store'])->name('admin.category.store');
@@ -67,9 +68,7 @@ Route::middleware('auth:admin', 'role:admin')->group(function () {
     Route::delete('admin/category-delete/{category}', [CategoryController::class, 'destroy'])->name('admin.category.delete');
 
 
-
     //!subcategory
-
     Route::get('admin/subcategory', [SubcategoryController::class, 'index'])->name('admin.subcategory.index');
     Route::get('admin/subcategory-create', [SubcategoryController::class, 'create'])->name('admin.subcategory.create');
     Route::post('admin/subcategory-store', [SubcategoryController::class, 'store'])->name('admin.subcategory.store');
@@ -77,8 +76,6 @@ Route::middleware('auth:admin', 'role:admin')->group(function () {
     Route::get('admin/subcategory-edit/{subcategory}', [SubcategoryController::class, 'edit'])->name('admin.subcategory.edit');
     Route::put('admin/subcategory-update/{subcategory}', [SubcategoryController::class, 'update'])->name('admin.subcategory.update');
     Route::delete('admin/subcategory-delete/{subcategory}', [SubcategoryController::class, 'destroy'])->name('admin.subcategory.delete');
-
-
 
     //!product
     Route::get('admin/product', [ProductAdminController::class, 'index'])->name('admin.product.index');
@@ -98,14 +95,10 @@ Route::middleware('auth:admin', 'role:admin')->group(function () {
     Route::put('admin/order-update/{order}', [OrderAdminController::class, 'update'])->name('admin.order.update');
     Route::delete('admin/order-delete/{order}', [OrderAdminController::class, 'destroy'])->name('admin.order.delete');
 
-
-
-
     //! user
     Route::get('admin/user', [UserController::class, 'index'])->name('admin.user.index');
     Route::get('admin/user-edit/{user}', [UserController::class, 'edit'])->name('admin.user.edit');
     Route::delete('admin/user-delete/{user}', [UserController::class, 'destroy'])->name('admin.user.delete');
-
 
     //! coupon
     Route::get('admin/coupon', [CouponController::class, 'index'])->name('admin.coupon.index');
@@ -123,6 +116,8 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('/messages/{receiverId}', [MessageController::class, 'getMessages']);
     Route::get('chat', [MessageController::class, 'index'])->name('admin.chat.index');
 });
+
+
 
 //!----------------------------------------------------------------------------------------
 

@@ -48,7 +48,7 @@
 
     @stack('css')
 
-   
+
 </head>
 
 <body>
@@ -80,22 +80,15 @@
     <script src="{{ asset('assets/plugins/metismenu/js/metisMenu.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
 
-    <!-- Charts & Maps -->
-    {{-- <script src="{{ asset('assets/plugins/chartjs/js/Chart.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/vectormap/jquery-jvectormap-2.0.2.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/vectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
-    <script src="{{ asset('assets/plugins/jquery.easy-pie-chart/jquery.easypiechart.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/sparkline-charts/jquery.sparkline.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/jquery-knob/excanvas.js') }}"></script>
-    <script src="{{ asset('assets/plugins/jquery-knob/jquery.knob.js') }}"></script> --}}
-
+   
     <!-- DataTables -->
     <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css" />
 
 
     <!-- App Scripts -->
-    <script src="{{ asset('assets/js/app.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/app.js') }}"></script> --}}
+
     <script src="{{ asset('assets/js/backend/index.js') }}"></script>
     <script src="{{ asset('assets/js/index.js') }}"></script>
 
@@ -112,7 +105,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
 
     <!-- Chat Scripts -->
-     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    @vite(['resources/js/app.js'])
 
     @stack('scripts')
 

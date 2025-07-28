@@ -12,21 +12,17 @@ $(document).ready(function () {
         receiverId = $(this).data("id");
 
         $("#users-list li").removeClass("active");
-
         $("#users-list li").css({
-            "color": "black",
+            "color": "#494949",
             "font-weight": 400,
             "font-size": "14px"
         })
-
         $(this).addClass("active");
-
         $(this).css({
-            "color": "black",
+            "color": "#494949",
             "font-weight": 500,
             "font-size": "20px"
         });
-
         $("#chat-container").show();
         $("#chat-footer-x").show();
         $("#chat-header-x").show();
@@ -84,6 +80,7 @@ $(document).ready(function () {
         });
     }
 
+
     $("#send").click(function () {
         $("#chat-container").addClass("scroll")
 
@@ -99,23 +96,29 @@ $(document).ready(function () {
         }
     });
 
-    Pusher.logToConsole = true;
+    // Pusher.logToConsole = true;
 
 
-    const pusher = new Pusher(window.PUSHER_APP_KEY, {
-        cluster: window.PUSHER_CLUSTER,
-        forceTLS: true
-    });
+    window.Echo.join("presence-chat-channel.1")
+        .here((users) => {
+            users.forEach((user) => {
+                updateUserStatus(user.id, true);
+            });
+        })
+        .joining((user) => {
+            updateUserStatus(user.id, true)
 
+        })
+        .leaving((user) => {
+            updateUserStatus(user.id, false)
+        })
+        .listen(".new-message", function (data) {
 
-    const channel = pusher.subscribe("chat-channel");
+            if (data.message.receiver_id == senderId || data.message.sender_id == senderId) {
 
-    channel.bind("new-message", function (data) {
-        if (data.message.receiver_id == senderId || data.message.sender_id == senderId) {
+                let userName = data.message.sender.name ?? "Unknown";
 
-            let userName = data.message.sender.name ?? "Unknown";
-
-            const rightMessage = $(`<div class="chat-content-rightside chat-msg-animate ">
+                const rightMessage = $(`<div class="chat-content-rightside chat-msg-animate ">
                             <div class="d-flex ms-auto">
                                 <div class="flex-grow-1 me-2">
                                     <p class="mb-0 chat-time text-end">you,${formatTime(data.message.created_at)}</p>
@@ -124,12 +127,13 @@ $(document).ready(function () {
                             </div>
                         </div>`)
 
-            const leftMessage = $(
-                `<div class="chat-content-leftside chat-msg-animate">
+                const leftMessage = $(
+                    `<div class="chat-content-leftside chat-msg-animate">
                         <div class="d-flex" >
-                                  <img src= ${data.message.sender.avatar} width="48" height="48"
+                                <img src= ${data.message.sender.avatar} width="48" height="48"
                                     class="rounded-circle" alt="" />
                              
+
                                 <div class="flex-grow-1 ms-2">
                                     <p class="mb-0 chat-time">${userName}, ${formatTime(data.message.created_at)}</p>
                                     <p class="chat-left-msg">${data.message.message}</p>
@@ -137,24 +141,28 @@ $(document).ready(function () {
                         </div>
                      </div>
                      `
-            )
+                )
 
-            if (data.message.sender_id == senderId) {
-                $("#chat-box").append(rightMessage);
+                if (data.message.sender_id == senderId) {
 
-                setTimeout(() => {
-                    rightMessage.addClass("show");
-                }, 20);
+                    $("#chat-box").append(rightMessage);
 
-            } else {
-                $("#chat-box").append(leftMessage);
-                setTimeout(() => {
-                    leftMessage.addClass("show");
-                }, 20);
+                    setTimeout(() => {
+                        rightMessage.addClass("show");
+                    }, 20);
+
+                } else {
+                    $("#chat-box").append(leftMessage);
+                    setTimeout(() => {
+                        leftMessage.addClass("show");
+                    }, 20);
+
+                }
+                $("#chat-container").scrollTop($("#chat-container")[0].scrollHeight);
             }
-            $("#chat-container").scrollTop($("#chat-container")[0].scrollHeight);
-        }
-    });
+
+
+        });
 
 
     function formatTime(timestamp) {
@@ -162,5 +170,12 @@ $(document).ready(function () {
         return time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     }
 
-});
+    function updateUserStatus(userId, isOnline) {
+        const element = document.querySelector(`[data-id="onlineOffline-${userId}"]`);
+        if (!element) return;
 
+        element.classList.remove('online-user-chat', 'offline-user-chat');
+        element.classList.add(isOnline ? 'online-user-chat' : 'offline-user-chat');
+    }
+
+});

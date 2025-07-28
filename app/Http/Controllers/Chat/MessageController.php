@@ -8,7 +8,6 @@ use App\Models\Message;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-
 class MessageController extends Controller
 {
 
@@ -29,7 +28,7 @@ class MessageController extends Controller
 
         $message->load('sender');
 
-        broadcast(new NewMessage($message))->toOthers();
+        broadcast(new NewMessage($message));
 
         return response()->json($message);
     }

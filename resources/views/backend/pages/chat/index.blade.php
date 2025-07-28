@@ -16,6 +16,30 @@
         .scroll {
             scroll-behavior: smooth;
         }
+
+        .offline-user-chat {
+            position: absolute;
+            /* top: 0; */
+            bottom: 1.5rem;
+            left: 4rem;
+            width: 0.7rem;
+            height: 0.7rem;
+            background: red;
+            border: solid 2px white;
+            border-radius: 100%;
+        }
+
+         .online-user-chat {
+            position: absolute;
+            /* top: 0; */
+            bottom: 1.5rem;
+            left: 4rem;
+            width: 0.7rem;
+            height: 0.7rem;
+            background: rgb(43, 255, 0);
+            border: solid 2px white;
+            border-radius: 100%;
+        }
     </style>
 @endpush
 
@@ -139,7 +163,9 @@
                                                 <li class="list-group-item" data-id="{{ $user->id }}"
                                                     style="cursor: pointer">
                                                     <img src="{{ asset($user->avatar) }}" width="42" height="42"
-                                                        style="margin: 10px" class="rounded-circle" alt="" />
+                                                        style="margin: 10px ; border: 1px solid #0000003d"
+                                                        class="rounded-circle" alt="" />
+                                                    <div data-id="onlineOffline-{{$user->id}}" class="offline-user-chat"></div>
 
                                                     {{ $user->name }}
                                                 </li>
