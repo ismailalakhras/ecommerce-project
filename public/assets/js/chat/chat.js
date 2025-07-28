@@ -1,14 +1,10 @@
 
 $(document).ready(function () {
 
-
-
-
     let receiverId = null;
     let senderId = $('meta[name="user-id"]').attr("content");
 
     $("#users-list li").click(function () {
-
         receiverId = $(this).data("id");
 
         $("#users-list li").removeClass("active");
@@ -30,55 +26,9 @@ $(document).ready(function () {
         $("#chat-header").text("Chat with " + $(this).text());
         $("#chat-container").removeClass("scroll")
 
+        updateReceiverStatus();
         loadMessages();
     });
-
-    function loadMessages() {
-        if (!receiverId) return;
-        $.get("/messages/" + receiverId, function (data) {
-            $("#chat-box").html("");
-
-            data.forEach(msg => {
-
-                let userName = msg.sender_name ?? "Unknown";
-                let avatar = msg.avatar ?? "Unknown";
-
-                if (msg.sender_id == senderId) {
-                    $("#chat-box").append(
-                        `<div class="chat-content-rightside  ">
-                            <div class="d-flex ms-auto">
-                                <div class="flex-grow-1 me-2">
-                                    <p class="mb-0 chat-time text-end">you,${formatTime(msg.created_at)}</p>
-                                    <p class="chat-right-msg">${msg.message}</p>
-                                </div>
-                            </div>
-                        </div>`
-
-                    );
-                } else {
-                    $("#chat-box").append(
-
-                        ` <div class="chat-content-leftside ">
-                        <div class="d-flex ">
-                                <img src= ${avatar}  width="48" height="48"
-                                    class="rounded-circle" alt="" />
-                             
-
-                                <div class="flex-grow-1 ms-2">
-                                    <p class="mb-0 chat-time">${userName}, ${formatTime(msg.created_at)}</p>
-                                    <p class="chat-left-msg">${msg.message}</p>
-                                </div>
-                            </div>
-                            </div>
-                            `
-                    );
-                }
-                $("#chat-container").scrollTop($("#chat-container")[0].scrollHeight);
-
-
-            });
-        });
-    }
 
 
     $("#send").click(function () {
@@ -87,7 +37,6 @@ $(document).ready(function () {
         let message = $("#message").val();
         if (message.trim() !== "" && receiverId) {
             $.post("/send-message", {
-                _token: $('meta[name="csrf-token"]').attr("content"),
                 receiver_id: receiverId,
                 message: message
             }, function () {
@@ -98,18 +47,26 @@ $(document).ready(function () {
 
     // Pusher.logToConsole = true;
 
-
+    //todo Listener for presence chat channel
     window.Echo.join("presence-chat-channel.1")
         .here((users) => {
+
+
             users.forEach((user) => {
+                onlineUsers = users;
+                updateReceiverStatus();
                 updateUserStatus(user.id, true);
             });
         })
         .joining((user) => {
+            onlineUsers.push(user);
+            updateReceiverStatus();
             updateUserStatus(user.id, true)
 
         })
         .leaving((user) => {
+            onlineUsers = onlineUsers.filter(u => u.id !== user.id);
+            updateReceiverStatus();
             updateUserStatus(user.id, false)
         })
         .listen(".new-message", function (data) {
@@ -160,22 +117,80 @@ $(document).ready(function () {
                 }
                 $("#chat-container").scrollTop($("#chat-container")[0].scrollHeight);
             }
-
-
         });
 
 
+    //! load messages function
+    function loadMessages() {
+        if (!receiverId) return;
+        $.get("/messages/" + receiverId, function (data) {
+            $("#chat-box").html("");
+
+            data.forEach(msg => {
+
+                let userName = msg.sender_name ?? "Unknown";
+                let avatar = msg.avatar ?? "Unknown";
+
+                if (msg.sender_id == senderId) {
+                    $("#chat-box").append(
+                        `<div class="chat-content-rightside  ">
+                            <div class="d-flex ms-auto">
+                                <div class="flex-grow-1 me-2">
+                                    <p class="mb-0 chat-time text-end">you,${formatTime(msg.created_at)}</p>
+                                    <p class="chat-right-msg">${msg.message}</p>
+                                </div>
+                            </div>
+                        </div>`
+
+                    );
+                } else {
+                    $("#chat-box").append(
+
+                        ` <div class="chat-content-leftside ">
+                        <div class="d-flex ">
+                                <img src= ${avatar}  width="48" height="48"
+                                    class="rounded-circle" alt="" />
+                             
+
+                                <div class="flex-grow-1 ms-2">
+                                    <p class="mb-0 chat-time">${userName}, ${formatTime(msg.created_at)}</p>
+                                    <p class="chat-left-msg">${msg.message}</p>
+                                </div>
+                            </div>
+                            </div>
+                            `
+                    );
+                }
+                $("#chat-container").scrollTop($("#chat-container")[0].scrollHeight);
+
+
+            });
+        });
+    }
+
+    //! format time function
     function formatTime(timestamp) {
         let time = new Date(timestamp);
         return time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     }
 
+    //! update user status in sidebar function
     function updateUserStatus(userId, isOnline) {
-        const element = document.querySelector(`[data-id="onlineOffline-${userId}"]`);
-        if (!element) return;
+        const $element = $(`[data-id="onlineOffline-${userId}"]`);
+        if ($element.length === 0) return;
 
-        element.classList.remove('online-user-chat', 'offline-user-chat');
-        element.classList.add(isOnline ? 'online-user-chat' : 'offline-user-chat');
+        $element.toggleClass('online-user-chat', isOnline);
+        $element.toggleClass('offline-user-chat', !isOnline);
+
+    }
+
+    //! update user status in head of chat function
+    function updateReceiverStatus() {
+        if (!receiverId) return;
+        const isOnline = onlineUsers.some(user => user.id === receiverId);
+
+        $("#onlineOffline").toggleClass("chart-online", isOnline);
+        $("#onlineOffline").toggleClass("chart-offline", !isOnline);
     }
 
 });

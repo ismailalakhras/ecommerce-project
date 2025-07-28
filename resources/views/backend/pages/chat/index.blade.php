@@ -29,7 +29,7 @@
             border-radius: 100%;
         }
 
-         .online-user-chat {
+        .online-user-chat {
             position: absolute;
             /* top: 0; */
             bottom: 1.5rem;
@@ -78,7 +78,7 @@
                         <div class="mb-3"></div>
 
                         <div class="chat-tab-menu mt-3">
-                            <ul class="nav nav-pills nav-justified">
+                            {{-- <ul class="nav nav-pills nav-justified">
                                 <li class="nav-item">
                                     <a class="nav-link active" data-bs-toggle="pill" href="javascript:;">
                                         <div class="font-24"><i class='bx bx-conversation'></i>
@@ -111,7 +111,7 @@
                                         </div>
                                     </a>
                                 </li>
-                            </ul>
+                            </ul> --}}
                         </div>
                     </div>
                     <div class="chat-sidebar-content">
@@ -165,7 +165,8 @@
                                                     <img src="{{ asset($user->avatar) }}" width="42" height="42"
                                                         style="margin: 10px ; border: 1px solid #0000003d"
                                                         class="rounded-circle" alt="" />
-                                                    <div data-id="onlineOffline-{{$user->id}}" class="offline-user-chat"></div>
+                                                    <div data-id="onlineOffline-{{ $user->id }}"
+                                                        class="offline-user-chat"></div>
 
                                                     {{ $user->name }}
                                                 </li>
@@ -188,7 +189,7 @@
                             <h4 id="chat-header" class="mb-1 font-weight-bold" style="     font-size: 1.1rem;">Chat</h4>
                             <div class="list-inline d-sm-flex mb-0 d-none"> <a href="javascript:;"
                                     class="list-inline-item d-flex align-items-center text-secondary"><small
-                                        class='bx bxs-circle me-1 chart-online'></small>Active Now</a>
+                                        id="onlineOffline" class='bx bxs-circle me-1 chart-offline'></small>Active Now</a>
                                 <a href="javascript:;"
                                     class="list-inline-item d-flex align-items-center text-secondary">|</a>
                                 <a href="javascript:;"
@@ -218,25 +219,7 @@
 
 
                     <div id="chat-box">
-                        <div class="chat-content-leftside ">
-                            <div class="d-flex">
-                                <img src="assets/images/avatars/avatar-3.png" width="48" height="48"
-                                    class="rounded-circle" alt="" />
-                                <div class="flex-grow-1 ms-2">
-                                    <p class="mb-0 chat-time">Harvey, 2:35 PM</p>
-                                    <p class="chat-left-msg">Hi, harvey where are you now a days?</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="chat-content-rightside">
-                            <div class="d-flex ms-auto">
-                                <div class="flex-grow-1 me-2">
-                                    <p class="mb-0 chat-time text-end">you, 2:37 PM</p>
-                                    <p class="chat-right-msg">I am in USA</p>
-                                </div>
-                            </div>
-                        </div>
+                       
                     </div>
                 </div>
 
