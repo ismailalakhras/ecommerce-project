@@ -187,7 +187,7 @@
                         </div>
                         <div>
                             <h4 id="chat-header" class="mb-1 font-weight-bold" style="     font-size: 1.1rem;">Chat</h4>
-                            <div class="list-inline d-sm-flex mb-0 d-none"> <a href="javascript:;"
+                            <div class="list-inline d-sm-flex mb-0 d-none"> <a id="onlineOfflineText"
                                     class="list-inline-item d-flex align-items-center text-secondary"><small
                                         id="onlineOffline" class='bx bxs-circle me-1 chart-offline'></small>Active Now</a>
                                 <a href="javascript:;"
@@ -219,7 +219,8 @@
 
 
                     <div id="chat-box">
-                       
+                      
+
                     </div>
                 </div>
 

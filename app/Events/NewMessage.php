@@ -19,13 +19,21 @@ class NewMessage implements ShouldBroadcast
     public function __construct(Message $message)
     {
         $this->message = $message;
-       
     }
 
     public function broadcastOn()
     {
-        return new PresenceChannel('presence-chat-channel.1');
+        return new PresenceChannel('presence-chat-channel.' . $this->getChannelId($this->message));
     }
+
+
+    protected function getChannelId()
+    {
+        $ids = [$this->message->sender_id, $this->message->receiver_id];
+        sort($ids);
+        return implode('-', $ids);
+    }
+
 
     public function broadcastAs()
     {

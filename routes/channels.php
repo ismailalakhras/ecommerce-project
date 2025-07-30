@@ -25,3 +25,6 @@ Broadcast::channel('presence-chat-channel.{id}', function ($user ,$id) {
     return $user;
 },['guards' => ['admin']]);
 
+Broadcast::channel('presence-global-chat', function ($user) {
+    return $user;
+}, ['guards' => ['admin']]);

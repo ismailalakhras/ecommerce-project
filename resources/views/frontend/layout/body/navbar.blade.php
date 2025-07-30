@@ -94,17 +94,6 @@
                               <div class="header-action-right">
                                   <div class="header-action-2">
 
-
-                                      {{-- <div class="header-action-icon-2">
-                                    <a href="shop-wishlist.html">
-                                        <img class="svgInject" alt="Nest"
-                                            src="build/assets/imgs/theme/icons/icon-heart.svg" />
-                                        <span class="pro-count blue">0</span>
-                                    </a>
-                                    <a href="shop-wishlist.html"><span class="lable">Wishlist</span></a>
-                                </div> --}}
-
-
                                       <div class="header-action-icon-2">
                                           <a class="mini-cart-icon" href="{{ route('cart.index') }}">
                                               <img alt="Nest"
@@ -214,32 +203,14 @@
                                                   <img class="svgInject" alt="Nest"
                                                       src="{{ asset('build/assets/imgs/theme/icons/icon-user.svg') }}" />
                                               </a>
-                                              <a href="page-account.html"><span class="lable ml-0">Account</span></a>
+                                              <a><span class="lable ml-0">Account</span></a>
                                               <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
                                                   <ul>
                                                       <li>
-                                                          <a href="page-account.html"><i
+                                                          <a ><i
                                                                   class="fi fi-rs-user mr-10"></i>{{ ucfirst(explode(' ', auth()->user()->name)[0]) }}</a>
                                                       </li>
-                                                      <li>
-                                                          <a href="page-account.html"><i
-                                                                  class="fi fi-rs-location-alt mr-10"></i>Order
-                                                              Tracking</a>
-                                                      </li>
-                                                      <li>
-                                                          <a href="page-account.html"><i
-                                                                  class="fi fi-rs-label mr-10"></i>My
-                                                              Voucher</a>
-                                                      </li>
-                                                      <li>
-                                                          <a href="shop-wishlist.html"><i
-                                                                  class="fi fi-rs-heart mr-10"></i>My
-                                                              Wishlist</a>
-                                                      </li>
-                                                      <li>
-                                                          <a href="page-account.html"><i
-                                                                  class="fi fi-rs-settings-sliders mr-10"></i>Setting</a>
-                                                      </li>
+                                                      
                                                       <li>
 
 
@@ -306,7 +277,7 @@
 
                                           </li>
                                           <li>
-                                              <a href="#">About</a>
+                                              <a class=" about-btn">About</a>
                                           </li>
 
 
@@ -378,21 +349,19 @@
 
 
 
-
                                               </ul>
                                           </li>
 
                                           <li>
                                               <a href="#">Pages <i class="fi-rs-angle-down"></i></a>
                                               <ul class="sub-menu">
-                                                  <li><a href="#">Contact</a></li>
-                                                  <li><a href="#">Privacy Policy</a></li>
-                                                  <li><a href="#">Terms of Service</a></li>
+                                                  <li><a href="/category/0/products"> products by category</a></li>
+                                                  <li><a href="/subcategory/0/products"> products by subcategory</a></li>
                                                   <li><a href="{{ route('order.index') }}">My orders</a></li>
                                               </ul>
                                           </li>
                                           <li>
-                                              <a href="#">Contact</a>
+                                              <a  class=" contact-btn">Contact</a>
                                           </li>
                                       </ul>
                                   </nav>

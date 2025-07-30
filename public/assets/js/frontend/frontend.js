@@ -364,6 +364,14 @@ $(function () {
         window.location.href = '/'
     })
 
+    $(document).on('click', '.about-btn', function () {
+        window.location.href = '/about'
+    })
+
+    $(document).on('click', '.contact-btn', function () {
+        window.location.href = '/contact'
+    })
+
     $(document).on('click', '.reset-password-href', function () {
         window.location.href = '/reset-password'
     })

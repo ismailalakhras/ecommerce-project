@@ -45,4 +45,14 @@ class HomeController extends Controller
 
         return view('frontend.pages.home', compact('categories', 'hotDealsProducts', 'topRatedProducts', 'RecentlyAddedProducts', 'specialDealsProducts', 'featuredProducts',  'shoppingCart'));
     }
+
+    public function about ()
+    {
+        return view('frontend.pages.about');
+    }
+
+     public function contact ()
+    {
+        return view('frontend.pages.contact');
+    }
 }
