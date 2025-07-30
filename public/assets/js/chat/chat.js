@@ -7,13 +7,13 @@ $(document).ready(function () {
     let currentChannel = null;
 
     $("#users-list li").click(function () {
+
         receiverId = $(this).data("id");
         channelId = senderId < receiverId ? senderId + "-" + receiverId : receiverId + "-" + senderId;
 
         if (currentChannel) {
-            currentChannel.unsubscribe();
+            window.Echo.leave("presence-chat-channel." + channelId);
             currentChannel = null;
-            onlineUsers = [];
         }
 
         currentChannel = subscribeToChannel(channelId);
@@ -44,6 +44,9 @@ $(document).ready(function () {
         $("#chat-container").addClass("scroll");
 
         let message = $("#message").val();
+
+        if (!senderId || !receiverId) return;
+
         if (message.trim() !== "" && receiverId) {
             $.post("/send-message", {
                 receiver_id: receiverId,
@@ -73,7 +76,6 @@ $(document).ready(function () {
             updateReceiverStatus();
             updateUserStatus(user.id, false);
         })
-
 
 
     //! subscribe to channel function
@@ -120,7 +122,7 @@ $(document).ready(function () {
 
     //! load messages function
     function loadMessages() {
-        if (!receiverId) return;
+        if (!senderId || !receiverId) return;
         $.get("/messages/" + receiverId, function (data) {
             $("#chat-box").html("");
             data.forEach(msg => {
