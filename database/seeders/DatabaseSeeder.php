@@ -40,6 +40,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(ShoppingCartSeeder::class);
         $this->call(MessageSeeder::class);
+        $this->call(GroupChatSeeder::class);
 
     }
 }

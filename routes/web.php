@@ -8,7 +8,9 @@ use App\Http\Controllers\Backend\OrderAdminController;
 use App\Http\Controllers\Backend\ProductAdminController;
 use App\Http\Controllers\Backend\SubcategoryController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\Chat\GroupChatController;
 use App\Http\Controllers\Chat\MessageController;
+use App\Http\Controllers\Chat\MessageGroupController;
 use App\Http\Controllers\frontend\CouponController as FrontendCouponController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\OrderController;
@@ -117,6 +119,15 @@ Route::middleware('auth:admin')->group(function () {
     Route::post('/send-message', [MessageController::class, 'sendMessage']);
     Route::get('/messages/{receiverId}', [MessageController::class, 'getMessages']);
     Route::get('chat', [MessageController::class, 'index'])->name('admin.chat.index');
+});
+
+
+//!group message
+Route::middleware('auth:admin')->group(function () {
+    Route::get('{group}/messages', [GroupChatController::class, 'messages']);
+    Route::post('{group}/send', [GroupChatController::class, 'sendMessage']);
+    Route::get('{group}/members', [GroupChatController::class, 'members']);
+    Route::get('groups', [GroupChatController::class, 'groups']);
 });
 
 

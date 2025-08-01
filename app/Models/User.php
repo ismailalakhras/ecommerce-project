@@ -62,4 +62,14 @@ class User extends Authenticatable implements LaratrustUser
     {
         return $this->hasMany(Order::class);
     }
+
+    public function groupChats()
+    {
+        return $this->belongsToMany(GroupChat::class, 'group_chat_users');
+    }
+
+    public function groupMessages()
+    {
+        return $this->hasMany(GroupMessage::class, 'sender_id');
+    }
 }

@@ -128,16 +128,17 @@
                                                 <a class="dropdown-item" href="#">Join a meeting</a>
                                             </div>
                                         </div>
-                                        <div class="dropdown"> <a href="#"
+                                        <div class="dropdown">
+                                            <a id="dropdownMenuBtn"
                                                 class="btn btn-white btn-sm radius-30 dropdown-toggle dropdown-toggle-nocaret"
-                                                data-bs-toggle="dropdown" data-display="static"><i
-                                                    class='bx bxs-edit me-2'></i>New Chat<i
-                                                    class='bx bxs-chevron-down ms-2'></i></a>
-                                            <div class="dropdown-menu dropdown-menu-right"> <a class="dropdown-item"
-                                                    href="#">New Group Chat</a>
-                                                <a class="dropdown-item" href="#">New Moderated Group</a>
-                                                <a class="dropdown-item" href="#">New Chat</a>
-                                                <a class="dropdown-item" href="#">New Private Conversation</a>
+                                                data-bs-toggle="dropdown" data-display="static">
+                                                <i class='bx bxs-edit me-2'></i><span id="dropdown-label">Friends Chats</span><i
+                                                    class='bx bxs-chevron-down ms-2'></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a id="myGroups-btn" class="dropdown-item  dropdown-option"
+                                                    href="#">My Groups</a>
+                                                <a id="myChats-btn" class="dropdown-item  dropdown-option" href="#">Friends Chats</a>
                                             </div>
                                         </div>
                                     </div>
@@ -155,7 +156,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="chat-list">
+                                <div id="chat-list" class="chat-list">
                                     <div id="user-container" class="list-group list-group-flush">
 
                                         <ul id="users-list" class="list-group">
@@ -172,7 +173,26 @@
                                                 </li>
                                             @endforeach
                                         </ul>
+                                    </div>
+                                </div>
 
+                                <div id="group-chat-list" class="chat-list" style="display: none">
+                                    <div id="user-container" class="list-group list-group-flush">
+
+                                        <ul id="groups-list" class="list-group">
+                                            @foreach ($users as $user)
+                                                <li class="list-group-item" data-id="{{ $user->id }}"
+                                                    style="cursor: pointer">
+                                                    <img src="{{ asset($user->avatar) }}" width="42" height="42"
+                                                        style="margin: 10px ; border: 1px solid #0000003d"
+                                                        class="rounded-circle" alt="" />
+                                                    <div data-id="onlineOffline-{{ $user->id }}"
+                                                        class="offline-user-chat"></div>
+
+                                                    {{ $user->name }}
+                                                </li>
+                                            @endforeach
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -219,7 +239,7 @@
 
 
                     <div id="chat-box">
-                      
+
 
                     </div>
                 </div>
@@ -230,6 +250,24 @@
                             <div class="input-group"> <span class="input-group-text"><i class='bx bx-smile'></i></span>
                                 <input id="message" type="text" class="form-control" placeholder="Type a message">
                                 <button id="send" class="btn btn-primary ms-2">Send</button>
+                            </div>
+                        </div>
+                        <div class="chat-footer-menu"> <a href="javascript:;"><i class='bx bx-file'></i></a>
+                            <a href="javascript:;"><i class='bx bxs-contact'></i></a>
+                            <a href="javascript:;"><i class='bx bx-microphone'></i></a>
+                            <a href="javascript:;"><i class='bx bx-dots-horizontal-rounded'></i></a>
+                        </div>
+                    </div>
+                </span>
+
+
+                <span id="chat-footer-group" style="display: none">
+                    <div class="chat-footer d-flex align-items-center">
+                        <div class="flex-grow-1 pe-2">
+                            <div class="input-group"> <span class="input-group-text"><i class='bx bx-smile'></i></span>
+                                <input id="group-message" type="text" class="form-control"
+                                    placeholder="Type a message">
+                                <button id="group-send" class="btn btn-primary ms-2">Send xxxxxxxxx</button>
                             </div>
                         </div>
                         <div class="chat-footer-menu"> <a href="javascript:;"><i class='bx bx-file'></i></a>
