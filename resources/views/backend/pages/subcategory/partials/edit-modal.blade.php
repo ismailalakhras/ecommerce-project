@@ -43,9 +43,29 @@
                                             <option value="0">No</option>
                                         </select>
 
+
+
+
+
+                                        
                                         <label style="color: rgb(0, 60, 255) ; margin-bottom:5px">Image</label>
 
-                                        <input class="form-control mb-3" type="text" name="image">
+                                        <div class="preview-image"
+                                            style="    display: flex; align-items: center; justify-content: center; border: 1px solid #d7d7d7; padding: 1rem; margin: 1rem 0;">
+                                            <img id="preview-image" src="#" alt="Preview"
+                                                style="max-width: 200px; display: none;" />
+                                        </div>
+
+
+                                        <input id="input-image" class="form-control mb-3" type="file" name="image">
+
+
+
+
+
+
+
+
 
                                         <label style="color: rgb(0, 60, 255) ; margin-bottom:5px">Meta
                                             Title</label>

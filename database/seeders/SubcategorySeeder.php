@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Subcategory;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
@@ -29,16 +28,14 @@ class SubcategorySeeder extends Seeder
             ['category_id' => 2, 'name' => 'Accessories'],
             ['category_id' => 2, 'name' => 'Jewelry'],
 
-            //  Books  (category_id = 3)
-
-
+            // Books (category_id = 3)
             ['category_id' => 3, 'name' => 'Fiction'],
             ['category_id' => 3, 'name' => 'Non-fiction'],
             ['category_id' => 3, 'name' => 'Children\'s Books'],
             ['category_id' => 3, 'name' => 'Academic'],
             ['category_id' => 3, 'name' => 'Comics'],
 
-            //Home & Garden (category_id = 4)
+            // Home & Garden (category_id = 4)
             ['category_id' => 4, 'name' => 'Furniture'],
             ['category_id' => 4, 'name' => 'Kitchen'],
             ['category_id' => 4, 'name' => 'Garden Tools'],
@@ -53,24 +50,24 @@ class SubcategorySeeder extends Seeder
             ['category_id' => 5, 'name' => 'Water Sports'],
         ];
 
-        $insertData = [];
-
-        foreach ($subcategories as $subcat) {
-            $insertData[] = [
-                'category_id' => $subcat['category_id'],
-                'name' => $subcat['name'],
-                'slug' => Str::slug($subcat['name']),
-                'description' => 'Description for ' . $subcat['name'],
-                'image' => 'images/subcategories/' . Str::slug($subcat['name']) . '.svg',
-                'is_active' => true,
-                'sort_order' => 0,
-                'meta_title' => $subcat['name'] . ' Subcategory',
-                'meta_description' => 'Explore our collection of ' . $subcat['name'],
-                'created_at' => now(),
-                'updated_at' => now(),
-            ];
+        foreach ($subcategories as $subcategory) {
+            Subcategory::firstOrCreate(
+                [
+                    'category_id' => $subcategory['category_id'],
+                    'name' => $subcategory['name'],
+                ],
+                [
+                    'slug' => Str::slug($subcategory['name']),
+                    'description' => 'Description for ' . $subcategory['name'],
+                    'image' => 'images/subcategories/' . Str::slug($subcategory['name']) . '.svg',
+                    'is_active' => true,
+                    'sort_order' => 0,
+                    'meta_title' => $subcategory['name'] . ' Subcategory',
+                    'meta_description' => 'Explore our collection of ' . $subcategory['name'],
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]
+            );
         }
-
-        Subcategory::insert($insertData);
     }
 }

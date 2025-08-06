@@ -21,7 +21,7 @@ class MessageController extends Controller
     public function sendMessage(Request $request)
     {
         $message = Message::create([
-            'sender_id' => auth()->id(),
+            'sender_id' => $request->sender_id,
             'receiver_id' => $request->receiver_id,
             'message' => $request->message
         ]);
@@ -53,7 +53,7 @@ class MessageController extends Controller
                     'sender_id' => $msg->sender_id,
                     'receiver_id' => $msg->receiver_id,
                     'message' => $msg->message,
-                    'created_at' => $msg->created_at->toDateTimeString(),
+                    'created_at' => $msg->created_at,
                     'sender_name' => $msg->sender->name ?? 'Unknown',
                     'avatar' => $msg->sender->avatar ?? 'Unknown',
                 ];

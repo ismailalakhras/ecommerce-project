@@ -4,6 +4,7 @@ $(function () {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+    
 })
 
 //! ------------------------{{ add product to cart }}--------------------------------

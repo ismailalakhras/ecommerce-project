@@ -7,7 +7,23 @@ $(function () {
 //! ------------------------- << store category >>--------------------------
 $(function () {
 
+    $('#input-image-store').on('change', function () {
+        const file = this.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#preview-image-store').attr('src', e.target.result).show();
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    });
+
+
+
     $(document).on('click', '#store-category-btn', function () {
+
         const formData = new FormData($('#createCategoryForm')[0]);
 
         $.ajax({
@@ -34,7 +50,21 @@ $(function () {
 //! ------------------------- << edit category >>----------------------------
 $(function () {
     $(document).on('click', '.edit-category-btn', function () {
-        
+
+        $('#input-image').on('change', function () {
+            const file = this.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#preview-image').attr('src', e.target.result).show();
+
+            };
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        });
+
         const btn = $(this);
         const categoryId = btn.data('id')
 
@@ -61,7 +91,7 @@ $(function () {
     $(document).on('click', '#update-category-btn', function () {
 
         const categoryId = $(this).data('id');
-        
+
         const formData = new FormData($('#editCategoryForm')[0]);
 
         $.ajax({
@@ -170,7 +200,8 @@ function formFilling(res) {
     $('#editCategoryModal input[name="sort_order"]').val(res.category.sort_order);
 
     $('#editCategoryModal select[name="is_active"]').val(res.category.is_active);
-    $('#editCategoryModal input[name="image"]').val(res.category.image);
+    $('#preview-image').attr('src', `/${res.category.image}`).show();
+    // $('#editCategoryModal input[name="image"]').val(res.category.image);
     $('#editCategoryModal input[name="meta_title"]').val(res.category.meta_title);
     $('#editCategoryModal textarea[name="meta_description"]').val(res.category.meta_description);
 

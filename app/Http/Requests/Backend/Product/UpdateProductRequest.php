@@ -40,7 +40,7 @@ class UpdateProductRequest extends FormRequest
             'is_featured'         => 'nullable|boolean',
             'manage_stock'        => 'nullable|boolean',
             'stock_status'        => 'nullable|in:in_stock,out_of_stock,on_backorder',
-            'image'               => 'nullable|string|max:255',
+            'image'               => 'nullable|image',
             'meta_title'          => 'nullable|string|max:255',
             'meta_description'    => 'nullable|string',
             'rating_average'      => 'nullable|numeric|min:0|max:5',

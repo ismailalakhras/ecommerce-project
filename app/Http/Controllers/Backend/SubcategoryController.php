@@ -18,7 +18,7 @@ class SubcategoryController extends Controller
     {
         $subcategories = Subcategory::latest()->get();
         $categories = Category::latest()->get();
-        return $datatable->render('backend.pages.subcategory.index', compact('subcategories','categories'));
+        return $datatable->render('backend.pages.subcategory.index', compact('subcategories', 'categories'));
     }
 
 
@@ -91,6 +91,15 @@ class SubcategoryController extends Controller
 
         try {
             $validatedData = $request->validated();
+
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $filename = time() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('images'), $filename);
+                $validatedData['image'] = "images/$filename";
+            }
+
+
             $subcategory->update($validatedData);
             DB::commit();
 

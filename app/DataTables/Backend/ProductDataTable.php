@@ -26,7 +26,7 @@ class ProductDataTable extends DataTable
             ->addColumn('category_name', fn($product) => $product->category->name ?? '')
             ->addColumn('subcategory_name', fn($product) => $product->subcategory->name ?? '')
             ->editColumn('name', function ($row) {
-                return view('backend.pages.product.partials.name', compact('row'));
+                    return view('backend.pages.product.partials.name', compact('row'));
             })
             ->editColumn('is_active', function ($product) {
                 return $product->is_active ? 'Yes' : 'No';

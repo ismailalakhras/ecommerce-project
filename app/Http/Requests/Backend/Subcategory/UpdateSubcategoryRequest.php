@@ -26,7 +26,7 @@ class UpdateSubcategoryRequest extends FormRequest
             'category_id' => 'required|exists:categories,id',
             'slug' => 'nullable|string|max:255|unique:subcategories,slug,' . $this->route('subcategory')->id,
             'description' => 'nullable|string',
-            'image' => 'nullable|string',
+            'image' => 'nullable|image',
             'is_active' => 'nullable|boolean',
             'sort_order' => 'nullable|integer',
             'meta_title' => 'nullable|string|max:255',

@@ -8,27 +8,29 @@ use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        // إنشاء المستخدم الأدمن
-        $admin = User::create([
-            'name' => 'ismail',
-            'email' => 'ismail_admin@gmail.com',
-            'avatar' => 'images/avatar1.png',
-            'password' => Hash::make('000000000'),
-        ]);
+        // Create admin user
+        $admin = User::firstOrCreate(
+            ['email' => 'ismail_admin@gmail.com'],
+            [
+                'name' => 'ismail',
+                'avatar' => 'images/avatar1.png',
+                'password' => Hash::make('000000000'),
+            ]
+        );
 
-        $admin->addRole('admin');
+        if (!$admin->hasRole('admin')) {
+            $admin->addRole('admin');
+        }
 
+        // Regular users
         $usersData = [
             [
                 'name' => 'tareq',
                 'email' => 'tareq@gmail.com',
                 'avatar' => 'images/avatar2.svg',
-                'password' => Hash::make('000000000'),
+                'password' => Hash::make('0'),
             ],
             [
                 'name' => 'osama',
@@ -51,7 +53,14 @@ class UserSeeder extends Seeder
         ];
 
         foreach ($usersData as $userData) {
-            User::create($userData);
+            $user = User::firstOrCreate(
+                ['email' => $userData['email']],
+                $userData
+            );
+
+            if (!$user->hasRole('user')) {
+                $user->addRole('user');
+            }
         }
     }
 }

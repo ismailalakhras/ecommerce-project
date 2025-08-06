@@ -13,21 +13,25 @@ class GroupChatSeeder extends Seeder
     {
         $users = User::all();
 
-        $group = GroupChat::create([
-            'name' => 'Group 1',
-            'name' => 'Group 2',
-            'name' => 'Group 3',
-            'name' => 'Group 4',
-        ]);
+        $groupNames = ['Laravel', 'Php', 'Javascript', 'SQL'];
 
-        $group->users()->attach($users->pluck('id')->random(5));
+        foreach ($groupNames as $groupName) {
 
-        foreach (range(1, 10) as $i) {
-            GroupMessage::create([
-                'group_chat_id' => $group->id,
-                'sender_id' => $group->users->random()->id,
-                'message' => fake()->sentence(),
-            ]);
+         
+            $group = GroupChat::firstOrCreate(['name' => $groupName]);
+
+        
+            $userIds = $users->pluck('id')->random(5)->toArray();
+            $group->users()->syncWithoutDetaching($userIds); 
+
+            
+            foreach (range(1, 10) as $i) {
+                GroupMessage::create([
+                    'group_chat_id' => $group->id,
+                    'sender_id' => $group->users()->inRandomOrder()->first()->id,
+                    'message' => fake()->sentence(),
+                ]);
+            }
         }
     }
 }

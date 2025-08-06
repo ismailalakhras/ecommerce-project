@@ -2,6 +2,20 @@
 $(function () {
     $(document).on('click', '.create-product-btn', function () {
 
+        $('#input-image-store').on('change', function () {
+            const file = this.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#preview-image-store').attr('src', e.target.result).show();
+            };
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        });
+
+
         $.ajax({
             url: `/admin/product-create`,
             method: 'GET',
@@ -19,6 +33,8 @@ $(function () {
 
 //! ------------------------- << store product >>--------------------------
 $(function () {
+
+
 
     $(document).on('click', '#store-product-btn', function () {
         const formData = new FormData($('#createProductForm')[0]);
@@ -44,6 +60,22 @@ $(function () {
 //! ------------------------- << edit product >>----------------------------
 $(function () {
     $(document).on('click', '.edit-product-btn', function () {
+
+        $('#input-image').on('change', function () {
+            const file = this.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#preview-image').attr('src', e.target.result).show();
+
+            };
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        });
+
+
         const btn = $(this);
         const productId = btn.data('id')
 
@@ -208,6 +240,7 @@ function createSubcategorySelect(subcategories) {
 
 //todo Form Filling Function
 function formFilling(res) {
+
     $('#editModal input[name="name"]').val(res.product.name);
     $('#editModal input[name="sku"]').val(res.product.sku);
     $('#editModal input[name="price"]').val(res.product.price);
@@ -227,7 +260,10 @@ function formFilling(res) {
     $('#editModal select[name="is_featured"]').val(res.product.is_featured);
     $('#editModal select[name="manage_stock"]').val(res.product.manage_stock);
     $('#editModal select[name="stock_status"]').val(res.product.stock_status);
-    $('#editModal input[name="image"]').val(res.product.image);
+    // $('#editModal input[name="image"]').val(res.product.image);
+    $('#preview-image').attr('src', `/${res.product.image}`).show();
+    console.log(res.product);
+
     $('#editModal input[name="meta_title"]').val(res.product.meta_title);
     $('#editModal textarea[name="meta_description"]').val(res.product.meta_description);
     $('#editModal input[name="rating_average"]').val(res.product.rating_average);

@@ -10,7 +10,7 @@
                     <div class="col-xl-9 mx-auto" style="width: 100%">
                         <div class="card">
                             <div class="card-body">
-                                <form id="editProductForm" method="POST">
+                                <form id="editProductForm" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
 
@@ -96,7 +96,14 @@
                                     </select>
 
                                     <label class="text-primary mb-1">Image</label>
-                                    <input class="form-control mb-3" type="text" name="image">
+                                    <div class="preview-image"
+                                        style="    display: flex; align-items: center; justify-content: center; border: 1px solid #d7d7d7; padding: 1rem; margin: 1rem 0;">
+                                        <img id="preview-image" src="#" alt="Preview"
+                                            style="max-width: 200px; display: none;" />
+                                    </div>
+
+
+                                    <input id="input-image" class="form-control mb-3" type="file" name="image">
 
                                     <label class="text-primary mb-1">Meta Title</label>
                                     <input class="form-control mb-3" type="text" name="meta_title">
@@ -113,8 +120,8 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Close</button>
-                                        <button id="update-product-btn" type="button"
-                                            class="btn btn-primary">Save changes</button>
+                                        <button id="update-product-btn" type="button" class="btn btn-primary">Save
+                                            changes</button>
                                     </div>
                                 </form>
                             </div>

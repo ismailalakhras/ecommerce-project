@@ -39,6 +39,15 @@ class CategoryController extends Controller
 
         try {
             $validatedData = $request->validated();
+
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $filename = time() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('images'), $filename);
+                $validatedData['image'] = "images/$filename";
+            }
+
+
             Category::create($validatedData);
             DB::commit();
 
@@ -81,7 +90,16 @@ class CategoryController extends Controller
 
         try {
             $validatedData = $request->validated();
+
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $filename = time() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('images'), $filename);
+                $validatedData['image'] = "images/$filename";
+            }
+
             $category->update($validatedData);
+
             DB::commit();
 
             return response()->json([
@@ -123,4 +141,3 @@ class CategoryController extends Controller
         }
     }
 }
-    

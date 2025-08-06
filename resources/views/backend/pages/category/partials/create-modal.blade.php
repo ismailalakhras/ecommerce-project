@@ -11,7 +11,7 @@
 
                         <div class="card">
                             <div class="card-body">
-                                <form id="createCategoryForm" method="POST">
+                                <form id="createCategoryForm" method="POST" enctype="multipart/form-data">
                                     @CSRF
 
                                     <div class="card-body">
@@ -29,9 +29,24 @@
                                         <textarea class="form-control mb-3" type="text" name="description" rows="5" cols="50"></textarea>
 
 
+
+
+
                                         <label style="color: rgb(0, 60, 255) ; margin-bottom:5px">Image</label>
 
-                                        <input class="form-control mb-3" type="text" name="image">
+                                        <div class="preview-image-store"
+                                            style="    display: flex; align-items: center; justify-content: center; border: 1px solid #d7d7d7; padding: 1rem; margin: 1rem 0;">
+                                            <img id="preview-image-store" src="#" alt="Preview"
+                                                style="max-width: 200px; display: none;" />
+                                        </div>
+
+
+                                        <input id="input-image-store" class="form-control mb-3" type="file" name="image">
+
+
+
+
+
 
                                         <label style="color: rgb(0, 60, 255) ; margin-bottom:5px">Meta
                                             Title</label>

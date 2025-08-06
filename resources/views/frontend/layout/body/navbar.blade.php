@@ -120,7 +120,8 @@
 
                                                       @if (isset($shoppingCart) && $shoppingCart->count())
                                                           @foreach ($shoppingCart as $product)
-                                                              <li class="product-to-delete-{{ $product->product->id }}" data-id="{{$product->product->id}}">
+                                                              <li class="product-to-delete-{{ $product->product->id }}"
+                                                                  data-id="{{ $product->product->id }}">
                                                                   <div class="shopping-cart-img">
                                                                       <a href="">
                                                                           <img
@@ -207,10 +208,10 @@
                                               <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
                                                   <ul>
                                                       <li>
-                                                          <a ><i
+                                                          <a><i
                                                                   class="fi fi-rs-user mr-10"></i>{{ ucfirst(explode(' ', auth()->user()->name)[0]) }}</a>
                                                       </li>
-                                                      
+
                                                       <li>
 
 
@@ -266,7 +267,8 @@
                               <a href="index.html"><img src="{{ asset('build/assets/imgs/theme/logo.svg') }}"
                                       alt="logo" /></a>
                           </div>
-                          <div class="header-nav d-none d-lg-flex">
+
+                          <div class="header-nav d-none d-lg-flex" style="width: 100%;justify-content: center;">
 
                               <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block font-heading">
                                   <nav>
@@ -356,12 +358,13 @@
                                               <a href="#">Pages <i class="fi-rs-angle-down"></i></a>
                                               <ul class="sub-menu">
                                                   <li><a href="/category/0/products"> products by category</a></li>
-                                                  <li><a href="/subcategory/0/products"> products by subcategory</a></li>
+                                                  <li><a href="/subcategory/0/products"> products by subcategory</a>
+                                                  </li>
                                                   <li><a href="{{ route('order.index') }}">My orders</a></li>
                                               </ul>
                                           </li>
                                           <li>
-                                              <a  class=" contact-btn">Contact</a>
+                                              <a class=" contact-btn">Contact</a>
                                           </li>
                                       </ul>
                                   </nav>
@@ -624,4 +627,6 @@
                   </div>
               </div>
           </div>
+
+          
           <!--End header-->

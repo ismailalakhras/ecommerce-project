@@ -29,7 +29,21 @@ $(function () {
 //! ------------------------- << edit subcategory >>----------------------------
 $(function () {
     $(document).on('click', '.edit-subcategory-btn', function () {
-        
+
+        $('#input-image').on('change', function () {
+            const file = this.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#preview-image').attr('src', e.target.result).show();
+
+            };
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        });
+
         const btn = $(this);
         const categoryId = btn.data('id')
 
@@ -56,7 +70,7 @@ $(function () {
     $(document).on('click', '#update-subcategory-btn', function () {
 
         const categoryId = $(this).data('id');
-        
+
         const formData = new FormData($('#editSubcategoryForm')[0]);
 
         $.ajax({
@@ -167,7 +181,9 @@ function formFilling(res) {
     $('#editSubcategoryModal select[name="is_active"]').val(res.subcategory.is_active);
     $('#editSubcategoryModal select[name="category_id"]').val(res.subcategory.category_id);
 
-    $('#editSubcategoryModal input[name="image"]').val(res.subcategory.image);
+    // $('#editSubcategoryModal input[name="image"]').val(res.subcategory.image);
+    $('#preview-image').attr('src', `/${res.subcategory.image}`).show();
+
     $('#editSubcategoryModal input[name="meta_title"]').val(res.subcategory.meta_title);
     $('#editSubcategoryModal textarea[name="meta_description"]').val(res.subcategory.meta_description);
 

@@ -267,7 +267,7 @@
                             <div class="input-group"> <span class="input-group-text"><i class='bx bx-smile'></i></span>
                                 <input id="group-message" type="text" class="form-control"
                                     placeholder="Type a message">
-                                <button id="group-send" class="btn btn-primary ms-2">Send xxxxxxxxx</button>
+                                <button id="group-send" class="btn btn-primary ms-2">Send</button>
                             </div>
                         </div>
                         <div class="chat-footer-menu"> <a href="javascript:;"><i class='bx bx-file'></i></a>

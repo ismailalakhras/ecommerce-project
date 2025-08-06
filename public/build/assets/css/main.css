@@ -8855,9 +8855,21 @@ h6.post-title {
     padding: 0 0 10px 0;
 }
 
-.hotline img {
-    min-width: 35px;
-    margin-right: 12px;
+.hotline  {
+       position: fixed;
+    bottom: 1rem;
+    right: 5rem;
+    background-color: #f9f9f9;
+    color: white;
+    padding: 7px 21px;
+    border: 1px solid #00000042;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 0 rgb(198 0 15 / 72%);
+    animation: pulse 1.5s infinite;
+    z-index: 99999;
 }
 
 .hotline p {

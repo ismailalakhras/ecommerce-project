@@ -38,3 +38,9 @@ window.Echo = new Echo({
 });
 
 
+window.Echo.connector.pusher.connection.bind('connected', () => {
+    console.log('%c🔌 Echo connected to Pusher successfully!', 'color: green; font-weight: bold;');
+});
+
+
+

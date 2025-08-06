@@ -21,13 +21,16 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 });
 
 
+
+
 Broadcast::channel('presence-chat-channel.{id}', function ($user ,$id) {
     return $user;
-},['guards' => ['admin']]);
+},['guards' => ['admin' ,'web']]);
+
 
 Broadcast::channel('presence-global-chat', function ($user) {
     return $user;
-}, ['guards' => ['admin']]);
+},['guards' => ['admin' ,'web']]);
 
 
 Broadcast::channel('presence-group-chat.{id}', function ($user) {

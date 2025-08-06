@@ -47,6 +47,15 @@ class ProductAdminController extends Controller
 
         try {
             $validatedData = $request->validated();
+
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $filename = time() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('images/products'), $filename);
+                $validatedData['image'] = "images/products/$filename";
+            }
+
+
             Product::create($validatedData);
             DB::commit();
 
@@ -91,7 +100,16 @@ class ProductAdminController extends Controller
 
         try {
             $validatedData = $request->validated();
+
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $filename = time() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('images/products'), $filename);
+                $validatedData['image'] = "images/products/$filename";
+            }
+
             $product->update($validatedData);
+
             DB::commit();
 
             return response()->json([

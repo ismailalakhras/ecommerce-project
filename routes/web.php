@@ -115,7 +115,7 @@ Route::middleware('auth:admin', 'role:admin')->group(function () {
 });
 
 //! message
-Route::middleware('auth:admin')->group(function () {
+Route::middleware('auth:admin,web')->group(function () {
     Route::post('/send-message', [MessageController::class, 'sendMessage']);
     Route::get('/messages/{receiverId}', [MessageController::class, 'getMessages']);
     Route::get('chat', [MessageController::class, 'index'])->name('admin.chat.index');

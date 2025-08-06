@@ -11,7 +11,7 @@
 
                         <div class="card">
                             <div class="card-body">
-                                <form id="createSubcategoryForm" method="POST">
+                                <form id="createSubcategoryForm" method="POST" enctype="multipart/form-data">
                                     @CSRF
 
                                     <div class="card-body">

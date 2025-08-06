@@ -10,7 +10,7 @@
                     <div class="col-xl-9 mx-auto" style="width: 100%">
                         <div class="card">
                             <div class="card-body">
-                                <form id="createProductForm" method="POST">
+                                <form id="createProductForm" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <label class="text-primary mb-1">Product Name <span
                                             class="text-danger">*</span></label>
@@ -31,7 +31,8 @@
                                     <!-- SubCategory -->
                                     <label class="text-primary mb-1">SubCategory Name <span
                                             class="text-danger">*</span></label>
-                                    <select name="subcategory_id" id="createSubcategorySelect" class="form-control mb-3">
+                                    <select name="subcategory_id" id="createSubcategorySelect"
+                                        class="form-control mb-3">
                                         <option value="">-- Choose a SubCategory --</option>
                                     </select>
 
@@ -93,8 +94,23 @@
                                         <option value="on_backorder">On Backorder</option>
                                     </select>
 
+
+
+
+
+
                                     <label class="text-primary mb-1">Image</label>
-                                    <input class="form-control mb-3" type="text" name="image">
+                                    <div class="preview-image-store"
+                                        style="    display: flex; align-items: center; justify-content: center; border: 1px solid #d7d7d7; padding: 1rem; margin: 1rem 0;">
+                                        <img id="preview-image-store" src="#" alt="Preview"
+                                            style="max-width: 200px; display: none;" />
+                                    </div>
+
+                                    <input id="input-image-store" class="form-control mb-3" type="file" name="image">
+
+
+
+
 
                                     <label class="text-primary mb-1">Meta Title</label>
                                     <input class="form-control mb-3" type="text" name="meta_title">

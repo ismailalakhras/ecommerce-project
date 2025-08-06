@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Coupon;
 use Carbon\Carbon;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class CouponSeeder extends Seeder
@@ -14,7 +13,7 @@ class CouponSeeder extends Seeder
      */
     public function run(): void
     {
-         $coupons = [
+        $coupons = [
             [
                 'code' => 'WELCOME10',
                 'type' => 'percentage',
@@ -51,7 +50,10 @@ class CouponSeeder extends Seeder
         ];
 
         foreach ($coupons as $coupon) {
-            Coupon::create($coupon);
+            Coupon::firstOrCreate(
+                ['code' => $coupon['code']], 
+                $coupon
+            );
         }
     }
 }

@@ -64,6 +64,7 @@ $(document).ready(function () {
 
         if (message.trim() !== "" && receiverId) {
             $.post("/send-message", {
+                sender_id: senderId,
                 receiver_id: receiverId,
                 message: message
             }, function () {
@@ -76,6 +77,7 @@ $(document).ready(function () {
     //! subscribe to channel function
     function subscribeToChannel(channelId) {
         return window.Echo.join("presence-chat-channel." + channelId)
+
             .listen(".new-message", function (data) {
                 if (data.message.receiver_id == senderId || data.message.sender_id == senderId) {
 
@@ -274,6 +276,7 @@ $(document).ready(function () {
 
     //todo subscribe to group channel function
     function subscribeToGroupChannel(channelId) {
+        
         return window.Echo.join("presence-group-chat." + channelId)
             .listen(".new-group-message", function (data) {
 
